@@ -1,4 +1,3 @@
-#test für github
 package gui;
 
 import java.awt.Container;
