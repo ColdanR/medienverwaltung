@@ -1,11 +1,14 @@
 package data.speicherformate;
 
-public class DigitalMusik {
-	private	int		id				=	0;
-	private	String	datentraeger	=	"";
-	private	String	pfad			=	"";
-	private	String	format			=	"";
-	private	String	qualitaet		=	"";
+import data.Speicherformat;
+
+public class DigitalMusik implements Speicherformat {
+	private	int						id				=	0;
+	private	String					datentraeger	=	"";
+	private	String					pfad			=	"";
+	private	String					format			=	"";
+	private	String					qualitaet		=	"";
+	private enums.Speicherformat	type			=	null;
 	/**
 	 * @return the id
 	 */
@@ -65,5 +68,13 @@ public class DigitalMusik {
 	 */
 	public void setQualitaet(String qualitaet) {
 		this.qualitaet = qualitaet;
+	}
+	@Override
+	public void setType(enums.Speicherformat type) {
+		this.type = type;
+	}
+	@Override
+	public enums.Speicherformat getType() {
+		return type;
 	}
 }

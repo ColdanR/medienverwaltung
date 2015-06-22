@@ -1,4 +1,6 @@
-package data.medien;
+package data.medien.logic;
+
+import data.medien.Musik;
 
 public class MusikLogik {
 	private	Musik	object	=	null;
