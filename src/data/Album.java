@@ -10,11 +10,11 @@ import java.util.List;
  *
  */
 public class Album {
-	private	int						id					=	0;
-	private	Person					kuenstler			=	null;
-	private	String					name				=	"";
-	private	LocalDate				erscheinungsdatum	=	null;
-	private	List<Speicherformat>	speicherformate		=	new ArrayList<Speicherformat>();
+	private	int								id					=	0;
+	private	Person							kuenstler			=	null;
+	private	String							name				=	"";
+	private	LocalDate						erscheinungsdatum	=	null;
+	private	List<SpeicherFormatInterface>	speicherformate		=	new ArrayList<SpeicherFormatInterface>();
 	/**
 	 * @return the id
 	 */
@@ -63,10 +63,10 @@ public class Album {
 	public void setErscheinungsdatum(LocalDate erscheinungsdatum) {
 		this.erscheinungsdatum = erscheinungsdatum;
 	}
-	public List<Speicherformat> getSpeicherformate() {
+	public List<SpeicherFormatInterface> getSpeicherformate() {
 		return speicherformate;
 	}
-	public void setSpeicherformate(List<Speicherformat> speicherformate) {
+	public void setSpeicherformate(List<SpeicherFormatInterface> speicherformate) {
 		this.speicherformate = speicherformate;
 	}
 }

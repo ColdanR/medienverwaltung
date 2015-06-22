@@ -6,17 +6,17 @@ import java.util.List;
 
 import data.Album;
 import data.Person;
-import data.Speicherformat;
+import data.SpeicherFormatInterface;
 
 public class Musik {
-	private	int						id				=	0;
-	private	Person					interpret		=	null;
-	private String					titel			=	null;
-	private List<Album>				alben			=	new ArrayList<Album>();
-	private	LocalDate				ersterscheinung	=	null;
-	private	List<Person>			mitwirkende		=	new ArrayList<Person>();
-	private	List<Speicherformat>	speicherformate	=	new ArrayList<Speicherformat>();
-	private	boolean					live			=	false;
+	private	int								id				=	0;
+	private	Person							interpret		=	null;
+	private String							titel			=	null;
+	private List<Album>						alben			=	new ArrayList<Album>();
+	private	LocalDate						ersterscheinung	=	null;
+	private	List<Person>					mitwirkende		=	new ArrayList<Person>();
+	private	List<SpeicherFormatInterface>	speicherformate	=	new ArrayList<SpeicherFormatInterface>();
+	private	boolean							live			=	false;
 	/**
 	 * @return the id
 	 */
@@ -92,13 +92,13 @@ public class Musik {
 	/**
 	 * @return the speicherformate
 	 */
-	public List<Speicherformat> getSpeicherformate() {
+	public List<SpeicherFormatInterface> getSpeicherformate() {
 		return speicherformate;
 	}
 	/**
 	 * @param speicherformate the speicherformate to set
 	 */
-	public void setSpeicherformate(List<Speicherformat> speicherformate) {
+	public void setSpeicherformate(List<SpeicherFormatInterface> speicherformate) {
 		this.speicherformate = speicherformate;
 	}
 	/**

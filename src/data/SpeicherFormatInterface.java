@@ -1,6 +1,6 @@
 package data;
 
-public interface Speicherformat {
+public interface SpeicherFormatInterface {
 	
 	public void setType (enums.Speicherformat type);
 	

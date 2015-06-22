@@ -5,17 +5,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import data.Person;
 
+/**
+ * Database managment Class for Person Object
+ * @author Bernd Schmidt
+ *
+ */
 public class DBPerson extends DataBaseManager {
 
 	public DBPerson() throws ClassNotFoundException {
 		super();
 	}
 	
+	/**
+	 * Read content of a person into an object referred by the id
+	 * @param id ID of the Person to load
+	 * @return Person Object containing the data or null if not found or an exception has been thrown.
+	 */
 	public Person getPerson(int id) {
-		Person ret = new Person();
+		Person ret = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet result = null;
@@ -27,6 +38,7 @@ public class DBPerson extends DataBaseManager {
 			stmt.setInt(1, id);
 			result = stmt.executeQuery();
 			if (result.next()) {
+				ret = new Person();
 				ret.setId(result.getInt(1));
 				ret.setNachname(result.getString(2));
 				ret.setVorname(result.getString(3));
@@ -120,5 +132,20 @@ public class DBPerson extends DataBaseManager {
 			}
 		}
 		return ret;
+	}
+	
+	/**
+	 * Returns a list of persons featuring a song
+	 * @param songId the id of the song
+	 * @return List of Person
+	 */
+	public List<Person> loadPersonsForAlbum(int songId) {
+		// TODO Write this!
+		return null;
+	}
+	
+	public boolean writePersonsForAlbum(List<Person> personList, int songId) {
+		// TODO Write this
+		return false;
 	}
 }
