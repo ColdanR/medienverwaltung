@@ -1,7 +1,7 @@
 package data.speicherformate;
 
 public class DigitalMusik {
-	private	int		id	=	0;
+	private	int		id				=	0;
 	private	String	datentraeger	=	"";
 	private	String	pfad			=	"";
 	private	String	format			=	"";

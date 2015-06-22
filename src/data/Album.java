@@ -10,9 +10,9 @@ import java.util.List;
  *
  */
 public class Album {
-	private	int						id;
-	private	Person					kuenstler;
-	private	String					name;
+	private	int						id					=	0;
+	private	Person					kuenstler			=	null;
+	private	String					name				=	"";
 	private	LocalDate				erscheinungsdatum	=	null;
 	private	List<Speicherformat>	speicherformate		=	new ArrayList<Speicherformat>();
 	/**

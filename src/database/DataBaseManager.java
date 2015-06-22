@@ -29,8 +29,4 @@ public abstract class DataBaseManager {
 				db.getString("dbName") + "?user=" + db.getString("dbUser") + 
 				"&password=" + db.getString("dbPassword"));
 	}
-	
-	public abstract Object read(int id);
-	
-	public abstract boolean write(Object object);
 }
