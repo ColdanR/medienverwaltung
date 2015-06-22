@@ -8,7 +8,6 @@ import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import java.awt.Component;
 
 public class ButtonPanel extends JPanel
 {
@@ -46,7 +45,7 @@ public class ButtonPanel extends JPanel
 		gbc_btnVideo.gridy = 1;
 		add(btnVideo, gbc_btnVideo);		
 		
-		JButton btnBuecher = new JButton("Bücher");
+		JButton btnBuecher = new JButton("Bï¿½cher");
 		btnBuecher.setPreferredSize(new Dimension(100, 25));
 		btnBuecher.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();

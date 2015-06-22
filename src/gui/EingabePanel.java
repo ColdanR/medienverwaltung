@@ -1,19 +1,20 @@
 package gui;
 
-import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import java.awt.Font;
 
 public class EingabePanel extends JPanel 
 {
-	JPanel input;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField_1;
 	private JTextField textField;
 	private JTextField textField_2;
