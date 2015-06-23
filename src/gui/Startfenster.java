@@ -3,6 +3,7 @@ package gui;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
@@ -12,6 +13,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Panel;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -31,7 +33,7 @@ public class Startfenster extends JFrame implements ActionListener
 		cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 				
-		JPanel buttonPanel = new ButtonPanel();
+		JPanel buttonPanel = new JPanel();
 		
 		GridBagLayout gbl_buttonPanel = new GridBagLayout();
 		gbl_buttonPanel.columnWidths = new int[] {100, 0};
