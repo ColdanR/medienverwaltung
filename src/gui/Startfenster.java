@@ -60,7 +60,7 @@ public class Startfenster extends JFrame implements ActionListener
 		gbc_btnVideo.gridy = 1;
 		buttonPanel.add(btnVideo, gbc_btnVideo);		
 		
-		JButton btnBuecher = new JButton("Bücher");
+		JButton btnBuecher = new JButton("Bï¿½cher");
 		btnBuecher.setPreferredSize(new Dimension(100, 25));
 		btnBuecher.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
