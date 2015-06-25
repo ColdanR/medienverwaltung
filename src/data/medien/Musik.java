@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.Album;
 import data.Person;
 import data.SpeicherFormatInterface;
 
@@ -12,9 +11,9 @@ public class Musik {
 	private	int								id				=	0;
 	private	Person							interpret		=	null;
 	private String							titel			=	null;
-	private List<Album>						alben			=	new ArrayList<Album>();
+	// private List<Album>						alben			=	new ArrayList<Album>();
 	private	LocalDate						ersterscheinung	=	null;
-	private	List<Person>					mitwirkende		=	new ArrayList<Person>();
+	// private	List<Person>					mitwirkende		=	new ArrayList<Person>();
 	private	List<SpeicherFormatInterface>	speicherformate	=	new ArrayList<SpeicherFormatInterface>();
 	private	boolean							live			=	false;
 	/**
@@ -56,15 +55,15 @@ public class Musik {
 	/**
 	 * @return the alben
 	 */
-	public List<Album> getAlben() {
+	/*public List<Album> getAlben() {
 		return alben;
-	}
+	}*/
 	/**
 	 * @param alben the alben to set
 	 */
-	public void setAlben(List<Album> alben) {
+	/*public void setAlben(List<Album> alben) {
 		this.alben = alben;
-	}
+	}*/
 	/**
 	 * @return the ersterscheinung
 	 */
@@ -80,15 +79,15 @@ public class Musik {
 	/**
 	 * @return the mitwirkende
 	 */
-	public List<Person> getMitwirkende() {
+	/*public List<Person> getMitwirkende() {
 		return mitwirkende;
-	}
+	}*/
 	/**
 	 * @param mitwirkende the mitwirkende to set
 	 */
-	public void setMitwirkende(List<Person> mitwirkende) {
+	/*public void setMitwirkende(List<Person> mitwirkende) {
 		this.mitwirkende = mitwirkende;
-	}
+	}*/
 	/**
 	 * @return the speicherformate
 	 */
