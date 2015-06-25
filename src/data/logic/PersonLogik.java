@@ -1,4 +1,4 @@
-package data.medien.logic;
+package data.logic;
 
 import java.util.ArrayList;
 import java.util.List;
