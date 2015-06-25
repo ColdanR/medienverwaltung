@@ -15,7 +15,6 @@ import java.awt.Insets;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 
 import java.awt.FlowLayout;
 
@@ -31,7 +30,7 @@ public class Startfenster extends JFrame implements ActionListener
 		cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 				
-		JPanel buttonPanel = new ButtonPanel();
+		JPanel buttonPanel = new JPanel();
 		
 		GridBagLayout gbl_buttonPanel = new GridBagLayout();
 		gbl_buttonPanel.columnWidths = new int[] {100, 0};
