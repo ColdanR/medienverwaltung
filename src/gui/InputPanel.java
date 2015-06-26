@@ -17,9 +17,12 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JCheckBox;
 import java.awt.Component;
+<<<<<<< HEAD
 import javax.swing.border.BevelBorder;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+=======
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 
 public class InputPanel extends JPanel implements ActionListener
 {
@@ -29,6 +32,7 @@ public class InputPanel extends JPanel implements ActionListener
 	private JTextField txfTitel;
 	private JTextField txfMitwirkende;
 	private JTextField txfErsterscheinung;
+<<<<<<< HEAD
 	private JCheckBox chkbxLive;
 	private Font fontStd = new Font("Tahoma", Font.PLAIN, 14);
 	private BevelBorder brdBevel = new BevelBorder(BevelBorder.LOWERED);
@@ -38,22 +42,37 @@ public class InputPanel extends JPanel implements ActionListener
 	private JButton btnInterpret;
 	private JButton btnAbbrechen;
 	private JButton btnSpeichern;
+=======
+	private JTextField txfGenre;
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 	
 	
 	public InputPanel()
 	{
+		//super();
 		setAlignmentY(Component.TOP_ALIGNMENT);
 		
+<<<<<<< HEAD
 		setBorder(brdTitel);		
+=======
+		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "CD",TitledBorder.LEADING , TitledBorder.TOP, null, null));		
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 		GridBagLayout gbl = new GridBagLayout();
+<<<<<<< HEAD
 		gbl.columnWidths = new int[] {30, 0, 0, 30, 30, 0};
 		gbl.rowHeights = new int[] {30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+=======
+		gbl.columnWidths = new int[]{30, 0, 0, 0, 0};
+		gbl.rowHeights = new int[] {30, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 		setLayout(gbl);
 		
 		JLabel lblTitel = new JLabel("Titel");
-		lblTitel.setFont(fontStd);
+		lblTitel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblTitel = new GridBagConstraints();
 		gbc_lblTitel.gridwidth = 3;
 		gbc_lblTitel.insets = new Insets(0, 0, 5, 10);
@@ -63,20 +82,50 @@ public class InputPanel extends JPanel implements ActionListener
 		add(lblTitel, gbc_lblTitel);
 		
 		txfTitel = new JTextField();
-		txfTitel.setBorder(brdBevel);
-		txfTitel.setFont(fontStd);
+		txfTitel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_txfTitel = new GridBagConstraints();
+<<<<<<< HEAD
 		gbc_txfTitel.gridwidth = 3;
 		gbc_txfTitel.fill = GridBagConstraints.HORIZONTAL;
+=======
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 		gbc_txfTitel.anchor = GridBagConstraints.WEST;
 		gbc_txfTitel.insets = new Insets(0, 0, 10, 10);
+<<<<<<< HEAD
 		gbc_txfTitel.gridx = 1;
 		gbc_txfTitel.gridy = 2;
+=======
+		gbc_txfTitel.gridx = 2;
+		gbc_txfTitel.gridy = 1;
+		txfTitel.setColumns(20);
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 		add(txfTitel, gbc_txfTitel);
 		
+<<<<<<< HEAD
+=======
+		
+		JLabel lblInterpret = new JLabel("Interpret");
+		lblInterpret.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblInterpret = new GridBagConstraints();
+		gbc_lblInterpret.insets = new Insets(0, 0, 10, 10);
+		gbc_lblInterpret.anchor = GridBagConstraints.WEST;
+		gbc_lblInterpret.gridx = 1;
+		gbc_lblInterpret.gridy = 2;
+		add(lblInterpret, gbc_lblInterpret);
+		
+		txfInterpret = new JTextField();
+		txfInterpret.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		GridBagConstraints gbc_txfInterpret = new GridBagConstraints();
+		gbc_txfInterpret.anchor = GridBagConstraints.WEST;
+		gbc_txfInterpret.insets = new Insets(0, 0, 10, 10);
+		gbc_txfInterpret.gridx = 2;
+		gbc_txfInterpret.gridy = 2;
+		add(txfInterpret, gbc_txfInterpret);
+		txfInterpret.setColumns(20);
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 		
 		JLabel lblMitwirkende = new JLabel("Mitwirkende");
-		lblMitwirkende.setFont(fontStd);
+		lblMitwirkende.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblMitwirkende = new GridBagConstraints();
 		gbc_lblMitwirkende.gridwidth = 3;
 		gbc_lblMitwirkende.anchor = GridBagConstraints.WEST;
@@ -86,20 +135,70 @@ public class InputPanel extends JPanel implements ActionListener
 		add(lblMitwirkende, gbc_lblMitwirkende);
 		
 		txfMitwirkende = new JTextField();
-		txfMitwirkende.setBorder(brdBevel);
-		txfMitwirkende.setFont(fontStd);
+		txfMitwirkende.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_txfMitwirkende = new GridBagConstraints();
+<<<<<<< HEAD
 		gbc_txfMitwirkende.gridwidth = 3;
 		gbc_txfMitwirkende.fill = GridBagConstraints.HORIZONTAL;
+=======
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 		gbc_txfMitwirkende.anchor = GridBagConstraints.WEST;
 		gbc_txfMitwirkende.insets = new Insets(0,0,10,10);
+<<<<<<< HEAD
 		gbc_txfMitwirkende.gridx = 1;
 		gbc_txfMitwirkende.gridy = 4;
 		
+=======
+		gbc_txfMitwirkende.gridx = 2;
+		gbc_txfMitwirkende.gridy = 3;
+		txfMitwirkende.setColumns(20);
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 		add(txfMitwirkende, gbc_txfMitwirkende);
+<<<<<<< HEAD
+=======
+		
+		JLabel lblAlbum = new JLabel("Album");
+		lblAlbum.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblAlbum = new GridBagConstraints();
+		gbc_lblAlbum.insets = new Insets(0, 0, 10, 10);
+		gbc_lblAlbum.anchor = GridBagConstraints.WEST;
+		gbc_lblAlbum.gridx = 1;
+		gbc_lblAlbum.gridy = 4;
+		add(lblAlbum, gbc_lblAlbum);
+		
+		txfAlbum = new JTextField();
+		txfAlbum.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		GridBagConstraints gbc_txfAlbum = new GridBagConstraints();
+		gbc_txfAlbum.anchor = GridBagConstraints.WEST;
+		gbc_txfAlbum.insets = new Insets(0, 0, 10, 10);
+		gbc_txfAlbum.gridx = 2;
+		gbc_txfAlbum.gridy = 4;
+		add(txfAlbum, gbc_txfAlbum);
+		txfAlbum.setColumns(20);
+		
+				
+		JLabel lblGenre = new JLabel("Genre");
+		lblGenre.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblGenre = new GridBagConstraints();
+		gbc_lblGenre.anchor = GridBagConstraints.WEST;
+		gbc_lblGenre.insets = new Insets(0, 0, 10, 10);
+		gbc_lblGenre.gridx = 1;
+		gbc_lblGenre.gridy = 5;
+		add(lblGenre, gbc_lblGenre);
+		
+		txfGenre = new JTextField();
+		txfGenre.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		GridBagConstraints gbc_txfGenre = new GridBagConstraints();
+		gbc_txfGenre.anchor = GridBagConstraints.WEST;
+		gbc_txfGenre.insets = new Insets(0, 0, 10, 10);
+		gbc_txfGenre.gridx = 2;
+		gbc_txfGenre.gridy = 5;
+		add(txfGenre, gbc_txfGenre);
+		txfGenre.setColumns(20);
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 		
 		JLabel lblErsterscheinung = new JLabel("Erstausgabe");
-		lblErsterscheinung.setFont(fontStd);
+		lblErsterscheinung.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblErsterscheinung = new GridBagConstraints();
 		gbc_lblErsterscheinung.gridwidth = 2;
 		gbc_lblErsterscheinung.anchor = GridBagConstraints.WEST;
@@ -109,11 +208,13 @@ public class InputPanel extends JPanel implements ActionListener
 		add(lblErsterscheinung, gbc_lblErsterscheinung);
 		
 		txfErsterscheinung = new JTextField();
-		txfErsterscheinung.setBorder(brdBevel);
-		txfErsterscheinung.setFont(fontStd);
+		txfErsterscheinung.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_txfErsterscheinung = new GridBagConstraints();
+<<<<<<< HEAD
 		gbc_txfErsterscheinung.gridwidth = 2;
 		gbc_txfErsterscheinung.fill = GridBagConstraints.HORIZONTAL;
+=======
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 		gbc_txfErsterscheinung.anchor = GridBagConstraints.WEST;
 		gbc_txfErsterscheinung.insets = new Insets(0, 0, 10, 10);
 		gbc_txfErsterscheinung.gridx = 1;
@@ -121,6 +222,7 @@ public class InputPanel extends JPanel implements ActionListener
 		add(txfErsterscheinung, gbc_txfErsterscheinung);
 		txfErsterscheinung.setColumns(20);
 		
+<<<<<<< HEAD
 		btnInterpret = new JButton("Interpret");
 		btnInterpret.setFont(fontStd);
 		GridBagConstraints gbc_btnInterpret = new GridBagConstraints();
@@ -134,8 +236,11 @@ public class InputPanel extends JPanel implements ActionListener
 		chkbxLive.setMargin(new Insets(2, 0, 2, 2));
 		chkbxLive.setIconTextGap(10);
 		chkbxLive.setHorizontalTextPosition(SwingConstants.LEFT);
+=======
+		JCheckBox chkbxLive = new JCheckBox("Live?");
+>>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 		chkbxLive.setActionCommand("Live");
-		chkbxLive.setFont(fontStd);
+		chkbxLive.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_chkbxLive = new GridBagConstraints();
 		gbc_chkbxLive.anchor = GridBagConstraints.WEST;
 		gbc_chkbxLive.insets = new Insets(0, 0, 30, 10);

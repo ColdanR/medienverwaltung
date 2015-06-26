@@ -25,7 +25,7 @@ public class DBPerson extends DataBaseManager {
 	 * @param id ID of the Person to load
 	 * @return Person Object containing the data or null if not found or an exception has been thrown.
 	 */
-	public Person getPerson(int id) {
+	public Person getForId(int id) {
 		Person ret = null;
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -74,7 +74,7 @@ public class DBPerson extends DataBaseManager {
 		return ret;
 	}
 	
-	public boolean writePerson(Person person) throws IllegalArgumentException {
+	public boolean write(Person person) throws IllegalArgumentException {
 		boolean ret = false;
 		if (person == null) {
 			throw new IllegalArgumentException();
@@ -133,19 +133,14 @@ public class DBPerson extends DataBaseManager {
 		}
 		return ret;
 	}
-	
-	/**
-	 * Returns a list of persons featuring a song
-	 * @param songId the id of the song
-	 * @return List of Person
-	 */
-	public List<Person> loadPersonsForAlbum(int songId) {
-		// TODO Write this!
-		return null;
-	}
-	
-	public boolean writePersonsForAlbum(List<Person> personList, int songId) {
+
+	public boolean delete(Person object) {
 		// TODO Write this
 		return false;
+	}
+	
+	public List<Person> getAll() {
+		// TODO Write this
+		return null;
 	}
 }
