@@ -3,6 +3,7 @@ package gui;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
@@ -14,23 +15,15 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-
-import java.awt.FlowLayout;
-<<<<<<< HEAD
-
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-=======
->>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 
 public class Startfenster extends JFrame implements ActionListener
 {
 	
 	private static final long serialVersionUID = 1L;
 	Container cp;
-<<<<<<< HEAD
 	
 	private Font 	fontStd = new Font("Tahoma", Font.PLAIN, 14);
 	private JPanel 	buttonPanel;
@@ -40,10 +33,6 @@ public class Startfenster extends JFrame implements ActionListener
 	private JButton btnMAnzeigen;
 	private JButton btnKNeu;
 	private JButton btnKAnzeigen;
-	
-					
-=======
->>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 
 	public Startfenster()							
 	{
@@ -51,53 +40,9 @@ public class Startfenster extends JFrame implements ActionListener
 		cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 				
-<<<<<<< HEAD
 		buttonPanel = new JPanel();
 		buttonPanel.setAlignmentY(Component.TOP_ALIGNMENT);
-=======
-		JPanel buttonPanel = new JPanel();
-		
-		GridBagLayout gbl_buttonPanel = new GridBagLayout();
-		gbl_buttonPanel.columnWidths = new int[] {100, 0};
-		gbl_buttonPanel.rowHeights = new int[] {0, 0, 0, 30, 0};
-		gbl_buttonPanel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_buttonPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		buttonPanel.setLayout(gbl_buttonPanel);
-		
-		JButton btnMusik = new JButton("Musik");
-		btnMusik.setPreferredSize(new Dimension(100, 25));
-		btnMusik.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		GridBagConstraints gbc_btnMusik = new GridBagConstraints();
-		gbc_btnMusik.anchor = GridBagConstraints.WEST;
-		gbc_btnMusik.insets = new Insets(10, 10, 10, 10);
-		gbc_btnMusik.gridx = 0;
-		gbc_btnMusik.gridy = 0;
-		buttonPanel.add(btnMusik, gbc_btnMusik);		
-		
-		JButton btnVideo = new JButton("Video");
-		btnVideo.setPreferredSize(new Dimension(100, 25));
-		btnVideo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		GridBagConstraints gbc_btnVideo = new GridBagConstraints();
-		gbc_btnVideo.anchor = GridBagConstraints.WEST;
-		gbc_btnVideo.insets = new Insets(0, 10, 10, 10);
-		gbc_btnVideo.gridx = 0;
-		gbc_btnVideo.gridy = 1;
-		buttonPanel.add(btnVideo, gbc_btnVideo);		
-		
-		JButton btnBuecher = new JButton("B�cher");
-		btnBuecher.setPreferredSize(new Dimension(100, 25));
-		btnBuecher.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 10, 10, 10);
-		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 2;
-		buttonPanel.add(btnBuecher, gbc_btnNewButton);
-		
-		
->>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
 		cp.add(buttonPanel, BorderLayout.WEST);
-<<<<<<< HEAD
 		
 		
 		GridLayout gl = new GridLayout(2,1);
@@ -178,15 +123,11 @@ public class Startfenster extends JFrame implements ActionListener
 		gbc_btnKAnzeigen.gridx = 0;
 		gbc_btnKAnzeigen.gridy = 3;
 		pnlGl2.add(btnKAnzeigen, gbc_btnKAnzeigen);
-=======
->>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
-		
-		
+
 		InputPanel input = new InputPanel();
 		input.setAlignmentY(Component.TOP_ALIGNMENT);
 		cp.add(input, BorderLayout.CENTER);
 		
-<<<<<<< HEAD
 //		southPanel = new JPanel();
 //		FlowLayout flowLayout = (FlowLayout) southPanel.getLayout();
 //		flowLayout.setVgap(10);
@@ -200,24 +141,6 @@ public class Startfenster extends JFrame implements ActionListener
 //		southPanel.add(btnAbbrechen);
 //		
 //		cp.add(southPanel, BorderLayout.SOUTH);
-=======
-		JPanel southPanel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) southPanel.getLayout();
-		flowLayout.setVgap(10);
-		flowLayout.setHgap(10);
-		flowLayout.setAlignment(FlowLayout.RIGHT);
-		
-		
-		
-		JButton btnSpeichern = new JButton("speichern");
-		southPanel.add(btnSpeichern);
-		
-		JButton btnAbbrechen = new JButton("abbrechen");
-		southPanel.add(btnAbbrechen);
-		
-		cp.add(southPanel, BorderLayout.SOUTH);
->>>>>>> branch 'master' of https://github.com/ColdanR/medienverwaltung.git
-				
 	}
 	
 	
