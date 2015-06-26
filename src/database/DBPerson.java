@@ -184,10 +184,16 @@ public class DBPerson extends DataBaseManager {
 			}
 		}
 		return ret; */
+		return null;
 	}
-	
-	public boolean writePersonsForAlbum(List<Person> personList, int songId) {
+
+	public boolean delete(Person object) {
 		// TODO Write this
 		return false;
+	}
+	
+	public List<Person> getAll() {
+		// TODO Write this
+		return null;
 	}
 }
