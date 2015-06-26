@@ -140,8 +140,50 @@ public class DBPerson extends DataBaseManager {
 	 * @return List of Person
 	 */
 	public List<Person> loadPersonsForAlbum(int songId) {
-		// TODO Write this!
-		return null;
+	/*	PreparedStatement stmt = null;
+		ResultSet result = null;
+		String PersList = "";
+		try {
+			String sql = "SELECT LIST(A.MASKENKEY_PERSON)"
+					   + "FROM TITEL A"
+					   + "LEFT OUTER JOIN PERSON B ON B.TITEL_ID_LINKKEY = A.ID"
+					   + "WHERE A.ID = ?";
+			conn = getConnection();
+			stmt = conn.prepareStatement(sql);
+			// Erster Index ist immer 1 bei SQL Befehlen!
+			stmt.setInt(1, songId);
+			result = stmt.executeQuery();
+			if (result.next()) {
+				;
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (result != null) {
+				try {
+					result.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return ret; */
 	}
 	
 	public boolean writePersonsForAlbum(List<Person> personList, int songId) {
