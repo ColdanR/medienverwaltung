@@ -22,7 +22,6 @@ public class Speicherort extends JDialog implements ActionListener
 	 private static final long serialVersionUID = 1L;
 
 	    Container cp = getContentPane();
-	    private JTextField txfFormat;
 	    private JTextField txfDatentraeger;
 	    private JTextField txfPfad;
 	    private JTextField txfDateiformat;

@@ -2,7 +2,7 @@ package enums;
 
 public enum ErrorsSpeicherFormateLogik implements ErrorMessage {
 	NoObjectLoaded("Es ist kein Speicherformat gesetzt."),
-	UnableToDelete("Das Speicherformat konnte nicht gelöscht werden.")
+	UnableToDelete("Das Speicherformat konnte nicht geloescht werden.")
 	;
 	private	String	errorMessage	=	"";
 

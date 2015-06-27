@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -17,41 +16,46 @@ import java.awt.Insets;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import gui.dialog.InterpretDialog;
+
 import javax.swing.JButton;
 
-public class Startfenster extends JFrame implements ActionListener
-{
+public class Startfenster extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
-	Container cp;
 	
-	private Font 	fontStd = new Font("Tahoma", Font.PLAIN, 14);
-	private JPanel 	buttonPanel;
-	private JLabel 	lblMusik;
-	private JLabel 	lblKuenstler;
 	private JButton btnMNeu;
 	private JButton btnMAnzeigen;
 	private JButton btnKNeu;
 	private JButton btnKAnzeigen;
 
-	public Startfenster()							
-	{
+	public Startfenster() {
 		super("Medien Verwaltung");
-		cp = getContentPane();
+		this.setFont(StaticComponents.FONT_STD);
+		this.setForeground(StaticComponents.FONT_COLOR_STD);
+		this.setBackground(StaticComponents.BACKGROUND_COLOR_STD);
+		
+		Container cp = getContentPane();
 		cp.setLayout(new BorderLayout());
-				
-		buttonPanel = new JPanel();
+		cp.add(createButtonPanel(), BorderLayout.WEST);
+		cp.add(new InputPanel(), BorderLayout.CENTER);
+		
+		btnKAnzeigen.addActionListener(this);
+		btnKNeu.addActionListener(this);
+		btnMAnzeigen.addActionListener(this);
+		btnMNeu.addActionListener(this);
+	}
+	
+	private JPanel createButtonPanel() {
+		JPanel buttonPanel = new JPanel();
 		buttonPanel.setAlignmentY(Component.TOP_ALIGNMENT);
-		cp.add(buttonPanel, BorderLayout.WEST);
+		buttonPanel.setLayout(new GridLayout(0,1));
 		
-		
-		GridLayout gl = new GridLayout(2,1);
 		JPanel pnlGl1 = new JPanel();
 		JPanel pnlGl2 = new JPanel();
-		buttonPanel.setLayout(gl);
 		buttonPanel.add(pnlGl1);
 		buttonPanel.add(pnlGl2);
-				
 		
 		GridBagLayout gbl_pnlGl1 = new GridBagLayout();
 		gbl_pnlGl1.columnWidths = new int[] {100, 0};
@@ -66,10 +70,8 @@ public class Startfenster extends JFrame implements ActionListener
 		gbl_pnlGl2.columnWeights = new double[]{0.0, Double.MIN_VALUE};
 		gbl_pnlGl2.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE, 0.0};
 		pnlGl2.setLayout(gbl_pnlGl2);
-		
 				
-		lblMusik = new JLabel("Musik");
-		lblMusik.setFont(fontStd);
+		JLabel lblMusik = new JLabel("Musik");
 		GridBagConstraints gbc_lblMusik = new GridBagConstraints();
 		gbc_lblMusik.insets = new Insets(0, 10, 10, 10);
 		gbc_lblMusik.gridx = 0;
@@ -78,7 +80,6 @@ public class Startfenster extends JFrame implements ActionListener
 		
 		btnMNeu = new JButton("neu");
 		btnMNeu.setPreferredSize(new Dimension(83, 25));
-		btnMNeu.setFont(fontStd);
 		GridBagConstraints gbc_btnMNeu = new GridBagConstraints();
 		gbc_btnMNeu.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnMNeu.insets = new Insets(0, 10, 10, 10);
@@ -87,7 +88,6 @@ public class Startfenster extends JFrame implements ActionListener
 		pnlGl1.add(btnMNeu, gbc_btnMNeu);
 		
 		btnMAnzeigen = new JButton("anzeigen");
-		btnMAnzeigen.setFont(fontStd);
 		GridBagConstraints gbc_btnMAnzeigen = new GridBagConstraints();
 		gbc_btnMAnzeigen.anchor = GridBagConstraints.NORTH;
 		gbc_btnMAnzeigen.fill = GridBagConstraints.HORIZONTAL;
@@ -96,8 +96,7 @@ public class Startfenster extends JFrame implements ActionListener
 		gbc_btnMAnzeigen.gridy = 3;
 		pnlGl1.add(btnMAnzeigen, gbc_btnMAnzeigen);
 		
-		lblKuenstler = new JLabel("Künstler");
-		lblKuenstler.setFont(fontStd);
+		JLabel lblKuenstler = new JLabel("Kuenstler");
 		GridBagConstraints gbc_lblKuenstler = new GridBagConstraints();
 		gbc_lblKuenstler.insets = new Insets(0, 10, 10, 10);
 		gbc_lblKuenstler.gridx = 0;
@@ -106,7 +105,6 @@ public class Startfenster extends JFrame implements ActionListener
 		
 		btnKNeu = new JButton("neu");
 		btnKNeu.setPreferredSize(new Dimension(83, 25));
-		btnKNeu.setFont(fontStd);
 		GridBagConstraints gbc_btnKNeu = new GridBagConstraints();
 		gbc_btnKNeu.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnKNeu.insets = new Insets(0, 10, 10, 10);
@@ -115,7 +113,6 @@ public class Startfenster extends JFrame implements ActionListener
 		pnlGl2.add(btnKNeu, gbc_btnKNeu);
 		
 		btnKAnzeigen = new JButton("anzeigen");
-		btnKAnzeigen.setFont(fontStd);
 		GridBagConstraints gbc_btnKAnzeigen = new GridBagConstraints();
 		gbc_btnKAnzeigen.anchor = GridBagConstraints.NORTH;
 		gbc_btnKAnzeigen.fill = GridBagConstraints.HORIZONTAL;
@@ -123,43 +120,26 @@ public class Startfenster extends JFrame implements ActionListener
 		gbc_btnKAnzeigen.gridx = 0;
 		gbc_btnKAnzeigen.gridy = 3;
 		pnlGl2.add(btnKAnzeigen, gbc_btnKAnzeigen);
-
-		InputPanel input = new InputPanel();
-		input.setAlignmentY(Component.TOP_ALIGNMENT);
-		cp.add(input, BorderLayout.CENTER);
 		
-//		southPanel = new JPanel();
-//		FlowLayout flowLayout = (FlowLayout) southPanel.getLayout();
-//		flowLayout.setVgap(10);
-//		flowLayout.setHgap(10);
-//		flowLayout.setAlignment(FlowLayout.RIGHT);
-//			
-//		btnSpeichern = new JButton("speichern");
-//		southPanel.add(btnSpeichern);
-//		
-//		btnAbbrechen = new JButton("abbrechen");
-//		southPanel.add(btnAbbrechen);
-//		
-//		cp.add(southPanel, BorderLayout.SOUTH);
+		return buttonPanel;
 	}
 	
 	
-	public static void main(String[] args) 
-	{
+	public static void main(String[] args) {
 		Startfenster mv = new Startfenster();
 		mv.pack();
 		mv.setVisible(true);
 		mv.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		mv.setLocationRelativeTo(null);
 		mv.setResizable(false);
-		
-	
-
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		//  XXX (JW) Auto-generated method stub
+		if (arg0.getSource() == btnKAnzeigen) {
+			InterpretDialog dialog = new InterpretDialog(this);
+			dialog.display();
+		}
 	}
 
 }

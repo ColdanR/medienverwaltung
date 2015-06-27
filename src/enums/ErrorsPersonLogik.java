@@ -2,9 +2,9 @@ package enums;
 
 
 public enum ErrorsPersonLogik implements ErrorMessage {
-	KeinNachname ("Kein Nachname übergeben."),
-	KeinVorname ("Kein Vorname übergeben"),
-	KeinKuenstlername("Kein Künstlername übergabe")
+	KeinNachname ("Kein Nachname uebergeben."),
+	KeinVorname ("Kein Vorname uebergeben"),
+	KeinKuenstlername("Kein Kuenstlername eingegeben")
 	;
 	
 	private String	errorMessage	=	"";
