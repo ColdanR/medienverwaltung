@@ -74,7 +74,7 @@ public class PersonLogik implements DatenLogik<Person> {
 	public boolean write() {
 		try {
 			DBPerson dbLogic = getDBLogic();
-			if (!dbLogic.write(object)) {
+			if (!dbLogic.writePerson(object)) {
 				errors.add(DatabaseErrors.UnableToWrite);
 				return false;
 			} else {
@@ -90,7 +90,7 @@ public class PersonLogik implements DatenLogik<Person> {
 	public boolean loadObject(int id) {
 		try {
 			DBPerson dbLogic = getDBLogic();
-			object = dbLogic.getForId(id);
+			object = dbLogic.getPerson(id);
 			if (object == null) {
 				errors.add(DatabaseErrors.UnableToRead);
 				return false;
