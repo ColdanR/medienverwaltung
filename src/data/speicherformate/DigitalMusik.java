@@ -9,7 +9,7 @@ public class DigitalMusik implements SpeicherFormatInterface {
 	private	String			pfad			=	"";
 	private	String			format			=	"";
 	private	String			qualitaet		=	"";
-	private Speicherformat	type			=	null;
+	private Speicherformat	type			=	Speicherformat.DigitalMusik;
 	/**
 	 * @return the id
 	 */
@@ -70,10 +70,7 @@ public class DigitalMusik implements SpeicherFormatInterface {
 	public void setQualitaet(String qualitaet) {
 		this.qualitaet = qualitaet;
 	}
-	@Override
-	public void setType(Speicherformat type) {
-		this.type = type;
-	}
+
 	@Override
 	public Speicherformat getType() {
 		return type;

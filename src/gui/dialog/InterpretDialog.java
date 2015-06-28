@@ -15,11 +15,11 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.border.BevelBorder;
 
 import data.Person;
 import data.logic.PersonLogik;
 import gui.ReturningDialog;
+import gui.StaticComponents;
 
 public class InterpretDialog extends ReturningDialog<Person> {
     private	JTextField	txfNachname;
@@ -27,7 +27,6 @@ public class InterpretDialog extends ReturningDialog<Person> {
     private	JTextField	txfKuenstlername;
     private	JButton		btnSpeichern;
     private	JButton		btnAbbrechen;
-    private	BevelBorder	brdBevel	=	new BevelBorder(BevelBorder.LOWERED);
     
 	public InterpretDialog(Window parent) {
 		super(parent, "Interpret anlegen", 400, 200);
@@ -92,7 +91,7 @@ public class InterpretDialog extends ReturningDialog<Person> {
     	gbc_lblNachname.gridy = 1;
     	pnlCenter.add(lblNachname, gbc_lblNachname);
     	txfNachname = new JTextField();
-    	txfNachname.setBorder(brdBevel);
+    	txfNachname.setBorder(StaticComponents.BORDER_TEXTFIELDS_STD);
     	GridBagConstraints gbc_txfNachname = new GridBagConstraints();
     	gbc_txfNachname.fill = GridBagConstraints.HORIZONTAL;
     	gbc_txfNachname.insets = new Insets(0, 0, 10, 10);
@@ -107,7 +106,7 @@ public class InterpretDialog extends ReturningDialog<Person> {
     	gbc_lblVorname.gridy = 2;
     	pnlCenter.add(lblVorname, gbc_lblVorname);
     	txfVorname = new JTextField();
-    	txfVorname.setBorder(brdBevel);
+    	txfVorname.setBorder(StaticComponents.BORDER_TEXTFIELDS_STD);
     	GridBagConstraints gbc_txfVorname = new GridBagConstraints();
     	gbc_txfVorname.fill = GridBagConstraints.HORIZONTAL;
     	gbc_txfVorname.insets = new Insets(0, 0, 10, 10);
@@ -122,7 +121,7 @@ public class InterpretDialog extends ReturningDialog<Person> {
     	gbc_lblKuenstlername.gridy = 3;
     	pnlCenter.add(lblKuenstlername, gbc_lblKuenstlername);
     	txfKuenstlername = new JTextField();
-    	txfKuenstlername.setBorder(brdBevel);
+    	txfKuenstlername.setBorder(StaticComponents.BORDER_TEXTFIELDS_STD);
     	GridBagConstraints gbc_txfKuenstlername = new GridBagConstraints();
     	gbc_txfKuenstlername.fill = GridBagConstraints.HORIZONTAL;
     	gbc_txfKuenstlername.insets = new Insets(0, 0, 10, 10);

@@ -8,6 +8,7 @@ import java.util.List;
 
 import data.DatenLogik;
 import data.SpeicherFormatInterface;
+import data.speicherformate.DigitalMusik;
 import database.DBSpeicherFormat;
 import enums.ErrorMessage;
 import enums.ErrorsSpeicherFormateLogik;
@@ -24,6 +25,30 @@ public class SpeicherFormateLogik implements DatenLogik<SpeicherFormatInterface>
 	
 	public SpeicherFormateLogik(int titelId) {
 		this.titelId = titelId;
+	}
+	
+	public boolean createDigitalMusik(String datentraeger, String pfad, String format, String qualitaet) {
+		if (datentraeger == null || datentraeger.isEmpty()) {
+			errors.add(ErrorsSpeicherFormateLogik.NoDatentraeger);
+		}
+		if (pfad == null || pfad.isEmpty()) {
+			errors.add(ErrorsSpeicherFormateLogik.NoPfad);
+		}
+		if (format == null || format.isEmpty()) {
+			errors.add(ErrorsSpeicherFormateLogik.NoFormat);
+		}
+		if (qualitaet == null || qualitaet.isEmpty()) {
+			errors.add(ErrorsSpeicherFormateLogik.NoQualitaet);
+		}
+		if (errors.size() == 0) {
+			DigitalMusik tempObject = new DigitalMusik();
+			tempObject.setDatentraeger(datentraeger);
+			tempObject.setFormat(format);
+			tempObject.setPfad(pfad);
+			tempObject.setQualitaet(qualitaet);
+			object = tempObject;
+		}
+		return errors.size() == 0;
 	}
 
 	@Override
@@ -74,7 +99,7 @@ public class SpeicherFormateLogik implements DatenLogik<SpeicherFormatInterface>
 	}
 
 	@Override
-	public List<SpeicherFormatInterface> getAll() {
+	public List<SpeicherFormatInterface> getAll() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException("Dieser Befehl wird nicht unterstützt!");
 	}
 

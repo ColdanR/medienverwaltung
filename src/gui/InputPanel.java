@@ -9,7 +9,6 @@ import java.awt.Insets;
 
 import javax.swing.JTextField;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,8 +19,7 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-public class InputPanel extends JPanel implements ActionListener
-{
+public class InputPanel extends JPanel implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -29,7 +27,6 @@ public class InputPanel extends JPanel implements ActionListener
 	private JTextField txfMitwirkende;
 	private JTextField txfErsterscheinung;
 	private JCheckBox chkbxLive;
-	private Font fontStd = new Font("Tahoma", Font.PLAIN, 14);
 	private EtchedBorder brdEtched = new EtchedBorder(EtchedBorder.LOWERED, null, null);
 	private TitledBorder brdTitel = new TitledBorder((brdEtched), "Musik",TitledBorder.LEADING , TitledBorder.TOP, null, null);
 	private JButton btnSpeicherort;
@@ -37,9 +34,7 @@ public class InputPanel extends JPanel implements ActionListener
 	private JButton btnAbbrechen;
 	private JButton btnSpeichern;
 	
-	public InputPanel()
-	{
-		//super();
+	public InputPanel() {
 		setAlignmentY(Component.TOP_ALIGNMENT);
 		
 		setBorder(brdTitel);		
@@ -51,7 +46,7 @@ public class InputPanel extends JPanel implements ActionListener
 		setLayout(gbl);
 		
 		JLabel lblTitel = new JLabel("Titel");
-		lblTitel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblTitel.setFont(StaticComponents.FONT_STD);
 		GridBagConstraints gbc_lblTitel = new GridBagConstraints();
 		gbc_lblTitel.gridwidth = 3;
 		gbc_lblTitel.insets = new Insets(0, 0, 5, 10);
@@ -61,7 +56,7 @@ public class InputPanel extends JPanel implements ActionListener
 		add(lblTitel, gbc_lblTitel);
 		
 		txfTitel = new JTextField();
-		txfTitel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		txfTitel.setFont(StaticComponents.FONT_STD);
 		GridBagConstraints gbc_txfTitel = new GridBagConstraints();
 		gbc_txfTitel.gridwidth = 3;
 		gbc_txfTitel.fill = GridBagConstraints.HORIZONTAL;
@@ -72,7 +67,7 @@ public class InputPanel extends JPanel implements ActionListener
 		add(txfTitel, gbc_txfTitel);
 		
 		JLabel lblMitwirkende = new JLabel("Mitwirkende");
-		lblMitwirkende.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblMitwirkende.setFont(StaticComponents.FONT_STD);
 		GridBagConstraints gbc_lblMitwirkende = new GridBagConstraints();
 		gbc_lblMitwirkende.gridwidth = 3;
 		gbc_lblMitwirkende.anchor = GridBagConstraints.WEST;
@@ -82,7 +77,7 @@ public class InputPanel extends JPanel implements ActionListener
 		add(lblMitwirkende, gbc_lblMitwirkende);
 		
 		txfMitwirkende = new JTextField();
-		txfMitwirkende.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		txfMitwirkende.setFont(StaticComponents.FONT_STD);
 		GridBagConstraints gbc_txfMitwirkende = new GridBagConstraints();
 		gbc_txfMitwirkende.gridwidth = 3;
 		gbc_txfMitwirkende.fill = GridBagConstraints.HORIZONTAL;
@@ -94,7 +89,7 @@ public class InputPanel extends JPanel implements ActionListener
 		add(txfMitwirkende, gbc_txfMitwirkende);
 		
 		JLabel lblErsterscheinung = new JLabel("Erstausgabe");
-		lblErsterscheinung.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblErsterscheinung.setFont(StaticComponents.FONT_STD);
 		GridBagConstraints gbc_lblErsterscheinung = new GridBagConstraints();
 		gbc_lblErsterscheinung.gridwidth = 2;
 		gbc_lblErsterscheinung.anchor = GridBagConstraints.WEST;
@@ -104,7 +99,7 @@ public class InputPanel extends JPanel implements ActionListener
 		add(lblErsterscheinung, gbc_lblErsterscheinung);
 		
 		txfErsterscheinung = new JTextField();
-		txfErsterscheinung.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		txfErsterscheinung.setFont(StaticComponents.FONT_STD);
 		GridBagConstraints gbc_txfErsterscheinung = new GridBagConstraints();
 		gbc_txfErsterscheinung.gridwidth = 2;
 		gbc_txfErsterscheinung.fill = GridBagConstraints.HORIZONTAL;
@@ -116,7 +111,7 @@ public class InputPanel extends JPanel implements ActionListener
 		txfErsterscheinung.setColumns(20);
 		
 		btnInterpret = new JButton("Interpret");
-		btnInterpret.setFont(fontStd);
+		btnInterpret.setFont(StaticComponents.FONT_STD);
 		GridBagConstraints gbc_btnInterpret = new GridBagConstraints();
 		gbc_btnInterpret.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnInterpret.insets = new Insets(0, 0, 10, 10);
@@ -129,7 +124,7 @@ public class InputPanel extends JPanel implements ActionListener
 		chkbxLive.setIconTextGap(10);
 		chkbxLive.setHorizontalTextPosition(SwingConstants.LEFT);
 		chkbxLive.setActionCommand("Live");
-		chkbxLive.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		chkbxLive.setFont(StaticComponents.FONT_STD);
 		GridBagConstraints gbc_chkbxLive = new GridBagConstraints();
 		gbc_chkbxLive.anchor = GridBagConstraints.WEST;
 		gbc_chkbxLive.insets = new Insets(0, 0, 30, 10);
@@ -138,7 +133,7 @@ public class InputPanel extends JPanel implements ActionListener
 		add(chkbxLive, gbc_chkbxLive);
 		
 		btnSpeicherort = new JButton("Speicherort");
-		btnSpeicherort.setFont(fontStd);
+		btnSpeicherort.setFont(StaticComponents.FONT_STD);
 		GridBagConstraints gbc_btnSpeicherformat = new GridBagConstraints();
 		gbc_btnSpeicherformat.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnSpeicherformat.insets = new Insets(0, 0, 30, 10);
@@ -147,7 +142,7 @@ public class InputPanel extends JPanel implements ActionListener
 		add(btnSpeicherort, gbc_btnSpeicherformat);
 		
 		btnSpeichern = new JButton("speichern");
-		btnSpeichern.setFont(fontStd);
+		btnSpeichern.setFont(StaticComponents.FONT_STD);
 		GridBagConstraints gbc_btnSpeichern = new GridBagConstraints();
 		gbc_btnSpeichern.anchor = GridBagConstraints.EAST;
 		gbc_btnSpeichern.insets = new Insets(0, 0, 10, 10);
@@ -156,7 +151,7 @@ public class InputPanel extends JPanel implements ActionListener
 		add(btnSpeichern, gbc_btnSpeichern);
 		
 		btnAbbrechen = new JButton("abbrechen");
-		btnAbbrechen.setFont(fontStd);
+		btnAbbrechen.setFont(StaticComponents.FONT_STD);
 		GridBagConstraints gbc_btnAbbrechen = new GridBagConstraints();
 		gbc_btnAbbrechen.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnAbbrechen.insets = new Insets(0, 0, 10, 10);
@@ -164,37 +159,13 @@ public class InputPanel extends JPanel implements ActionListener
 		gbc_btnAbbrechen.gridy = 8;
 		add(btnAbbrechen, gbc_btnAbbrechen);
 		
-		
-		txfTitel.addActionListener(this);
-		txfMitwirkende.addActionListener(this);
-		txfErsterscheinung.addActionListener(this);
-		chkbxLive.addActionListener(this);
 		btnSpeicherort.addActionListener(this);
 		btnSpeichern.addActionListener(this);
 		btnAbbrechen.addActionListener(this);
-		
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-//		Object source = e.getSource();
-//		
-//		try
-//		{
-//			switch (source)
-//			{
-//			case txfTitel:
-//				String titel = txfTitel.getText();
-//				break;
-//			}	
-//				
-//				
-//			
-//		}
-//		catch
-//		{
-//			
-//		}
+	public void actionPerformed(ActionEvent e) {
+		
 	}
 }
