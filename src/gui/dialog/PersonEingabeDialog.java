@@ -21,14 +21,14 @@ import data.logic.PersonLogik;
 import gui.ReturningDialog;
 import gui.StaticComponents;
 
-public class InterpretDialog extends ReturningDialog<Person> {
+public class PersonEingabeDialog extends ReturningDialog<Person> {
     private	JTextField	txfNachname;
     private	JTextField	txfVorname;
     private	JTextField	txfKuenstlername;
     private	JButton		btnSpeichern;
     private	JButton		btnAbbrechen;
     
-	public InterpretDialog(Window parent) {
+	public PersonEingabeDialog(Window parent) {
 		super(parent, "Interpret anlegen", 400, 200);
     }
 

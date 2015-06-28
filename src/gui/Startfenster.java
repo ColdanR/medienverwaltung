@@ -17,7 +17,7 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import gui.dialog.InterpretDialog;
+import gui.dialog.PersonEingabeDialog;
 
 import javax.swing.JButton;
 
@@ -137,7 +137,7 @@ public class Startfenster extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnKAnzeigen) {
-			InterpretDialog dialog = new InterpretDialog(this);
+			PersonEingabeDialog dialog = new PersonEingabeDialog(this);
 			dialog.display();
 		}
 	}

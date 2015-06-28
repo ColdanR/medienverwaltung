@@ -45,7 +45,7 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		} else if (a.getSource() == btnCancelButton) {
 			dialog.dispose();
 		} else if (a.getSource() == btnAddButton) {
-			InterpretDialog newDialog = new InterpretDialog(dialog);
+			PersonEingabeDialog newDialog = new PersonEingabeDialog(dialog);
 			newDialog.display();
 			if (newDialog.getObject() != null) {
 				setObject(newDialog.getObject());

@@ -3,14 +3,14 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public abstract class DataBaseManager {
-	/**
-	 * ResourceBundle für Daten der Datenbankverbindung
-	 */
-	private	static	ResourceBundle	db			=	ResourceBundle.getBundle("database");
-	private static	String			sqlConnect	=	"";
+	private 	static	String	sqlConnect	=	"";
+	private		static	String	username	=	"";
+	private		static	String	password	=	"";
+	protected	static	boolean	noErrors	=	false;
 	
 	private enum SqlServers {
 		MySQL ("com.mysql.jdbc.Driver", "jdbc:mysql://", "mysql");
@@ -49,10 +49,20 @@ public abstract class DataBaseManager {
 	
 	static {
 		try {
-			SqlServers	server	=	SqlServers.getServerByName(db.getString("dbDriver"));
+			ResourceBundle	db		=	ResourceBundle.getBundle("database");
+			SqlServers		server	=	SqlServers.getServerByName(db.getString("dbDriver"));
+			sqlConnect				=	server.getconnectPart() + db.getString("dbHost") + "/" + db.getString("dbName");
+			username				=	db.getString("dbUser");
+			password				=	db.getString("dbPassword");
 			Class.forName(server.getDriver());
-			sqlConnect			=	server.getconnectPart() + db.getString("dbHost") + "/" + db.getString("dbName");
+			noErrors = true;
 		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (MissingResourceException e) {
+			e.printStackTrace();
+		} catch (ClassCastException e) {
+			e.printStackTrace();
+		} catch (LinkageError e) {
 			e.printStackTrace();
 		}
 	}
@@ -62,7 +72,7 @@ public abstract class DataBaseManager {
 	 * @return the connection object
 	 * @throws SQLException Connection refused
 	 */
-	protected Connection getConnection () throws SQLException {
-		return DriverManager.getConnection(sqlConnect, db.getString("dbUser"), db.getString("dbPassword"));
+	protected final Connection getConnection () throws SQLException {
+		return DriverManager.getConnection(sqlConnect, username, password);
 	}
 }
