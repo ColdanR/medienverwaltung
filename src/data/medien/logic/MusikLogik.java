@@ -167,4 +167,10 @@ public class MusikLogik implements DatenLogik<Musik> {
 		}
 		return false;
 	}
+
+	@Override
+	public void reset() {
+		this.object = null;
+		this.errors = new ArrayList<ErrorMessage>();
+	}
 }

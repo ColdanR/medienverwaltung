@@ -23,8 +23,7 @@ public class SpeicherFormateLogik implements DatenLogik<SpeicherFormatInterface>
 	private	int						titelId	=	0;
 	private	List<ErrorMessage>		errors	=	new ArrayList<ErrorMessage>();
 	
-	public SpeicherFormateLogik(int titelId) {
-		this.titelId = titelId;
+	public SpeicherFormateLogik() {
 	}
 	
 	public boolean createDigitalMusik(String datentraeger, String pfad, String format, String qualitaet) {
@@ -71,22 +70,24 @@ public class SpeicherFormateLogik implements DatenLogik<SpeicherFormatInterface>
 		DBSpeicherFormat	dbLogik	=	new DBSpeicherFormat();
 		if (object == null) {
 			errors.add(ErrorsSpeicherFormateLogik.NoObjectLoaded);
-			return false;
 		}
-		if (!dbLogik.write(object, titelId)) {
-			errors.add(ErrorsSpeicherFormateLogik.UnableToDelete);
-			return false;
-		} else {
-			return true;
+		if (titelId == 0) {
+			errors.add(ErrorsSpeicherFormateLogik.NoTitleIdSet);
 		}
+		if (errors.size() == 0) {
+			if (!dbLogik.write(object, titelId)) {
+				errors.add(ErrorsSpeicherFormateLogik.UnableToWrite);
+			}
+		}
+		return errors.size() == 0;
 	}
 
 	@Override
 	public boolean loadObject(int id) {
 		DBSpeicherFormat	dbLogik	=	new DBSpeicherFormat();
 		object = dbLogik.getForId(id);
-		if (!dbLogik.delete(object)) {
-			errors.add(ErrorsSpeicherFormateLogik.UnableToDelete);
+		if (object == null) {
+			errors.add(ErrorsSpeicherFormateLogik.UnableToLoad);
 			return false;
 		} else {
 			return true;
@@ -114,5 +115,12 @@ public class SpeicherFormateLogik implements DatenLogik<SpeicherFormatInterface>
 
 	public void setTitelId(int titelId) {
 		this.titelId = titelId;
+	}
+
+	@Override
+	public void reset() {
+		this.titelId = 0;
+		this.errors = new ArrayList<ErrorMessage>();
+		this.object = null;
 	}
 }

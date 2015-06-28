@@ -133,4 +133,10 @@ public class PersonLogik implements DatenLogik<Person> {
 	private DBPerson getDBLogic() throws ClassNotFoundException {
 		return new DBPerson();
 	}
+
+	@Override
+	public void reset() {
+		this.object = null;
+		this.errors = new ArrayList<ErrorMessage>();
+	}
 }

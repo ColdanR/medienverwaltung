@@ -7,39 +7,63 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public abstract class DataBaseManager {
-	private 	static	String	sqlConnect	=	"";
-	private		static	String	username	=	"";
-	private		static	String	password	=	"";
-	protected	static	boolean	noErrors	=	false;
+	private 	static	String		sqlConnect	=	"";
+	private		static	String		username	=	"";
+	private		static	String		password	=	"";
+	protected	static	boolean		noErrors	=	false;
 	
+	/**
+	 * Enumeration für die unterstützten Datenbanken
+	 * @author User
+	 *
+	 */
 	private enum SqlServers {
-		MySQL ("com.mysql.jdbc.Driver", "jdbc:mysql://", "mysql");
+		MySQL ("com.mysql.jdbc.Driver", "jdbc:mysql://", "mysql"),
+		FireBird("org.firebirdsql.jdbc.FBDriver", "jdbc:firebirdsql://", "firebird")
+		;
 		
 		private	String	driver		=	"";
 		private	String	connectPart	=	"";
-		private	String	name		=	"";
+		private	String	id			=	"";
 		
-		private SqlServers (String driver, String connectPart, String name) {
+		private SqlServers (String driver, String connectPart, String id) {
 			this.driver			=	driver;
 			this.connectPart	=	connectPart;
-			this.name			=	name;
+			this.id				=	id;
 		}
 		
+		/**
+		 * Klasse des Treibers
+		 * @return
+		 */
 		public String getDriver() {
 			return driver;
 		}
 		
+		/**
+		 * Prefix der Datenbankverbindung
+		 * @return
+		 */
 		public String getconnectPart() {
 			return connectPart;
 		}
 		
-		public String getName() {
-			return name;
+		/**
+		 * Eindeutige Bezeichnung
+		 * @return
+		 */
+		private String getId() {
+			return id;
 		}
 		
-		public static SqlServers getServerByName(String name) {
+		/**
+		 * 
+		 * @param id
+		 * @return
+		 */
+		public static SqlServers getServerByName(String id) {
 			for (SqlServers value : SqlServers.values()) {
-				if (name.equals(value.getName())) {
+				if (id.equals(value.getId())) {
 					return value;
 				}
 			}
@@ -56,6 +80,8 @@ public abstract class DataBaseManager {
 			password				=	db.getString("dbPassword");
 			Class.forName(server.getDriver());
 			noErrors = true;
+		} catch (NullPointerException e) {
+			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (MissingResourceException e) {

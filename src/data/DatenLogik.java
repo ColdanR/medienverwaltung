@@ -17,4 +17,5 @@ public interface DatenLogik<E> {
 	public E getObject();
 	public List<E> getAll();
 	public List<ErrorMessage> getErrors();
+	public void reset();
 }

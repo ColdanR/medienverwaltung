@@ -2,10 +2,12 @@ package enums;
 
 
 public enum DatabaseErrors implements ErrorMessage {
-	NoDBAvailable("Datenbank nicht verfuegbar."),
+	NoDBAvailable("Datenbank nicht verf\u00FCgbar."),
 	UnableToRead("Es konnte nicht aus der Datenbank gelesen werden."),
-	UnableToDelete("Der Datensatz konnte nicht aus der Datenbank geloescht werden."),
-	UnableToWrite("Das Schreiben in die Datenbank ist fehlgeschlagen.");
+	UnableToDelete("Der Datensatz konnte nicht aus der Datenbank gel\u00F6scht werden."),
+	UnableToWrite("Das Schreiben in die Datenbank ist fehlgeschlagen."),
+	UnknownDriver("Unbekannter Treiber in den Einstellungen verwendet.")
+	;
 	
 	String errorMessage = "";
 	
@@ -17,5 +19,4 @@ public enum DatabaseErrors implements ErrorMessage {
 	public String getErrorMessage() {
 		return errorMessage;
 	}
-
 }
