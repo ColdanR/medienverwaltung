@@ -26,8 +26,11 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 	JButton			btnAddButton;
 	JList<Person>	listPersonen;
 
+
 	public PersonAuswahlDialog(Window parent) {
 		super(parent, "Person auswaehlen", 600, 400);
+		createDialogContent();
+		
 	}
 
 	@Override
@@ -56,16 +59,22 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 
 	@Override
 	protected JPanel createDialogContent() {
+		
 		// Creating MainPanel and Subpanels
-		JPanel	panel	=	new JPanel(new BorderLayout());
+		JPanel	display	=	new JPanel(new BorderLayout());
 		JPanel	buttons	=	new JPanel();
 		JPanel	main	=	new JPanel(new GridLayout(0, 1));
-		panel.add(main, BorderLayout.CENTER);
-		panel.add(buttons, BorderLayout.SOUTH);
+		display.add(main, BorderLayout.CENTER);
+		display.add(buttons, BorderLayout.SOUTH);
 		
 		// Main
 		PersonLogik		logik		=	new PersonLogik();
 		List<Person>	listData	=	logik.getAll();
+		
+		listPersonen = new JList<Person>(listData.toArray(new Person[]{}));
+		listPersonen.setCellRenderer(new PersonListRenderer());
+		main.add(listPersonen);
+		
 		if (logik.getErrors().isEmpty()) {
 			listPersonen = new JList<Person>(listData.toArray(new Person[]{}));
 			listPersonen.setCellRenderer(new PersonListRenderer());
@@ -94,6 +103,6 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		}
 		btnCancelButton.addActionListener(this);
 		
-		return panel;
+		return display;
 	}
 }

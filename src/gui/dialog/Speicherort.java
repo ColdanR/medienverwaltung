@@ -21,7 +21,7 @@ import gui.StaticComponents;
 /**
  * Dialog zur Eingabe eines neuen Speicherformates
  * @author Bernd Schmidt Logikimplementierung
- * @author Jens Design
+ * @author Jens Wiede (design)
  *
  */
 public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
@@ -33,9 +33,11 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 	private	JButton		btnAbbrechen;
 	private	int			titelId;
 	
+	
 	public Speicherort(Window parent, int titelId) {
-		super(parent, "Speicherort", 400, 400);
+		super(parent, "Speicherort", 400, 300);
 		this.titelId = titelId;
+		this.createDialogContent();
 	}
 	
 	@Override
@@ -65,11 +67,10 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 	}
 
 	@Override
-	protected JPanel createDialogContent() {
-		JPanel display = new JPanel();
-		display.setLayout(new BorderLayout());
-		
-		// Creating and adding main Components
+	protected JPanel createDialogContent() 
+	{
+		// Creating MainPanel and Subpanels
+		JPanel display		= 	new JPanel(new BorderLayout());
 		JPanel pnlNorth		=	new JPanel();
 		JPanel pnlCenter	=	new JPanel();
 		JPanel pnlSouth		=	new JPanel();
@@ -83,7 +84,7 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		pnlNorth.setLayout(fl_pnlNorth);
 		
 		JLabel lblHeader = new JLabel("Speicherort");
-		lblHeader.setFont(StaticComponents.FONT_BOLD);
+		lblHeader.setFont(StaticComponents.FONT_TITLE);
 		pnlNorth.add(lblHeader);
 		
 		// Main
@@ -95,7 +96,7 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		pnlCenter.setLayout(gbl);
 		
 		JLabel lblDatentraeger = new JLabel("Datentr\u00E4ger");
-		lblDatentraeger.setFont(StaticComponents.FONT_STD);
+		StaticComponents.setFontLabel(lblDatentraeger);
 		GridBagConstraints gbc_lblDatentraeger = new GridBagConstraints();
 		gbc_lblDatentraeger.anchor = GridBagConstraints.WEST;
 		gbc_lblDatentraeger.insets = new Insets(0, 0, 10, 10);
@@ -104,8 +105,7 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		pnlCenter.add(lblDatentraeger, gbc_lblDatentraeger);
 		
 		txfDatentraeger = new JTextField();
-		txfDatentraeger.setBorder(StaticComponents.BORDER_TEXTFIELDS_STD);
-		txfDatentraeger.setFont(StaticComponents.FONT_STD);
+		StaticComponents.setFontBorderTextField(txfDatentraeger);
 		GridBagConstraints gbc_txfDatentraeger = new GridBagConstraints();
 		gbc_txfDatentraeger.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txfDatentraeger.insets = new Insets(0, 0, 10, 10);
@@ -114,7 +114,7 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		pnlCenter.add(txfDatentraeger, gbc_txfDatentraeger);
 		
 		JLabel lblPfad = new JLabel("Pfad");
-		lblPfad.setFont(StaticComponents.FONT_STD);
+		StaticComponents.setFontLabel(lblPfad);
 		GridBagConstraints gbc_lblPfad = new GridBagConstraints();
 		gbc_lblPfad.anchor = GridBagConstraints.WEST;
 		gbc_lblPfad.insets = new Insets(0, 0, 10, 10);
@@ -123,8 +123,7 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		pnlCenter.add(lblPfad, gbc_lblPfad);
 		
 		txfPfad = new JTextField();
-		txfPfad.setBorder(StaticComponents.BORDER_TEXTFIELDS_STD);
-		txfPfad.setFont(StaticComponents.FONT_STD);
+		StaticComponents.setFontBorderTextField(txfPfad);
 		GridBagConstraints gbc_txfPfad = new GridBagConstraints();
 		gbc_txfPfad.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txfPfad.insets = new Insets(0, 0, 10, 10);
@@ -133,7 +132,7 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		pnlCenter.add(txfPfad, gbc_txfPfad);
 		
 		JLabel lblDateiformat = new JLabel("Dateiformat");
-		lblDateiformat.setFont(StaticComponents.FONT_STD);
+		StaticComponents.setFontLabel(lblDateiformat);
 		GridBagConstraints gbc_lblDateiformat = new GridBagConstraints();
 		gbc_lblDateiformat.anchor = GridBagConstraints.WEST;
 		gbc_lblDateiformat.insets = new Insets(0, 0, 10, 10);
@@ -142,8 +141,7 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		pnlCenter.add(lblDateiformat, gbc_lblDateiformat);
 		
 		txfDateiformat = new JTextField();
-		txfDateiformat.setBorder(StaticComponents.BORDER_TEXTFIELDS_STD);
-		txfDateiformat.setFont(StaticComponents.FONT_STD);
+		StaticComponents.setFontBorderTextField(txfDateiformat);
 		GridBagConstraints gbc_txfDateiformat = new GridBagConstraints();
 		gbc_txfDateiformat.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txfDateiformat.insets = new Insets(0, 0, 10, 10);
@@ -151,8 +149,8 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		gbc_txfDateiformat.gridy = 4;
 		pnlCenter.add(txfDateiformat, gbc_txfDateiformat);
 		
-		JLabel lblQualitaet = new JLabel("Qualit√§t");
-		lblQualitaet.setFont(StaticComponents.FONT_STD);
+		JLabel lblQualitaet = new JLabel("Qualit‰t");
+		StaticComponents.setFontLabel(lblQualitaet);
 		GridBagConstraints gbc_lblQualitaet = new GridBagConstraints();
 		gbc_lblQualitaet.anchor = GridBagConstraints.WEST;
 		gbc_lblQualitaet.insets = new Insets(0, 0, 10, 10);
@@ -161,8 +159,7 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		pnlCenter.add(lblQualitaet, gbc_lblQualitaet);
 		
 		txfQualitaet = new JTextField();
-		txfQualitaet.setBorder(StaticComponents.BORDER_TEXTFIELDS_STD);
-		txfQualitaet.setFont(StaticComponents.FONT_STD);
+		StaticComponents.setFontBorderTextField(txfQualitaet);
 		gbc_txfDateiformat = new GridBagConstraints();
 		gbc_txfDateiformat.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txfDateiformat.insets = new Insets(0, 0, 10, 10);

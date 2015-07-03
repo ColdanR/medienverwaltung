@@ -10,7 +10,6 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Window;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
@@ -29,7 +28,8 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
     private	JButton		btnAbbrechen;
     
 	public PersonEingabeDialog(Window parent) {
-		super(parent, "Interpret anlegen", 400, 200);
+		super(parent, "Interpret anlegen", 400, 250);
+//		createDialogContent();
     }
 
 	@Override
@@ -70,11 +70,14 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
     	FlowLayout fl_pnlNorth = new FlowLayout();
     	fl_pnlNorth.setAlignment(FlowLayout.CENTER);
 		pnlNorth.setLayout(fl_pnlNorth);
+		
 		JLabel lblInterpret = new JLabel("Interpret");
-    	lblInterpret.setFont(new Font("Tahoma", Font.BOLD, 16));
+    	lblInterpret.setFont(StaticComponents.FONT_TITLE);
     	pnlNorth.add(lblInterpret);
+    	
     	panel.add(pnlNorth, BorderLayout.NORTH);
-		GridBagLayout gbl = new GridBagLayout();
+		
+    	GridBagLayout gbl = new GridBagLayout();
     	gbl.columnWidths = new int[] {30, 0, 200, 30};
     	gbl.rowHeights = new int[] {30, 0, 0, 0, 30};
     	gbl.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -84,50 +87,59 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
     	JPanel pnlCenter = new JPanel();
     	pnlCenter.setLayout(gbl);
     	JLabel lblNachname = new JLabel("Nachname");
+    	lblNachname.setFont(StaticComponents.FONT_LABEL);
     	GridBagConstraints gbc_lblNachname = new GridBagConstraints();
     	gbc_lblNachname.anchor = GridBagConstraints.WEST;
     	gbc_lblNachname.insets = new Insets(0, 0, 10, 10);
     	gbc_lblNachname.gridx = 1;
     	gbc_lblNachname.gridy = 1;
     	pnlCenter.add(lblNachname, gbc_lblNachname);
+    	
     	txfNachname = new JTextField();
-    	txfNachname.setBorder(StaticComponents.BORDER_TEXTFIELDS_STD);
+    	StaticComponents.setFontBorderTextField(txfNachname);
     	GridBagConstraints gbc_txfNachname = new GridBagConstraints();
     	gbc_txfNachname.fill = GridBagConstraints.HORIZONTAL;
     	gbc_txfNachname.insets = new Insets(0, 0, 10, 10);
     	gbc_txfNachname.gridx = 2;
     	gbc_txfNachname.gridy = 1;
     	pnlCenter.add(txfNachname, gbc_txfNachname);
+    	
     	JLabel lblVorname = new JLabel("Vorname");
+    	lblVorname.setFont(StaticComponents.FONT_LABEL);
     	GridBagConstraints gbc_lblVorname = new GridBagConstraints();
     	gbc_lblVorname.anchor = GridBagConstraints.WEST;
     	gbc_lblVorname.insets = new Insets(0, 0, 10, 10);
     	gbc_lblVorname.gridx = 1;
     	gbc_lblVorname.gridy = 2;
     	pnlCenter.add(lblVorname, gbc_lblVorname);
+    	
     	txfVorname = new JTextField();
-    	txfVorname.setBorder(StaticComponents.BORDER_TEXTFIELDS_STD);
+    	StaticComponents.setFontBorderTextField(txfVorname);
     	GridBagConstraints gbc_txfVorname = new GridBagConstraints();
     	gbc_txfVorname.fill = GridBagConstraints.HORIZONTAL;
     	gbc_txfVorname.insets = new Insets(0, 0, 10, 10);
     	gbc_txfVorname.gridx = 2;
     	gbc_txfVorname.gridy = 2;
     	pnlCenter.add(txfVorname, gbc_txfVorname);
+    	
     	JLabel lblKuenstlername = new JLabel("K\u00FCnstlername");
+    	lblKuenstlername.setFont(StaticComponents.FONT_LABEL);
     	GridBagConstraints gbc_lblKuenstlername = new GridBagConstraints();
     	gbc_lblKuenstlername.anchor = GridBagConstraints.WEST;
     	gbc_lblKuenstlername.insets = new Insets(0, 0, 10, 10);
     	gbc_lblKuenstlername.gridx = 1;
     	gbc_lblKuenstlername.gridy = 3;
     	pnlCenter.add(lblKuenstlername, gbc_lblKuenstlername);
+    	
     	txfKuenstlername = new JTextField();
-    	txfKuenstlername.setBorder(StaticComponents.BORDER_TEXTFIELDS_STD);
+    	StaticComponents.setFontBorderTextField(txfKuenstlername);
     	GridBagConstraints gbc_txfKuenstlername = new GridBagConstraints();
     	gbc_txfKuenstlername.fill = GridBagConstraints.HORIZONTAL;
     	gbc_txfKuenstlername.insets = new Insets(0, 0, 10, 10);
     	gbc_txfKuenstlername.gridx = 2;
     	gbc_txfKuenstlername.gridy = 3;
     	pnlCenter.add(txfKuenstlername, gbc_txfKuenstlername);
+    	
     	panel.add(pnlCenter, BorderLayout.CENTER);
 
     	// Button Panel
@@ -141,6 +153,7 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
 		pnlSouth.add(btnSpeichern);
 		btnAbbrechen = new JButton("abbrechen");
 		pnlSouth.add(btnAbbrechen);
+		
 		panel.add(pnlSouth, BorderLayout.SOUTH);
 		
 		btnSpeichern.addActionListener(this);
