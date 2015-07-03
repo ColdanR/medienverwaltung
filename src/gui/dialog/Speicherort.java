@@ -41,24 +41,35 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == btnAbbrechen) {
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		if (arg0.getSource() == btnAbbrechen) 
+		{
 			dialog.dispose();
-		} else if (arg0.getSource() == btnSpeichern) {
+		} 
+		else if (arg0.getSource() == btnSpeichern) 
+		{
 			SpeicherFormateLogik logik = new SpeicherFormateLogik();
 			logik.setTitelId(titelId);
 			boolean errors = false;
-			if (logik.createDigitalMusik(txfDatentraeger.getText(), txfPfad.getText(), txfDateiformat.getText(), txfQualitaet.getText())) {
-				if (logik.write()) {
+			if (logik.createDigitalMusik(txfDatentraeger.getText(), txfPfad.getText(), txfDateiformat.getText(), txfQualitaet.getText())) 
+			{
+				if (logik.write()) 
+				{
 					setObject(logik.getObject());
 					dialog.dispose();
-				} else {
+				} 
+				else 
+				{
 					errors = true;
 				}
-			} else {
+			} 
+			else 
+			{
 				errors = true;
 			}
-			if (errors) {
+			if (errors) 
+			{
 				FehlerDialog fehlerDialog = new FehlerDialog(null, logik.getErrors());
 				fehlerDialog.setAlwaysOnTop(true);
 				fehlerDialog.setVisible(true);

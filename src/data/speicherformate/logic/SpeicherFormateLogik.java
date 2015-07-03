@@ -14,7 +14,7 @@ import enums.ErrorMessage;
 import enums.ErrorsSpeicherFormateLogik;
 
 /**
- * Klasse zur Abhandlung der Logik fÃ¼r Speicherformate
+ * Klasse zur Abhandlung der Logik für Speicherformate
  * @author Bernd Schmidt
  *
  */

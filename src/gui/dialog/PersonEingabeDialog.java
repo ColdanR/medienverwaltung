@@ -29,30 +29,38 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
     
 	public PersonEingabeDialog(Window parent) {
 		super(parent, "Interpret anlegen", 400, 250);
-//		createDialogContent();
+		createDialogContent();
     }
 
 	@Override
-	public void actionPerformed(ActionEvent aEvent) {
-		if (aEvent.getSource() == btnSpeichern) {
+	public void actionPerformed(ActionEvent aEvent) 
+	{
+		if (aEvent.getSource() == btnSpeichern) 
+		{
 			PersonLogik logik = new PersonLogik();
 			boolean errors = false;
-			if (logik.createNew(txfNachname.getText(), txfVorname.getText(), txfKuenstlername.getText())) {
+			if (logik.createNew(txfNachname.getText(), txfVorname.getText(), txfKuenstlername.getText())) 
+			{
 				if (logik.write()) {
 					setObject(logik.getObject());
 					dialog.dispose();
 				} else {
 					errors = true;
 				}
-			} else {
+			} 
+			else 
+			{
 				errors = true;
 			}
-			if (errors) {
+			if (errors) 
+			{
 				FehlerDialog fehlerDialog = new FehlerDialog(null, logik.getErrors());
 				fehlerDialog.setAlwaysOnTop(true);
 				fehlerDialog.setVisible(true);
 			}
-		} else if (aEvent.getSource() == btnAbbrechen) {
+		} 
+		else if (aEvent.getSource() == btnAbbrechen) 
+		{
 			txfKuenstlername.setText("");
 			txfNachname.setText("");
 			txfVorname.setText("");
@@ -61,7 +69,8 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
 	}
 
 	@Override
-	protected JPanel createDialogContent() {
+	protected JPanel createDialogContent() 
+	{
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		

@@ -14,7 +14,8 @@ import javax.swing.JPanel;
  * @author User
  *
  */
-public abstract class ReturningDialog<E> implements ActionListener {
+public abstract class ReturningDialog<E> implements ActionListener 
+{
 	private		Window	parent;
 	protected	JDialog	dialog;
 	private		E		object;
@@ -22,7 +23,8 @@ public abstract class ReturningDialog<E> implements ActionListener {
 	private		int		width;
 	private		int		height;
 
-	public ReturningDialog (Window parent, String title, int width, int height) {
+	public ReturningDialog (Window parent, String title, int width, int height) 
+	{
 		this.parent	=	parent;
 		this.title	=	title;
 		this.width	=	width;
@@ -41,7 +43,8 @@ public abstract class ReturningDialog<E> implements ActionListener {
      * @param width width of the Dialog
      * @param height height of the Dialog
      */
-    public final void display() {
+    public final void display() 
+    {
         dialog = new JDialog(parent, title, ModalityType.APPLICATION_MODAL);
         dialog.setSize(width, height);
         dialog.setResizable(false);
@@ -49,13 +52,14 @@ public abstract class ReturningDialog<E> implements ActionListener {
         dialog.setContentPane(createDialogContent());
         dialog.setLocationRelativeTo(parent);
         dialog.setVisible(true);
-    };
+    }
     
     /**
      * Sets the returning object
      * @param object object to return
      */
-    protected final void setObject(E object) {
+    protected final void setObject(E object) 
+    {
     	this.object = object;
     }
     
@@ -63,7 +67,8 @@ public abstract class ReturningDialog<E> implements ActionListener {
      * Returns the object
      * @return
      */
-    public final E getObject() {
+    public final E getObject()
+    {
         return object;
     }
 }

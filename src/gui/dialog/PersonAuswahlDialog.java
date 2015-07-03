@@ -27,30 +27,41 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 	JList<Person>	listPersonen;
 
 
-	public PersonAuswahlDialog(Window parent) {
-		super(parent, "Person auswaehlen", 600, 400);
+	public PersonAuswahlDialog(Window parent) 
+	{
+		super(parent, "Person auswählen", 600, 400);
 		createDialogContent();
 		
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent a) {
-		if (a.getSource() == btnSelectButton) {
-			if (listPersonen.isSelectionEmpty()) {
+	public void actionPerformed(ActionEvent a) 
+	{
+		if (a.getSource() == btnSelectButton) 
+		{
+			if (listPersonen.isSelectionEmpty()) 
+			{
 				List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
 				errors.add(ErrorsGUI.NoSelection);
 				JDialog	errorDialog = new FehlerDialog(dialog, errors);
 				errorDialog.setVisible(true);
-			} else {
+			} 
+			else 
+			{
 				setObject(listPersonen.getSelectedValue());
 				dialog.dispose();
 			}
-		} else if (a.getSource() == btnCancelButton) {
+		} 
+		else if (a.getSource() == btnCancelButton) 
+		{
 			dialog.dispose();
-		} else if (a.getSource() == btnAddButton) {
+		} 
+		else if (a.getSource() == btnAddButton) 
+		{
 			PersonEingabeDialog newDialog = new PersonEingabeDialog(dialog);
 			newDialog.display();
-			if (newDialog.getObject() != null) {
+			if (newDialog.getObject() != null) 
+			{
 				setObject(newDialog.getObject());
 				dialog.dispose();
 			}
@@ -75,13 +86,17 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		listPersonen.setCellRenderer(new PersonListRenderer());
 		main.add(listPersonen);
 		
-		if (logik.getErrors().isEmpty()) {
+		if (logik.getErrors().isEmpty()) 
+		{
 			listPersonen = new JList<Person>(listData.toArray(new Person[]{}));
 			listPersonen.setCellRenderer(new PersonListRenderer());
 			main.add(listPersonen);
-		} else {
+		} 
+		else 
+		{
 			main.add(new JLabel("Leider sind Fehler aufgetreten"));
-			for (ErrorMessage error : logik.getErrors()) {
+			for (ErrorMessage error : logik.getErrors()) 
+			{
 				main.add(new JLabel(error.getErrorMessage()));
 			}
 		}
@@ -89,8 +104,9 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		// Buttons
 		btnAddButton = new JButton("Neuanlage");
 		buttons.add(btnAddButton);
-		if (listPersonen != null) {
-			btnSelectButton = new JButton("Auswaehlen");
+		if (listPersonen != null) 
+		{
+			btnSelectButton = new JButton("Auswählen");
 			buttons.add(btnSelectButton);
 		}
 		btnCancelButton = new JButton("Abbrechen");
@@ -98,7 +114,8 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		
 		// Eventhandler
 		btnAddButton.addActionListener(this);
-		if (btnSelectButton != null) {
+		if (btnSelectButton != null) 
+		{
 			btnSelectButton.addActionListener(this);
 		}
 		btnCancelButton.addActionListener(this);
