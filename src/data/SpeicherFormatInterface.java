@@ -1,8 +1,8 @@
 package data;
 
+import enums.Speicherformat;
+
 public interface SpeicherFormatInterface {
 	
-	public void setType (enums.Speicherformat type);
-	
-	public enums.Speicherformat getType();
+	public Speicherformat getType();
 }

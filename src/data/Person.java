@@ -53,4 +53,9 @@ public class Person {
 	public void setKuenstlername(String kuenstlername) {
 		this.kuenstlername = kuenstlername;
 	}
+	
+	@Override
+	public String toString() {
+		return "Ausgabe Person: Vorname: " + vorname + " Nachname: " + nachname + " Künstlername: " + kuenstlername;
+	}
 }

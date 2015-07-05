@@ -7,114 +7,170 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.Panel;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import gui.dialog.*;
+
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 
-import java.awt.FlowLayout;
-
-public class Startfenster extends JFrame implements ActionListener
-{
+public class Startfenster extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
-	Container cp;
-
-	public Startfenster()							
+	
+	private JButton		btnMNeu;
+	private JButton		btnMAnzeigen;
+	private JButton		btnPNeu;
+	private JButton		btnPAnzeigen;
+	private	Container	cp;			
+	
+	public Startfenster() 
 	{
 		super("Medien Verwaltung");
-		cp = getContentPane();
+		this.setFont(StaticComponents.FONT_STD);
+		this.setForeground(StaticComponents.FONT_COLOR_STD);
+		this.setBackground(StaticComponents.BACKGROUND_COLOR_STD);
+		
+		new StartPanel();
+		cp = getContentPane();		
 		cp.setLayout(new BorderLayout());
-				
+		cp.add(createButtonPanel(), BorderLayout.WEST);
+		cp.add(new MusikEingabePanel(), BorderLayout.CENTER);
+//		cp.add(startPanel, BorderLayout.CENTER);
+		
+		btnMAnzeigen.addActionListener(this);
+		btnMNeu.addActionListener(this);
+		btnPAnzeigen.addActionListener(this);
+		btnPNeu.addActionListener(this);
+		
+	}
+	
+	private JPanel createButtonPanel() 
+	{
 		JPanel buttonPanel = new JPanel();
+		buttonPanel.setBorder(StaticComponents.BORDER_PANEL);
+		GridLayout gl_buttonPanel = new GridLayout(0,1);
+		buttonPanel.setLayout(gl_buttonPanel);
 		
-		GridBagLayout gbl_buttonPanel = new GridBagLayout();
-		gbl_buttonPanel.columnWidths = new int[] {100, 0};
-		gbl_buttonPanel.rowHeights = new int[] {0, 0, 0, 30, 0};
-		gbl_buttonPanel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_buttonPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		buttonPanel.setLayout(gbl_buttonPanel);
+		JPanel pnlGl1 = new JPanel();
+		JPanel pnlGl2 = new JPanel();
+		buttonPanel.add(pnlGl1);
+		buttonPanel.add(pnlGl2);
 		
-		JButton btnMusik = new JButton("Musik");
-		btnMusik.setPreferredSize(new Dimension(100, 25));
-		btnMusik.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		GridBagConstraints gbc_btnMusik = new GridBagConstraints();
-		gbc_btnMusik.anchor = GridBagConstraints.WEST;
-		gbc_btnMusik.insets = new Insets(10, 10, 10, 10);
-		gbc_btnMusik.gridx = 0;
-		gbc_btnMusik.gridy = 0;
-		buttonPanel.add(btnMusik, gbc_btnMusik);		
+		GridBagLayout gbl_pnlGl1 = new GridBagLayout();
+		gbl_pnlGl1.columnWidths = new int[] {100, 0};
+		gbl_pnlGl1.rowHeights = new int[] {0, 0, 0, 0};
+		gbl_pnlGl1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_pnlGl1.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		pnlGl1.setLayout(gbl_pnlGl1);
 		
-		JButton btnVideo = new JButton("Video");
-		btnVideo.setPreferredSize(new Dimension(100, 25));
-		btnVideo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		GridBagConstraints gbc_btnVideo = new GridBagConstraints();
-		gbc_btnVideo.anchor = GridBagConstraints.WEST;
-		gbc_btnVideo.insets = new Insets(0, 10, 10, 10);
-		gbc_btnVideo.gridx = 0;
-		gbc_btnVideo.gridy = 1;
-		buttonPanel.add(btnVideo, gbc_btnVideo);		
-		
-		JButton btnBuecher = new JButton("Bücher");
-		btnBuecher.setPreferredSize(new Dimension(100, 25));
-		btnBuecher.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 10, 10, 10);
-		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 2;
-		buttonPanel.add(btnBuecher, gbc_btnNewButton);
-		
-		
-		cp.add(buttonPanel, BorderLayout.WEST);
-		
-		
-		InputPanel input = new InputPanel();
-		input.setAlignmentY(Component.TOP_ALIGNMENT);
-		cp.add(input, BorderLayout.CENTER);
-		
-		JPanel southPanel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) southPanel.getLayout();
-		flowLayout.setVgap(10);
-		flowLayout.setHgap(10);
-		flowLayout.setAlignment(FlowLayout.RIGHT);
-		
-		
-		
-		JButton btnSpeichern = new JButton("speichern");
-		southPanel.add(btnSpeichern);
-		
-		JButton btnAbbrechen = new JButton("abbrechen");
-		southPanel.add(btnAbbrechen);
-		
-		cp.add(southPanel, BorderLayout.SOUTH);
+		GridBagLayout gbl_pnlGl2 = new GridBagLayout();
+		gbl_pnlGl2.columnWidths = new int[] {100, 0};
+		gbl_pnlGl2.rowHeights = new int[] {0, 0, 0, 0};
+		gbl_pnlGl2.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_pnlGl2.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		pnlGl2.setLayout(gbl_pnlGl2);
 				
+		JLabel lblMusik = new JLabel("Musik");
+		lblMusik.setFont(StaticComponents.FONT_TITLE);
+		GridBagConstraints gbc_lblMusik = new GridBagConstraints();
+		gbc_lblMusik.insets = new Insets(10, 10, 10, 10);
+		gbc_lblMusik.gridx = 0;
+		gbc_lblMusik.gridy = 0;
+		pnlGl1.add(lblMusik, gbc_lblMusik);
+		
+		btnMNeu = new JButton("neu");
+		btnMNeu.setFont(StaticComponents.FONT_BUTTON);
+		GridBagConstraints gbc_btnMNeu = new GridBagConstraints();
+		gbc_btnMNeu.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnMNeu.insets = new Insets(0, 10, 10, 10);
+		gbc_btnMNeu.gridx = 0;
+		gbc_btnMNeu.gridy = 1;
+		pnlGl1.add(btnMNeu, gbc_btnMNeu);
+		
+		btnMAnzeigen = new JButton("anzeigen");
+		btnMAnzeigen.setFont(StaticComponents.FONT_BUTTON);
+		GridBagConstraints gbc_btnMAnzeigen = new GridBagConstraints();
+		gbc_btnMAnzeigen.anchor = GridBagConstraints.NORTH;
+		gbc_btnMAnzeigen.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnMAnzeigen.insets = new Insets(0, 10, 0, 10);
+		gbc_btnMAnzeigen.gridx = 0;
+		gbc_btnMAnzeigen.gridy = 2;
+		pnlGl1.add(btnMAnzeigen, gbc_btnMAnzeigen);
+		
+		JLabel lblPerson = new JLabel("Person");
+		lblPerson.setFont(StaticComponents.FONT_TITLE);
+		GridBagConstraints gbc_lblPerson = new GridBagConstraints();
+		gbc_lblPerson.insets = new Insets(10, 10, 10, 10);
+		gbc_lblPerson.gridx = 0;
+		gbc_lblPerson.gridy = 0;
+		pnlGl2.add(lblPerson, gbc_lblPerson);
+		
+		btnPNeu = new JButton("neu");
+		btnPNeu.setFont(StaticComponents.FONT_BUTTON);
+		GridBagConstraints gbc_btnPNeu = new GridBagConstraints();
+		gbc_btnPNeu.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnPNeu.insets = new Insets(0, 10, 10, 10);
+		gbc_btnPNeu.gridx = 0;
+		gbc_btnPNeu.gridy = 1;
+		pnlGl2.add(btnPNeu, gbc_btnPNeu);
+		
+		btnPAnzeigen = new JButton("anzeigen");
+		btnPAnzeigen.setFont(StaticComponents.FONT_BUTTON);
+		GridBagConstraints gbc_btnKAnzeigen = new GridBagConstraints();
+		gbc_btnKAnzeigen.anchor = GridBagConstraints.NORTH;
+		gbc_btnKAnzeigen.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnKAnzeigen.insets = new Insets(0, 10, 0, 10);
+		gbc_btnKAnzeigen.gridx = 0;
+		gbc_btnKAnzeigen.gridy = 2;
+		pnlGl2.add(btnPAnzeigen, gbc_btnKAnzeigen);
+		
+		return buttonPanel;
 	}
 	
 	
-	public static void main(String[] args) 
-	{
+	public static void main(String[] args) {
 		Startfenster mv = new Startfenster();
 		mv.pack();
 		mv.setVisible(true);
 		mv.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		mv.setLocationRelativeTo(null);
 		mv.setResizable(false);
-		
-	
-
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		//  XXX (JW) Auto-generated method stub
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		Object source = arg0.getSource();
+		
+		if (source == btnPNeu) 
+		{
+			PersonEingabeDialog dialog = new PersonEingabeDialog(this);
+			dialog.display();			
+		}
+		else if (source == btnPAnzeigen) 
+		{
+			PersonAuswahlDialog dialog = new PersonAuswahlDialog(this);
+			dialog.display();
+		}
+		else if (source == btnMNeu) 
+		{
+			ConfirmDialog dialog = new ConfirmDialog("Bitte bestätigen");
+			dialog.setVisible(true);
+			
+//			MusikEingabePanel panel = new MusikEingabePanel();
+//			cp.remove(startPanel);
+//			cp.add(panel, BorderLayout.CENTER);
+		}
+		else if (source == btnMAnzeigen) 
+		{
+						
+		}
 	}
 
 }

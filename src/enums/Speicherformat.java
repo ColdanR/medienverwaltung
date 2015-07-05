@@ -1,7 +1,9 @@
 package enums;
 
 public enum Speicherformat {
-	Digital,
+	DigitalMusik,
+	DigitalFilm,
+	DigitalBuch,
 	DVD,
 	Blueray,
 	CD,
