@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -27,6 +28,7 @@ public class Startfenster extends JFrame implements ActionListener {
 	private JButton		btnMAnzeigen;
 	private JButton		btnPNeu;
 	private JButton		btnPAnzeigen;
+	private JPanel		anzeigeFenster;
 	private	Container	cp;			
 	
 	public Startfenster() 
@@ -40,9 +42,9 @@ public class Startfenster extends JFrame implements ActionListener {
 		cp = getContentPane();		
 		cp.setLayout(new BorderLayout());
 		cp.add(createButtonPanel(), BorderLayout.WEST);
-		cp.add(new MusikEingabePanel(), BorderLayout.CENTER);
-//	cp.add(startPanel, BorderLayout.CENTER);
-		
+		anzeigeFenster = new StartPanel();
+		cp.add(anzeigeFenster, BorderLayout.CENTER);
+
 		btnMAnzeigen.addActionListener(this);
 		btnMNeu.addActionListener(this);
 		btnPAnzeigen.addActionListener(this);
@@ -140,7 +142,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		mv.setVisible(true);
 		mv.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		mv.setLocationRelativeTo(null);
-		mv.setResizable(false);
+//		mv.setResizable(false);
 	}
 
 	@Override
@@ -151,21 +153,24 @@ public class Startfenster extends JFrame implements ActionListener {
 		if (source == btnPNeu) 
 		{
 			PersonEingabeDialog dialog = new PersonEingabeDialog(this);
-			dialog.display();			
+			dialog.display();
+			// TODO Datenlogik
 		}
 		else if (source == btnPAnzeigen) 
 		{
+			// TODO Neuer Frame
 			PersonAuswahlDialog dialog = new PersonAuswahlDialog(this);
 			dialog.display();
 		}
 		else if (source == btnMNeu) 
 		{
-			ConfirmDialog dialog = new ConfirmDialog("Bitte bestätigen");
-			dialog.setVisible(true);
+			cp.remove(anzeigeFenster);
+			anzeigeFenster = new MusikEingabePanel();
+			cp.add(anzeigeFenster, BorderLayout.CENTER);
+			anzeigeFenster.revalidate();
+			anzeigeFenster.repaint();
+			this.pack();
 			
-//			MusikEingabePanel panel = new MusikEingabePanel();
-//			cp.remove(startPanel);
-//			cp.add(panel, BorderLayout.CENTER);
 		}
 		else if (source == btnMAnzeigen) 
 		{
