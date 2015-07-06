@@ -82,9 +82,9 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		PersonLogik		logik		=	new PersonLogik();
 		List<Person>	listData	=	logik.getAll();
 		
-		listPersonen = new JList<Person>(listData.toArray(new Person[]{}));
-		listPersonen.setCellRenderer(new PersonListRenderer());
-		main.add(listPersonen);
+//		listPersonen = new JList<Person>(listData.toArray(new Person[]{}));
+//		listPersonen.setCellRenderer(new PersonListRenderer());
+//		main.add(listPersonen);
 		
 		if (logik.getErrors().isEmpty()) 
 		{
