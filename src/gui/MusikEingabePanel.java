@@ -1,5 +1,8 @@
 package gui;
 
+import gui.dialog.FehlerDialog;
+import gui.dialog.Speicherort;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -23,33 +26,34 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 import java.awt.FlowLayout;
-import java.awt.Font;
 
 import javax.swing.JList;
 
+import data.medien.logic.MusikLogik;
 import data.speicherformate.DigitalMusik;
 
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 
 public class MusikEingabePanel extends JPanel implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private JTextField 		txfTitel;
-	private JTextField 		txfErsterscheinung;
-	private JCheckBox 		chkbxLive;
-	private JButton 		btnNeu;
-	private JButton 		btnLoeschen;
-	private JButton 		btnAbbrechen;
-	private JButton 		btnSpeichern;
-	private JLabel			lblMusikEingabe;
-	private JLabel 			lblInterpret;
-	private JList lstSpeicherort;
+	private JTextField 			txfTitel;
+	private JTextField 			txfErsterscheinung;
+	private JCheckBox 			chkbxLive;
+	private JButton 			btnNeu;
+	private JButton 			btnLoeschen;
+	private JButton 			btnAbbrechen;
+	private JButton 			btnSpeichern;
+	private JLabel				lblMusikEingabe;
+	private JList<DigitalMusik> lstSpeicherort;
 	
 	
 	public MusikEingabePanel() {
 		setAlignmentY(Component.TOP_ALIGNMENT);
 		createMusikEingabePanel();
+		btnNeu.addActionListener(this);
 		btnLoeschen.addActionListener(this);
 		btnSpeichern.addActionListener(this);
 		btnAbbrechen.addActionListener(this);
@@ -66,6 +70,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		
 		pnlNorth.setBorder(StaticComponents.BORDER_PANEL);
 		pnlCenter.setBorder(StaticComponents.BORDER_PANEL);
+		pnlSouth.setBorder(StaticComponents.BORDER_PANEL);
 		
 		this.add(pnlNorth, BorderLayout.NORTH);
 		this.add(pnlCenter, BorderLayout.CENTER);
@@ -78,10 +83,10 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			
 		// creating BorderLayout.CENTER Components
 		GridBagLayout gbl = new GridBagLayout();
-		gbl.columnWidths = new int[] {30, 0, 0, 0, 0, 0};
-		gbl.rowHeights = new int[] {30, 0, 0, 0, 0, 0, 0, 0};
-		gbl.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl.columnWidths = new int[] {30, 0, 0, 0, 30, 0};
+		gbl.rowHeights = new int[] {30, 0, 0, 0, 0, 0, 30, 0};
+		gbl.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlCenter.setLayout(gbl);
 		
 		JLabel lblTitel = new JLabel("Titel");
@@ -99,7 +104,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		gbc_txfTitel.gridwidth = 2;
 		gbc_txfTitel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txfTitel.anchor = GridBagConstraints.WEST;
-		gbc_txfTitel.insets = new Insets(0, 0, 10, 10);
+		gbc_txfTitel.insets = new Insets(0, 0, 10, 5);
 		gbc_txfTitel.gridx = 2;
 		gbc_txfTitel.gridy = 1;
 		pnlCenter.add(txfTitel, gbc_txfTitel);
@@ -133,7 +138,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		StaticComponents.setFontLabel(chkbxLive);
 		GridBagConstraints gbc_chkbxLive = new GridBagConstraints();
 		gbc_chkbxLive.anchor = GridBagConstraints.WEST;
-		gbc_chkbxLive.insets = new Insets(0, 0, 10, 10);
+		gbc_chkbxLive.insets = new Insets(0, 0, 10, 5);
 		gbc_chkbxLive.gridx = 3;
 		gbc_chkbxLive.gridy = 2;
 		pnlCenter.add(chkbxLive, gbc_chkbxLive);
@@ -147,26 +152,18 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		gbc_lblSpeicherort.gridy = 3;
 		pnlCenter.add(lblSpeicherort, gbc_lblSpeicherort);
 		
-		lblInterpret = new JLabel();
-		StaticComponents.setFontBorderLabel(lblInterpret);
-		GridBagConstraints gbc_lblInterpret = new GridBagConstraints();
-		gbc_lblInterpret.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblInterpret.anchor = GridBagConstraints.WEST;
-		gbc_lblInterpret.insets = new Insets(0, 0, 10, 10);
-		gbc_lblInterpret.gridx = 4;
-		gbc_lblInterpret.gridy = 4;
-		pnlCenter.add(lblInterpret, gbc_lblInterpret);
-		
 		lstSpeicherort = new JList<DigitalMusik>();
 		lstSpeicherort.setVisibleRowCount(5);
 		lstSpeicherort.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane scp_lst = new JScrollPane();
+		scp_lst.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scp_lst.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
 		scp_lst.setViewportView(lstSpeicherort);
 		GridBagConstraints gbc_scp_lst = new GridBagConstraints();
 		gbc_scp_lst.anchor = GridBagConstraints.WEST;
 		gbc_scp_lst.gridwidth = 3;
-		gbc_scp_lst.insets = new Insets(0, 0, 10, 10);
+		gbc_scp_lst.insets = new Insets(0, 0, 10, 5);
 		gbc_scp_lst.fill = GridBagConstraints.HORIZONTAL;
 		gbc_scp_lst.gridx = 1;
 		gbc_scp_lst.gridy = 4;
@@ -176,7 +173,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		btnNeu.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnNeu = new GridBagConstraints();
 		gbc_btnNeu.anchor = GridBagConstraints.WEST;
-		gbc_btnNeu.insets = new Insets(0, 0, 10, 10);
+		gbc_btnNeu.insets = new Insets(0, 0, 5, 10);
 		gbc_btnNeu.gridx = 1;
 		gbc_btnNeu.gridy = 5;
 		pnlCenter.add(btnNeu, gbc_btnNeu);
@@ -185,7 +182,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		btnLoeschen.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnLoeschen = new GridBagConstraints();
 		gbc_btnLoeschen.anchor = GridBagConstraints.WEST;
-		gbc_btnLoeschen.insets = new Insets(0, 0, 10, 10);
+		gbc_btnLoeschen.insets = new Insets(0, 0, 5, 10);
 		gbc_btnLoeschen.gridx = 2;
 		gbc_btnLoeschen.gridy = 5;
 		pnlCenter.add(btnLoeschen, gbc_btnLoeschen);
@@ -213,6 +210,40 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) 
 	{
 		Object source = e.getSource();
+		
+		if (source == btnNeu) {
+			Speicherort dialog = new Speicherort(null);
+			dialog.display();
+		}
+		else if (source == btnLoeschen)	{
+				
+			
+		}
+		else if (source == btnSpeichern) {
+			MusikLogik logik  = new MusikLogik();
+			boolean errors = false;
+			if (logik.createNew(txfTitel.getText(), txfErsterscheinung.getText(), ???.getText())) 
+			{
+				if (logik.write()) {
+					setObject(logik.getObject());
+					dialog.dispose();
+				} else {
+					errors = true;
+				}
+			} 
+			else 
+			{
+				errors = true;
+			}
+			if (errors) 
+			{
+				FehlerDialog fehlerDialog = new FehlerDialog(null, logik.getErrors());
+				fehlerDialog.setAlwaysOnTop(true);
+				fehlerDialog.setVisible(true);
+			}
+			
+			
+		}
 		
 	}
 }

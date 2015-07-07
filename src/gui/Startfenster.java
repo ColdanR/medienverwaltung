@@ -29,7 +29,7 @@ public class Startfenster extends JFrame implements ActionListener {
 	private JButton		btnMAnzeigen;
 	private JButton		btnPNeu;
 	private JButton		btnPAnzeigen;
-	private JButton btnPAnzeigen_1;
+	private JButton btnBeenden;
 	private JPanel		anzeigeFenster;
 	private	Container	cp;			
 	
@@ -48,7 +48,7 @@ public class Startfenster extends JFrame implements ActionListener {
 
 		btnMAnzeigen.addActionListener(this);
 		btnMNeu.addActionListener(this);
-		btnPAnzeigen_1.addActionListener(this);
+		btnBeenden.addActionListener(this);
 		btnPNeu.addActionListener(this);
 		
 	}
@@ -85,7 +85,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		gbl_pnlGl3.columnWidths = new int[] {100, 0};
 		gbl_pnlGl3.rowHeights = new int[] {0, 0};
 		gbl_pnlGl3.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_pnlGl3.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_pnlGl3.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		pnlGl3.setLayout(gbl_pnlGl3);
 		
 		JLabel lblMusik = new JLabel("Musik");
@@ -142,15 +142,15 @@ public class Startfenster extends JFrame implements ActionListener {
 		gbc_btnKAnzeigen.gridy = 2;
 		pnlGl2.add(btnPAnzeigen, gbc_btnKAnzeigen);
 		
-		btnPAnzeigen_1 = new JButton("beenden");
-		btnPAnzeigen_1.setFont(StaticComponents.FONT_BUTTON);
+		btnBeenden = new JButton("beenden");
+		btnBeenden.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnBeenden = new GridBagConstraints();
 		gbc_btnBeenden.anchor = GridBagConstraints.SOUTH;
 		gbc_btnBeenden.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnBeenden.insets = new Insets(10, 10, 0, 10);
+		gbc_btnBeenden.insets = new Insets(10, 10, 10, 10);
 		gbc_btnBeenden.gridx = 0;
 		gbc_btnBeenden.gridy = 0;
-		pnlGl3.add(btnPAnzeigen_1, gbc_btnBeenden);
+		pnlGl3.add(btnBeenden, gbc_btnBeenden);
 		
 		
 		return buttonPanel;
@@ -177,7 +177,7 @@ public class Startfenster extends JFrame implements ActionListener {
 			dialog.display();
 			// TODO Datenlogik
 		}
-		else if (source == btnPAnzeigen_1) 
+		else if (source == btnBeenden) 
 		{
 			// TODO Neuer Frame
 			PersonAuswahlDialog dialog = new PersonAuswahlDialog(this);

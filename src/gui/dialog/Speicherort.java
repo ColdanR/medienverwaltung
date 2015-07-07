@@ -31,12 +31,10 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 	private	JTextField	txfQualitaet;
 	private	JButton		btnSpeichern;
 	private	JButton		btnAbbrechen;
-	private	int			titelId;
 	
 	
-	public Speicherort(Window parent, int titelId) {
+	public Speicherort(Window parent) {
 		super(parent, "Speicherort", 400, 300);
-		this.titelId = titelId;
 		this.createDialogContent();
 	}
 	
@@ -50,7 +48,6 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		else if (arg0.getSource() == btnSpeichern) 
 		{
 			SpeicherFormateLogik logik = new SpeicherFormateLogik();
-			logik.setTitelId(titelId);
 			boolean errors = false;
 			if (logik.createDigitalMusik(txfDatentraeger.getText(), txfPfad.getText(), txfDateiformat.getText(), txfQualitaet.getText())) 
 			{
