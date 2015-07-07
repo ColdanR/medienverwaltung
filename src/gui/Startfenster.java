@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -19,7 +18,6 @@ import javax.swing.JPanel;
 import gui.dialog.*;
 
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 
 public class Startfenster extends JFrame implements ActionListener {
 	
@@ -186,7 +184,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		else if (source == btnMNeu) 
 		{
 			cp.remove(anzeigeFenster);
-			anzeigeFenster = new MusikEingabePanel();
+			anzeigeFenster = new MusikEingabePanel(this);
 			cp.add(anzeigeFenster, BorderLayout.CENTER);
 			anzeigeFenster.revalidate();
 			anzeigeFenster.repaint();
@@ -204,4 +202,12 @@ public class Startfenster extends JFrame implements ActionListener {
 		}
 	}
 
+	public void setPanel(JPanel mainPanel) {
+		cp.remove(anzeigeFenster);
+		anzeigeFenster = mainPanel;
+		cp.add(anzeigeFenster, BorderLayout.CENTER);
+		anzeigeFenster.revalidate();
+		anzeigeFenster.repaint();
+		this.pack();
+	}
 }
