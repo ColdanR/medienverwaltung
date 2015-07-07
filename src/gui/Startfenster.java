@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import gui.dialog.*;
 
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class Startfenster extends JFrame implements ActionListener {
 	
@@ -28,6 +29,7 @@ public class Startfenster extends JFrame implements ActionListener {
 	private JButton		btnMAnzeigen;
 	private JButton		btnPNeu;
 	private JButton		btnPAnzeigen;
+	private JButton btnPAnzeigen_1;
 	private JPanel		anzeigeFenster;
 	private	Container	cp;			
 	
@@ -38,7 +40,6 @@ public class Startfenster extends JFrame implements ActionListener {
 		this.setForeground(StaticComponents.FONT_COLOR_STD);
 		this.setBackground(StaticComponents.BACKGROUND_COLOR_STD);
 		
-//		StartPanel startPanel = new StartPanel();
 		cp = getContentPane();		
 		cp.setLayout(new BorderLayout());
 		cp.add(createButtonPanel(), BorderLayout.WEST);
@@ -47,7 +48,7 @@ public class Startfenster extends JFrame implements ActionListener {
 
 		btnMAnzeigen.addActionListener(this);
 		btnMNeu.addActionListener(this);
-		btnPAnzeigen.addActionListener(this);
+		btnPAnzeigen_1.addActionListener(this);
 		btnPNeu.addActionListener(this);
 		
 	}
@@ -61,8 +62,10 @@ public class Startfenster extends JFrame implements ActionListener {
 		
 		JPanel pnlGl1 = new JPanel();
 		JPanel pnlGl2 = new JPanel();
+		JPanel pnlGl3 = new JPanel();
 		buttonPanel.add(pnlGl1);
 		buttonPanel.add(pnlGl2);
+		buttonPanel.add(pnlGl3);
 		
 		GridBagLayout gbl_pnlGl1 = new GridBagLayout();
 		gbl_pnlGl1.columnWidths = new int[] {100, 0};
@@ -77,7 +80,14 @@ public class Startfenster extends JFrame implements ActionListener {
 		gbl_pnlGl2.columnWeights = new double[]{0.0, Double.MIN_VALUE};
 		gbl_pnlGl2.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlGl2.setLayout(gbl_pnlGl2);
-				
+		
+		GridBagLayout gbl_pnlGl3 = new GridBagLayout();
+		gbl_pnlGl3.columnWidths = new int[] {100, 0};
+		gbl_pnlGl3.rowHeights = new int[] {0, 0};
+		gbl_pnlGl3.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_pnlGl3.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		pnlGl3.setLayout(gbl_pnlGl3);
+		
 		JLabel lblMusik = new JLabel("Musik");
 		lblMusik.setFont(StaticComponents.FONT_TITLE);
 		GridBagConstraints gbc_lblMusik = new GridBagConstraints();
@@ -132,6 +142,17 @@ public class Startfenster extends JFrame implements ActionListener {
 		gbc_btnKAnzeigen.gridy = 2;
 		pnlGl2.add(btnPAnzeigen, gbc_btnKAnzeigen);
 		
+		btnPAnzeigen_1 = new JButton("beenden");
+		btnPAnzeigen_1.setFont(StaticComponents.FONT_BUTTON);
+		GridBagConstraints gbc_btnBeenden = new GridBagConstraints();
+		gbc_btnBeenden.anchor = GridBagConstraints.SOUTH;
+		gbc_btnBeenden.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnBeenden.insets = new Insets(10, 10, 0, 10);
+		gbc_btnBeenden.gridx = 0;
+		gbc_btnBeenden.gridy = 0;
+		pnlGl3.add(btnPAnzeigen_1, gbc_btnBeenden);
+		
+		
 		return buttonPanel;
 	}
 	
@@ -156,7 +177,7 @@ public class Startfenster extends JFrame implements ActionListener {
 			dialog.display();
 			// TODO Datenlogik
 		}
-		else if (source == btnPAnzeigen) 
+		else if (source == btnPAnzeigen_1) 
 		{
 			// TODO Neuer Frame
 			PersonAuswahlDialog dialog = new PersonAuswahlDialog(this);
@@ -174,7 +195,12 @@ public class Startfenster extends JFrame implements ActionListener {
 		}
 		else if (source == btnMAnzeigen) 
 		{
-						
+			cp.remove(anzeigeFenster);
+//			anzeigeFenster = new MusikEingabePanel();
+//			cp.add(anzeigeFenster, BorderLayout.CENTER);
+//			anzeigeFenster.revalidate();
+//			anzeigeFenster.repaint();
+//			this.pack();		
 		}
 	}
 
