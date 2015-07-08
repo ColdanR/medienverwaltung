@@ -35,13 +35,13 @@ public class PersonLogik implements DatenLogik<Person> {
 	}
 	
 	public boolean editLoaded(String nachname, String vorname, String kuenstlername) {
-		if (nachname == null || nachname.trim().length() == 0) {
+		if (nachname == null) {
 			errors.add(ErrorsPersonLogik.KeinNachname);
 		}
 		if (vorname == null) {
 			errors.add(ErrorsPersonLogik.KeinVorname);
 		}
-		if (kuenstlername == null) {
+		if (kuenstlername == null || kuenstlername.trim().length() == 0) {
 			errors.add(ErrorsPersonLogik.KeinKuenstlername);
 		}
 		if (errors.size() > 0) {
