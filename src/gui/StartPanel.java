@@ -3,6 +3,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,6 +19,7 @@ public class StartPanel extends JPanel {
 	public StartPanel() {
 		
 		// Creating Panels
+		this.setMinimumSize(StaticComponents.MAIN_PANEL);
 		this.setLayout(new BorderLayout());
 		
 		JPanel pnlNorth		= new JPanel();

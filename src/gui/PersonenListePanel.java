@@ -14,10 +14,12 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.ScrollPaneLayout;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,14 @@ import data.Person;
 import data.logic.PersonLogik;
 import enums.ErrorMessage;
 import enums.ErrorsGUI;
+
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
+
+import java.awt.Color;
+
+import javax.swing.border.EmptyBorder;
 
 public class PersonenListePanel extends JPanel implements ActionListener {
 	/**
@@ -50,19 +60,21 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 	}
 	
 	public void creatPersonListPanel(){
-		this.setMinimumSize(new Dimension (300, 300));
+		this.setMinimumSize(StaticComponents.MAIN_PANEL);
 		this.setLayout(new BorderLayout());
 		
 		JPanel pnlNorth		= new JPanel();
 		pnlCenter			= new JPanel();
+		pnlCenter.setBorder(new CompoundBorder(StaticComponents.BORDER_PANEL, new EmptyBorder(10, 10, 10, 10)));
 		JPanel pnlSouth		= new JPanel();
 
 		pnlNorth.setBorder(StaticComponents.BORDER_PANEL);
 		pnlSouth.setBorder(StaticComponents.BORDER_PANEL);
-		pnlCenter.setBorder(StaticComponents.BORDER_PANEL);
+		
 		
 		this.add(pnlNorth, BorderLayout.NORTH);
 		this.add(pnlCenter, BorderLayout.CENTER);
+		pnlCenter.setLayout(new BorderLayout(50, 50));
 		this.add(pnlSouth, BorderLayout.SOUTH);
 		
 		//Header
@@ -116,9 +128,9 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 				errorDialog.setVisible(true);
 				return;
 			}
-			Person selecte = lstPersonList.getSelectedValue();
+			Person selected = lstPersonList.getSelectedValue();
 			PersonEingabeDialog dialog = new PersonEingabeDialog(null);
-			dialog.setPerson(selecte);
+			dialog.setPerson(selected);
 			dialog.display();
 			generateList();
 		}
@@ -126,8 +138,9 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 	private void generateList() {
 		PersonLogik		logik		=	new PersonLogik();
 		List<Person>	listData	=	logik.getAll();
-		
-		pnlCenter.remove(scrollPane);
+		if (scrollPane != null) {
+			pnlCenter.remove(scrollPane);
+		}
 		if (logik.getErrors().isEmpty()) 
 		{
 			lstPersonList = new JList<Person>(listData.toArray(new Person[]{}));
@@ -137,7 +150,12 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 			scrollPane = new JScrollPane(lstPersonList,
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 		            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			pnlCenter.add(scrollPane);
+				
+			pnlCenter.add(scrollPane, BorderLayout.CENTER);
+			
+			
+			
+			
 		} 
 		else 
 		{

@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JCheckBox;
@@ -23,7 +24,7 @@ public class StaticComponents {
 	
 	public	static	Color		FONT_COLOR_STD				=	Color.BLACK;
 	public	static	Color		FONT_COLOR_LABEL			=	Color.DARK_GRAY;
-	public	static	Color		FONT_COLOR_SELECTED			=	Color.WHITE;
+	public	static	Color		FONT_COLOR_SELECTED			=	Color.LIGHT_GRAY;
 	
 	public	static	Color		BACKGROUND_COLOR_STD		=	Color.WHITE;
 	public	static	Color		BACKGROUND_COLOR_SELECTED	=	Color.BLUE;
@@ -33,6 +34,8 @@ public class StaticComponents {
 	public	static	LineBorder	BORDER_PANEL				=	new LineBorder(BORDER_COLOR);
 	public	static	LineBorder	BORDER_TEXTFIELDS_STD		=	new LineBorder(BORDER_COLOR);
 	public	static	EmptyBorder	BORDER_EMPTY_BORDER 		= 	new EmptyBorder(2, 4, 2, 4);
+	
+	public	static	Dimension	MAIN_PANEL					=	new Dimension(600, 400);
 		
 	
 	public	static	void 		setFontLabel(JLabel x)	{

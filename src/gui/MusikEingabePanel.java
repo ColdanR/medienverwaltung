@@ -82,7 +82,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 	
 	private void createMusikEingabePanel()	{
 		
-		this.setMinimumSize(new Dimension (300, 300));
+		this.setMinimumSize(StaticComponents.MAIN_PANEL);
 		this.setLayout(new BorderLayout());
 		
 		JPanel pnlNorth		= new JPanel();

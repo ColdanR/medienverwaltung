@@ -45,7 +45,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		this.setForeground(StaticComponents.FONT_COLOR_STD);
 		this.setBackground(StaticComponents.BACKGROUND_COLOR_STD);
 		
-		cp = getContentPane();		
+		cp = getContentPane();
 		cp.setLayout(new BorderLayout());
 		cp.add(createButtonPanel(), BorderLayout.WEST);
 		anzeigeFenster = new StartPanel();
@@ -219,9 +219,9 @@ public class Startfenster extends JFrame implements ActionListener {
 	public void setPanel(JPanel mainPanel) {
 		cp.remove(anzeigeFenster);
 		anzeigeFenster = mainPanel;
+		anzeigeFenster.setMinimumSize(StaticComponents.MAIN_PANEL);
 		cp.add(anzeigeFenster, BorderLayout.CENTER);
 		anzeigeFenster.revalidate();
 		anzeigeFenster.repaint();
-		this.pack();
 	}
 }
