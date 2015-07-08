@@ -196,7 +196,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		}
 		else if (source == btnMNeu) 
 		{
-			setPanel(new MusikEingabePanel(this));
+			setPanel(new MusikEingabePanel(this, null));
 		}
 		else if (source == btnMAnzeigen) 
 		{   
@@ -207,7 +207,7 @@ public class Startfenster extends JFrame implements ActionListener {
 				FehlerDialog dialog = new FehlerDialog(getOwner(), errors);
 				dialog.setVisible(true);
 			} else {
-				setPanel(new MusikListPanel());
+				setPanel(new MusikListPanel(this));
 			}
 		}
 		else if (source == btnBeenden)
