@@ -211,7 +211,7 @@ public class DBSpeicherFormat extends DataBaseManager {
 				stmt.execute();
 			} else {
 				String sql = "UPDATE PERSON "
-						   + "SET `DATENTRAEGER` = ?, `PFAD` = ?, `FORMAT` = ?, `QUALITAE` = ? "
+						   + "SET `DATENTRAEGER` = ?, `PFAD` = ?, `FORMAT` = ?, `QUALITAET` = ? "
 						   + "WHERE `ID` = ?";
 				conn = getConnection();
 				stmt = conn.prepareStatement(sql);
