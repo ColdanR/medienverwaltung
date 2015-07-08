@@ -276,10 +276,9 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 				fehlerDialog.setAlwaysOnTop(true);
 				fehlerDialog.setVisible(true);
 			}
-			
-
-			
 		}
-		
+		else if (source == btnAbbrechen) {
+			this.source.setPanel(new StartPanel());
+		}
 	}
 }

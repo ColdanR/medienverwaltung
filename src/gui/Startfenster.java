@@ -22,6 +22,7 @@ import gui.dialog.*;
 import javax.swing.JButton;
 
 import data.logic.PersonLogik;
+import data.medien.logic.MusikLogik;
 import enums.ErrorMessage;
 import enums.ErrorsGUI;
 
@@ -168,7 +169,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		mv.setVisible(true);
 		mv.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		mv.setLocationRelativeTo(null);
-//		mv.setResizable(false);
+		mv.setResizable(false);
 	}
 
 	@Override
@@ -180,45 +181,34 @@ public class Startfenster extends JFrame implements ActionListener {
 		{
 			PersonEingabeDialog dialog = new PersonEingabeDialog(this);
 			dialog.display();
-			// TODO Datenlogik
 		}
 		else if (source == btnPAnzeigen) 
 		{
-			// TODO Neuer Frame
 			PersonLogik logik = new PersonLogik();
 			if (logik.getAll() == null || logik.getAll().size() == 0) {
-				// TODO Fehlerfall: Keine Daten
 				List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
 				errors.add(ErrorsGUI.NoDataAvailable);
 				FehlerDialog dialog = new FehlerDialog(getOwner(), errors);
 				dialog.setVisible(true);
 			} else {
-				cp.remove(anzeigeFenster);
-				anzeigeFenster = new PersonenListePanel();
-				cp.add(anzeigeFenster, BorderLayout.CENTER);
-				anzeigeFenster.revalidate();
-				anzeigeFenster.repaint();
-				this.pack();
+				setPanel(new PersonenListePanel());
 			}
 		}
 		else if (source == btnMNeu) 
 		{
-			cp.remove(anzeigeFenster);
-			anzeigeFenster = new MusikEingabePanel(this);
-			cp.add(anzeigeFenster, BorderLayout.CENTER);
-			anzeigeFenster.revalidate();
-			anzeigeFenster.repaint();
-			this.pack();
-			
+			setPanel(new MusikEingabePanel(this));
 		}
 		else if (source == btnMAnzeigen) 
-		{   // TODO neue Musikliste
-			cp.remove(anzeigeFenster);
-//			anzeigeFenster = new MusikEingabePanel();
-//			cp.add(anzeigeFenster, BorderLayout.CENTER);
-//			anzeigeFenster.revalidate();
-//			anzeigeFenster.repaint();
-//			this.pack();		
+		{   
+			MusikLogik logik = new MusikLogik();
+			if (logik.getAll() == null || logik.getAll().size() == 0) {
+				List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
+				errors.add(ErrorsGUI.NoDataAvailable);
+				FehlerDialog dialog = new FehlerDialog(getOwner(), errors);
+				dialog.setVisible(true);
+			} else {
+				setPanel(new MusikListPanel());
+			}
 		}
 		else if (source == btnBeenden)
 		{
