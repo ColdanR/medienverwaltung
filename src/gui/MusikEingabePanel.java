@@ -1,6 +1,7 @@
 package gui;
 
 import gui.dialog.FehlerDialog;
+import gui.dialog.PersonAuswahlDialog;
 import gui.dialog.Speicherort;
 import gui.renderer.SpeicherortListRenderer;
 
@@ -59,6 +60,8 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 	private JButton 						btnLoeschen;
 	private JButton 						btnAbbrechen;
 	private JButton 						btnSpeichern;
+	private	JButton							btnInterpret;
+	private	JLabel							lblInterpretAnzeige;
 	private JList<SpeicherFormatInterface>	lstSpeicherort;
 	private Person							interpret;
 	private Musik							musik;
@@ -74,6 +77,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		btnLoeschen.addActionListener(this);
 		btnSpeichern.addActionListener(this);
 		btnAbbrechen.addActionListener(this);
+		btnInterpret.addActionListener(this);
 	}
 	
 	private void createMusikEingabePanel()	{
@@ -177,6 +181,28 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		gbc_lblInterpret.gridx = 1;
 		gbc_lblInterpret.gridy = 3;
 		pnlCenter.add(lblInterpret, gbc_lblInterpret);
+		
+		lblInterpretAnzeige = new JLabel();
+		StaticComponents.setFontBorderLabel(lblInterpretAnzeige);
+		GridBagConstraints gbc_lblInterpretAnzeige = new GridBagConstraints();
+		gbc_lblInterpretAnzeige.anchor = GridBagConstraints.WEST;
+		gbc_lblInterpretAnzeige.insets = new Insets(0, 0, 10, 10);
+		gbc_lblInterpretAnzeige.gridx = 2;
+		gbc_lblInterpretAnzeige.gridy = 3;
+		pnlCenter.add(lblInterpretAnzeige, gbc_lblInterpretAnzeige);
+		if (musik != null) {
+			interpret = musik.getInterpret();
+		}
+		setInterpretLabel();
+		
+		btnInterpret = new JButton("auswählen");
+		btnInterpret.setFont(StaticComponents.FONT_BUTTON);
+		GridBagConstraints gbc_btnInterpret = new GridBagConstraints();
+		gbc_btnInterpret.anchor = GridBagConstraints.WEST;
+		gbc_btnInterpret.insets = new Insets(0, 0, 10, 10);
+		gbc_btnInterpret.gridx = 3;
+		gbc_btnInterpret.gridy = 3;
+		pnlCenter.add(btnInterpret, gbc_btnInterpret);
 		
 		JLabel lblSpeicherort = new JLabel("Speicherort");
 		StaticComponents.setFontLabel(lblSpeicherort);
@@ -308,6 +334,11 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			}
 		} else if (source == btnAbbrechen) {
 			this.source.setPanel(new StartPanel());
+		} else if (source == btnInterpret) {
+			PersonAuswahlDialog dialog = new PersonAuswahlDialog(this.source.getOwner());
+			dialog.display();
+			interpret = dialog.getObject();
+			setInterpretLabel();
 		}
 	}
 
@@ -317,5 +348,26 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 
 	public void setMusik(Musik musik) {
 		this.musik = musik;
+	}
+	
+	private void setInterpretLabel() {
+		StringBuilder	text	=	new StringBuilder();
+		if (interpret != null) {
+			text.append(interpret.getKuenstlername());
+			if (interpret.getNachname().length() > 0 || interpret.getVorname().length() > 0) {
+				text.append(" (");
+				if (interpret.getNachname().length() > 0) {
+					text.append(interpret.getNachname());
+				}
+				if (interpret.getNachname().length() > 0 && interpret.getVorname().length() > 0) {
+					text.append(", ");
+				}
+				if (interpret.getVorname().length() > 0) {
+					text.append(interpret.getVorname());
+				}
+				text.append(")");
+			}
+		}
+		lblInterpretAnzeige.setText(text.toString());
 	}
 }

@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 
 import data.Person;
 import data.logic.PersonLogik;
@@ -29,7 +30,7 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 
 	public PersonAuswahlDialog(Window parent) 
 	{
-		super(parent, "Person auswählen", 600, 400);
+		super(parent, "Person auswï¿½hlen", 600, 400);
 		createDialogContent();
 		
 	}
@@ -82,14 +83,12 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		PersonLogik		logik		=	new PersonLogik();
 		List<Person>	listData	=	logik.getAll();
 		
-//		listPersonen = new JList<Person>(listData.toArray(new Person[]{}));
-//		listPersonen.setCellRenderer(new PersonListRenderer());
-//		main.add(listPersonen);
-		
 		if (logik.getErrors().isEmpty()) 
 		{
 			listPersonen = new JList<Person>(listData.toArray(new Person[]{}));
 			listPersonen.setCellRenderer(new PersonListRenderer());
+			listPersonen.setVisibleRowCount(5);
+			listPersonen.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			main.add(listPersonen);
 		} 
 		else 
@@ -106,7 +105,7 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		buttons.add(btnAddButton);
 		if (listPersonen != null) 
 		{
-			btnSelectButton = new JButton("Auswählen");
+			btnSelectButton = new JButton("Auswï¿½hlen");
 			buttons.add(btnSelectButton);
 		}
 		btnCancelButton = new JButton("Abbrechen");
