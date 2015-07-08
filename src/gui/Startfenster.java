@@ -193,7 +193,12 @@ public class Startfenster extends JFrame implements ActionListener {
 				FehlerDialog dialog = new FehlerDialog(getOwner(), errors);
 				dialog.setVisible(true);
 			} else {
-				// TODO Neuer Frame Personenanzeige
+				cp.remove(anzeigeFenster);
+				anzeigeFenster = new PersonenListePanel();
+				cp.add(anzeigeFenster, BorderLayout.CENTER);
+				anzeigeFenster.revalidate();
+				anzeigeFenster.repaint();
+				this.pack();
 			}
 		}
 		else if (source == btnMNeu) 
