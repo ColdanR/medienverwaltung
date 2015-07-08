@@ -11,6 +11,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,6 +20,10 @@ import javax.swing.JPanel;
 import gui.dialog.*;
 
 import javax.swing.JButton;
+
+import data.logic.PersonLogik;
+import enums.ErrorMessage;
+import enums.ErrorsGUI;
 
 public class Startfenster extends JFrame implements ActionListener {
 	
@@ -48,6 +54,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		btnMNeu.addActionListener(this);
 		btnBeenden.addActionListener(this);
 		btnPNeu.addActionListener(this);
+		btnPAnzeigen.addActionListener(this);
 		
 	}
 	
@@ -178,8 +185,16 @@ public class Startfenster extends JFrame implements ActionListener {
 		else if (source == btnPAnzeigen) 
 		{
 			// TODO Neuer Frame
-			PersonAuswahlDialog dialog = new PersonAuswahlDialog(this);
-			dialog.display();
+			PersonLogik logik = new PersonLogik();
+			if (logik.getAll() == null || logik.getAll().size() == 0) {
+				// TODO Fehlerfall: Keine Daten
+				List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
+				errors.add(ErrorsGUI.NoDataAvailable);
+				FehlerDialog dialog = new FehlerDialog(getOwner(), errors);
+				dialog.setVisible(true);
+			} else {
+				// TODO Neuer Frame Personenanzeige
+			}
 		}
 		else if (source == btnMNeu) 
 		{

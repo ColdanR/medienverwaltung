@@ -36,32 +36,38 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
 	@Override
 	public void actionPerformed(ActionEvent aEvent) 
 	{
-		if (aEvent.getSource() == btnSpeichern) 
-		{
+		if (aEvent.getSource() == btnSpeichern) {
 			PersonLogik logik = new PersonLogik();
 			boolean errors = false;
-			if (logik.createNew(txfNachname.getText(), txfVorname.getText(), txfKuenstlername.getText())) 
-			{
-				if (logik.write()) {
-					setObject(logik.getObject());
-					dialog.dispose();
+			if (person != null) {
+				if (logik.loadObject(person.getId()) && logik.editLoaded(txfNachname.getText(), txfVorname.getText(), txfKuenstlername.getText())) {
+					if (logik.write()) {
+						setObject(logik.getObject());
+						dialog.dispose();
+					} else {
+						errors = true;
+					}
 				} else {
 					errors = true;
 				}
-			} 
-			else 
-			{
-				errors = true;
+			} else {
+				if (logik.createNew(txfNachname.getText(), txfVorname.getText(), txfKuenstlername.getText())) {
+					if (logik.write()) {
+						setObject(logik.getObject());
+						dialog.dispose();
+					} else {
+						errors = true;
+					}
+				} else {
+					errors = true;
+				}
 			}
-			if (errors) 
-			{
+			if (errors) {
 				FehlerDialog fehlerDialog = new FehlerDialog(null, logik.getErrors());
 				fehlerDialog.setAlwaysOnTop(true);
 				fehlerDialog.setVisible(true);
 			}
-		} 
-		else if (aEvent.getSource() == btnAbbrechen) 
-		{
+		} else if (aEvent.getSource() == btnAbbrechen) {
 			txfKuenstlername.setText("");
 			txfNachname.setText("");
 			txfVorname.setText("");
