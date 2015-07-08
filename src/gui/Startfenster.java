@@ -102,7 +102,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		gbc_lblMusik.gridy = 0;
 		pnlGl1.add(lblMusik, gbc_lblMusik);
 		
-		btnMNeu = new JButton("neu");
+		btnMNeu = new JButton("Neu");
 		btnMNeu.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnMNeu = new GridBagConstraints();
 		gbc_btnMNeu.fill = GridBagConstraints.HORIZONTAL;
@@ -111,7 +111,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		gbc_btnMNeu.gridy = 1;
 		pnlGl1.add(btnMNeu, gbc_btnMNeu);
 		
-		btnMAnzeigen = new JButton("anzeigen");
+		btnMAnzeigen = new JButton("Anzeigen");
 		btnMAnzeigen.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnMAnzeigen = new GridBagConstraints();
 		gbc_btnMAnzeigen.anchor = GridBagConstraints.NORTH;
@@ -129,7 +129,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		gbc_lblPerson.gridy = 0;
 		pnlGl2.add(lblPerson, gbc_lblPerson);
 		
-		btnPNeu = new JButton("neu");
+		btnPNeu = new JButton("Neu");
 		btnPNeu.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnPNeu = new GridBagConstraints();
 		gbc_btnPNeu.fill = GridBagConstraints.HORIZONTAL;
@@ -138,7 +138,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		gbc_btnPNeu.gridy = 1;
 		pnlGl2.add(btnPNeu, gbc_btnPNeu);
 		
-		btnPAnzeigen = new JButton("anzeigen");
+		btnPAnzeigen = new JButton("Anzeigen");
 		btnPAnzeigen.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnKAnzeigen = new GridBagConstraints();
 		gbc_btnKAnzeigen.anchor = GridBagConstraints.NORTH;
@@ -148,7 +148,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		gbc_btnKAnzeigen.gridy = 2;
 		pnlGl2.add(btnPAnzeigen, gbc_btnKAnzeigen);
 		
-		btnBeenden = new JButton("beenden");
+		btnBeenden = new JButton("Beenden");
 		btnBeenden.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnBeenden = new GridBagConstraints();
 		gbc_btnBeenden.anchor = GridBagConstraints.SOUTH;

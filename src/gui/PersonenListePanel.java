@@ -66,7 +66,7 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 		this.add(pnlSouth, BorderLayout.SOUTH);
 		
 		//Header
-		lblHeader = new JLabel("Interpreten anzeige");
+		lblHeader = new JLabel("Interpreten anzeigen");
 		lblHeader.setFont(StaticComponents.FONT_TITLE);
 		pnlNorth.add(lblHeader);
 		

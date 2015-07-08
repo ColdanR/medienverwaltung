@@ -63,7 +63,7 @@ public class MusikListPanel extends JPanel implements ActionListener {
 		this.add(pnlSouth, BorderLayout.SOUTH);
 		
 		//Header
-		lblHeader = new JLabel("Musik anzeige");
+		lblHeader = new JLabel("Musik anzeigen");
 		lblHeader.setFont(StaticComponents.FONT_TITLE);
 		pnlNorth.add(lblHeader);
 		
@@ -75,7 +75,7 @@ public class MusikListPanel extends JPanel implements ActionListener {
 		btnBearbeiten = new JButton("Bearbeiten");
 		btnBearbeiten.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnBearbeiten);
-		btnLoeschen = new JButton("L�schen");
+		btnLoeschen = new JButton("L\u00F6schen");
 		btnLoeschen.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnLoeschen);
 		

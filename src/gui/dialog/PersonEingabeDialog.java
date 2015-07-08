@@ -178,9 +178,9 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
     	fl_pnlSouth.setHgap(10);
     	fl_pnlSouth.setAlignment(FlowLayout.RIGHT);
     	pnlSouth.setLayout(fl_pnlSouth);		
-		btnSpeichern = new JButton("speichern");
+		btnSpeichern = new JButton("Speichern");
 		pnlSouth.add(btnSpeichern);
-		btnAbbrechen = new JButton("abbrechen");
+		btnAbbrechen = new JButton("Abbrechen");
 		pnlSouth.add(btnAbbrechen);
 		
 		panel.add(pnlSouth, BorderLayout.SOUTH);
