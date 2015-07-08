@@ -84,9 +84,7 @@ public class MusikListPanel extends JPanel implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		Object source = e.getSource();
-		
 		if (source == btnLoeschen)
 		{
 			if (lstMusikList.isSelectionEmpty()) {
