@@ -154,12 +154,14 @@ public class DBSpeicherFormat extends DataBaseManager {
 			for (SpeicherFormatInterface speicherformat : list) {
 				switch (speicherformat.getType()) {
 				case DigitalMusik:
-					ret = writeDigitalMusik(conn, (DigitalMusik) speicherformat, titelId);
+					ret = ret && writeDigitalMusik(conn, (DigitalMusik) speicherformat, titelId);
 				default:
 					throw new UnsupportedOperationException("Methode noch nicht implementiert!");
 				}
 			}
-			conn.commit();
+			if (ret) {
+				conn.commit();
+			}
 			conn.setAutoCommit(true);
 		} catch (ClassCastException | SQLException e) {
 			e.printStackTrace();
@@ -199,7 +201,12 @@ public class DBSpeicherFormat extends DataBaseManager {
 					speicherformat.setId(result.getInt(1));
 					ret = true;
 				}
-				// TODO Zuweisungstabelle
+				stmt.close();
+				String sql2 = "INSERT INTO `TITEL_MUSIKDIGITAL` (`TITEL_ID`, `MUSIKDIGTAL_ID`) VALUES (?, ?);";
+				stmt = conn.prepareStatement(sql2);
+				stmt.setInt(1, titelId);
+				stmt.setInt(2, speicherformat.getId());
+				stmt.execute();
 			} else {
 				String sql = "UPDATE PERSON "
 						   + "SET `DATENTRAEGER` = ?, `PFAD` = ?, `FORMAT` = ?, `QUALITAE` = ? "
@@ -281,8 +288,6 @@ public class DBSpeicherFormat extends DataBaseManager {
 		try {
 			String sql = "DELETE FROM TITEL_MUSIKDIGITAL WHERE MUSIKDIGITAL_ID = ?";
 			String sql2 = "DELETE FROM MUSIKDIGITAL WHERE ID = ?";
-			conn = getConnection();
-			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1,object.getId());
 			stmt.execute();
@@ -290,8 +295,6 @@ public class DBSpeicherFormat extends DataBaseManager {
 			stmt = conn.prepareStatement(sql2);
 			stmt.setInt(1,object.getId());
 			stmt.execute();
-			conn.commit();
-			conn.setAutoCommit(true);
 			ret = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -315,7 +318,35 @@ public class DBSpeicherFormat extends DataBaseManager {
 	}
 	
 	public boolean deleteList(List<SpeicherFormatInterface> list) {
-		// TODO
-		return false;
+		boolean ret = false;
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			conn.setAutoCommit(false);
+			for (SpeicherFormatInterface speicherformat : list) {
+				switch (speicherformat.getType()) {
+				case DigitalMusik:
+					ret = ret && deleteMusikDigital(conn, (DigitalMusik) speicherformat);
+				default:
+					throw new UnsupportedOperationException("Methode noch nicht implementiert!");
+				}
+			}
+			if (ret) {
+				conn.commit();
+			}
+			conn.setAutoCommit(true);
+		} catch (ClassCastException | SQLException e) {
+			e.printStackTrace();
+			ret = false;
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return ret;
 	}
 }
