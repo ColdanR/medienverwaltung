@@ -196,7 +196,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		}
 		setInterpretLabel();
 		
-		btnInterpret = new JButton("ausw\u00E4hlen");
+		btnInterpret = new JButton("Ausw\u00E4hlen");
 		btnInterpret.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnInterpret = new GridBagConstraints();
 		gbc_btnInterpret.anchor = GridBagConstraints.WEST;
@@ -235,7 +235,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		gbc_scp_lst.gridy = 5;
 		pnlCenter.add(scp_lst, gbc_scp_lst);
 		
-		btnNeu = new JButton("neu");
+		btnNeu = new JButton("Neu");
 		btnNeu.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnNeu = new GridBagConstraints();
 		gbc_btnNeu.anchor = GridBagConstraints.WEST;
@@ -244,7 +244,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		gbc_btnNeu.gridy = 6;
 		pnlCenter.add(btnNeu, gbc_btnNeu);
 		
-		btnLoeschen = new JButton("l\u00F6schen");
+		btnLoeschen = new JButton("L\u00F6schen");
 		btnLoeschen.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnLoeschen = new GridBagConstraints();
 		gbc_btnLoeschen.anchor = GridBagConstraints.WEST;
@@ -260,11 +260,11 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		fl_pnlSouth.setAlignment(FlowLayout.RIGHT);
 		pnlSouth.setBorder(StaticComponents.BORDER_PANEL);
 		
-		btnSpeichern = new JButton("speichern");
+		btnSpeichern = new JButton("Speichern");
 		btnSpeichern.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnSpeichern);
 		
-		btnAbbrechen = new JButton("abbrechen");
+		btnAbbrechen = new JButton("Abbrechen");
 		btnAbbrechen.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnAbbrechen);
 	}
