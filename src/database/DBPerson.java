@@ -13,7 +13,7 @@ import data.Person;
 
 /**
  * Database management Class for Person Object
- * @author <b>Bernd Schmidt</b> Funktionsköpfe angelegt
+ * @author <b>Bernd Schmidt</b> Funktionskï¿½pfe angelegt
  * @author <b>Andreas John</b> Implementierung der Funktionen
  *
  */
@@ -34,7 +34,7 @@ public class DBPerson extends DataBaseManager {
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
-			String sql = "SELECT A.ID, A.NAME, A.NAME_1, A.KNAME FROM PERSON WHERE A.ID = ?";
+			String sql = "SELECT A.ID, A.NAME, A.NAME_1, A.KNAME FROM PERSON A WHERE A.ID = ?";
 			
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -94,12 +94,11 @@ public class DBPerson extends DataBaseManager {
 				stmt.setString(1, person.getNachname());
 				stmt.setString(2, person.getVorname());
 				stmt.setString(3, person.getKuenstlername());
-				if (stmt.execute()) {
-					result = stmt.getGeneratedKeys();
-					if (result.next()) {
-						person.setId(result.getInt(1));
-						ret = true;
-					}
+				stmt.execute();
+				result = stmt.getGeneratedKeys();
+				if (result.next()) {
+					person.setId(result.getInt(1));
+					ret = true;
 				}
 			} else {
 				String sql = "UPDATE PERSON SET `NAME` = ?, `NAME_1` = ?, `KNAME` = ? WHERE `ID` = ?";
@@ -109,7 +108,8 @@ public class DBPerson extends DataBaseManager {
 				stmt.setString(2, person.getVorname());
 				stmt.setString(3, person.getKuenstlername());
 				stmt.setInt(4, person.getId());
-				ret = stmt.execute();
+				stmt.execute();
+				ret = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -165,7 +165,8 @@ public class DBPerson extends DataBaseManager {
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1,object.getId());
-			ret = stmt.execute();
+			stmt.execute();
+			ret = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

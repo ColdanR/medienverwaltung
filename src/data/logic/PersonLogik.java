@@ -47,7 +47,6 @@ public class PersonLogik implements DatenLogik<Person> {
 		if (errors.size() > 0) {
 			return false;
 		}
-		object = new Person();
 		object.setKuenstlername(kuenstlername);
 		object.setNachname(nachname);
 		object.setVorname(vorname);
