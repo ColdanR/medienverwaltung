@@ -238,8 +238,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			lstSpeicherort.setListData(list.toArray(new SpeicherFormatInterface[]{}));
 			lstSpeicherort.revalidate();
 			lstSpeicherort.repaint();
-		}
-		else if (source == btnLoeschen)	{
+		} else if (source == btnLoeschen) {
 			List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
 			if (lstSpeicherort.getSelectedValue() == null) {
 				errors.add(ErrorsGUI.NoSelection);
@@ -251,8 +250,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 				fehlerDialog.setAlwaysOnTop(true);
 				fehlerDialog.setVisible(true);
 			}
-		}
-		else if (source == btnSpeichern) {
+		} else if (source == btnSpeichern) {
 			List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
 			MusikLogik logik  = new MusikLogik();
 			List<SpeicherFormatInterface> list = new ArrayList<SpeicherFormatInterface>();
