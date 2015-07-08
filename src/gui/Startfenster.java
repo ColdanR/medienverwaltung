@@ -184,7 +184,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		else if (source == btnMNeu) 
 		{
 			cp.remove(anzeigeFenster);
-			anzeigeFenster = new MusikEingabePanel();
+			anzeigeFenster = new MusikEingabePanel(this);
 			cp.add(anzeigeFenster, BorderLayout.CENTER);
 			anzeigeFenster.revalidate();
 			anzeigeFenster.repaint();
@@ -206,4 +206,12 @@ public class Startfenster extends JFrame implements ActionListener {
 		}
 	}
 
+	public void setPanel(JPanel mainPanel) {
+		cp.remove(anzeigeFenster);
+		anzeigeFenster = mainPanel;
+		cp.add(anzeigeFenster, BorderLayout.CENTER);
+		anzeigeFenster.revalidate();
+		anzeigeFenster.repaint();
+		this.pack();
+	}
 }

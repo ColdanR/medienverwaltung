@@ -6,14 +6,14 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import data.Speicherformat;
+import data.SpeicherFormatInterface;
 import data.speicherformate.DigitalMusik;
 import gui.StaticComponents;
 
-public class SpeicherortListRenderer implements ListCellRenderer<Speicherformat> {
+public class SpeicherortListRenderer implements ListCellRenderer<SpeicherFormatInterface> {
 
 	@Override
-	public Component getListCellRendererComponent(JList<? extends Speicherformat> list, Speicherformat value, int index,
+	public Component getListCellRendererComponent(JList<? extends SpeicherFormatInterface> list, SpeicherFormatInterface value, int index,
 			boolean isSelected, boolean cellHasFocus) {
 		JLabel cell = new JLabel();
 		switch (value.getType()) {

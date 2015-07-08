@@ -2,6 +2,7 @@ package gui;
 
 import gui.dialog.FehlerDialog;
 import gui.dialog.Speicherort;
+import gui.renderer.SpeicherortListRenderer;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -14,9 +15,15 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JCheckBox;
 
@@ -29,8 +36,13 @@ import java.awt.FlowLayout;
 
 import javax.swing.JList;
 
+import data.Person;
+import data.SpeicherFormatInterface;
 import data.medien.logic.MusikLogik;
-import data.speicherformate.DigitalMusik;
+import data.speicherformate.logic.SpeicherFormateLogik;
+import database.DBSpeicherFormat;
+import enums.ErrorMessage;
+import enums.ErrorsGUI;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
@@ -39,18 +51,21 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private JTextField 			txfTitel;
-	private JTextField 			txfErsterscheinung;
-	private JCheckBox 			chkbxLive;
-	private JButton 			btnNeu;
-	private JButton 			btnLoeschen;
-	private JButton 			btnAbbrechen;
-	private JButton 			btnSpeichern;
-	private JLabel				lblMusikEingabe;
-	private JList<DigitalMusik> lstSpeicherort;
+	private Startfenster					source;
+	private JTextField 						txfTitel;
+	private JTextField 						txfErsterscheinung;
+	private JCheckBox 						chkbxLive;
+	private JButton 						btnNeu;
+	private JButton 						btnLoeschen;
+	private JButton 						btnAbbrechen;
+	private JButton 						btnSpeichern;
+	private JLabel							lblMusikEingabe;
+	private JList<SpeicherFormatInterface>	lstSpeicherort;
+	private Person							interpret;
 	
 	
-	public MusikEingabePanel() {
+	public MusikEingabePanel(Startfenster source) {
+		this.source = source;
 		setAlignmentY(Component.TOP_ALIGNMENT);
 		createMusikEingabePanel();
 		btnNeu.addActionListener(this);
@@ -152,7 +167,8 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		gbc_lblSpeicherort.gridy = 3;
 		pnlCenter.add(lblSpeicherort, gbc_lblSpeicherort);
 		
-		lstSpeicherort = new JList<DigitalMusik>();
+		lstSpeicherort = new JList<SpeicherFormatInterface>();
+		lstSpeicherort.setCellRenderer(new SpeicherortListRenderer());
 		lstSpeicherort.setVisibleRowCount(5);
 		lstSpeicherort.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane scp_lst = new JScrollPane();
@@ -207,43 +223,61 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
+	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		
 		if (source == btnNeu) {
-			Speicherort dialog = new Speicherort(null);
+			Speicherort dialog = new Speicherort(this.source);
 			dialog.display();
-		}
-		// TODO Löschen Button Logik
-		else if (source == btnLoeschen)	{
-				
-			
-		}
-		else if (source == btnSpeichern) {
+
+			List<SpeicherFormatInterface> list = new ArrayList<SpeicherFormatInterface>();
+			ListModel<SpeicherFormatInterface> modell = lstSpeicherort.getModel();
+			for (int i = 0; i < modell.getSize(); i++) {
+				list.add(modell.getElementAt(i));
+			}
+			list.add(dialog.getObject());
+			lstSpeicherort.setListData(list.toArray(new SpeicherFormatInterface[]{}));
+			lstSpeicherort.revalidate();
+			lstSpeicherort.repaint();
+		} else if (source == btnLoeschen) {
+			List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
+			if (lstSpeicherort.getSelectedValue() == null) {
+				errors.add(ErrorsGUI.NoSelection);
+			}
+			SpeicherFormateLogik logik = new SpeicherFormateLogik();
+			if (errors.size() > 0 || logik.getErrors().size() > 0) {
+				errors.addAll(logik.getErrors());
+				FehlerDialog fehlerDialog = new FehlerDialog(this.source, errors);
+				fehlerDialog.setAlwaysOnTop(true);
+				fehlerDialog.setVisible(true);
+			}
+		} else if (source == btnSpeichern) {
+			List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
 			MusikLogik logik  = new MusikLogik();
-			boolean errors = false;
-//			
-//			TODO Musik Logik
-//			if (logik.createNew(txfTitel.getText(), txfErsterscheinung.getText(), ???.getText())) 
-//			{
-//				if (logik.write()) {
-//					setObject(logik.getObject());
-//				} else {
-//					errors = true;
-//				}
-//			} 
-//			else 
-//			{
-//				errors = true;
-//			}
-//			if (errors) 
-//			{
-//				FehlerDialog fehlerDialog = new FehlerDialog(null, logik.getErrors());
-//				fehlerDialog.setAlwaysOnTop(true);
-//				fehlerDialog.setVisible(true);
-//			}
-//			
+			List<SpeicherFormatInterface> list = new ArrayList<SpeicherFormatInterface>();
+			ListModel<SpeicherFormatInterface> modell = lstSpeicherort.getModel();
+			for (int i = 0; i < modell.getSize(); i++) {
+				list.add(modell.getElementAt(i));
+			}
+			LocalDate date = null;
+			try {
+				 date = LocalDate.from(DateTimeFormatter.ofPattern("dd.MM.yyyy").parse(txfErsterscheinung.getText()));
+			} catch (DateTimeException ex) {
+				errors.add(ErrorsGUI.NoDateFormat);
+			}
+			if (errors.size() == 0 && logik.createNew(txfTitel.getText(), interpret, date, list, chkbxLive.isSelected())) {
+				if (logik.write()) {
+					this.source.setPanel(new StartPanel());
+				}
+			}
+			if (errors.size() > 0 || logik.getErrors().size() > 0) {
+				errors.addAll(logik.getErrors());
+				FehlerDialog fehlerDialog = new FehlerDialog(this.source, errors);
+				fehlerDialog.setAlwaysOnTop(true);
+				fehlerDialog.setVisible(true);
+			}
+			
+
 			
 		}
 		
