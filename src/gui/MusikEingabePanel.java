@@ -99,9 +99,9 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		// creating BorderLayout.CENTER Components
 		GridBagLayout gbl = new GridBagLayout();
 		gbl.columnWidths = new int[] {30, 0, 0, 0, 30, 0};
-		gbl.rowHeights = new int[] {30, 0, 0, 0, 0, 0, 30, 0};
+		gbl.rowHeights = new int[] {30, 0, 0, 0, 0, 0, 0, 30, 0};
 		gbl.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlCenter.setLayout(gbl);
 		
 		JLabel lblTitel = new JLabel("Titel");
@@ -158,13 +158,22 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		gbc_chkbxLive.gridy = 2;
 		pnlCenter.add(chkbxLive, gbc_chkbxLive);
 		
+		JLabel lblInterpret = new JLabel("Interpret");
+		StaticComponents.setFontLabel(lblInterpret);
+		GridBagConstraints gbc_lblInterpret = new GridBagConstraints();
+		gbc_lblInterpret.anchor = GridBagConstraints.WEST;
+		gbc_lblInterpret.insets = new Insets(0, 0, 10, 10);
+		gbc_lblInterpret.gridx = 1;
+		gbc_lblInterpret.gridy = 3;
+		pnlCenter.add(lblInterpret, gbc_lblInterpret);
+		
 		JLabel lblSpeicherort = new JLabel("Speicherort");
 		StaticComponents.setFontLabel(lblSpeicherort);
 		GridBagConstraints gbc_lblSpeicherort = new GridBagConstraints();
 		gbc_lblSpeicherort.anchor = GridBagConstraints.WEST;
 		gbc_lblSpeicherort.insets = new Insets(0, 0, 10, 10);
 		gbc_lblSpeicherort.gridx = 1;
-		gbc_lblSpeicherort.gridy = 3;
+		gbc_lblSpeicherort.gridy = 4;
 		pnlCenter.add(lblSpeicherort, gbc_lblSpeicherort);
 		
 		lstSpeicherort = new JList<SpeicherFormatInterface>();
@@ -182,7 +191,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		gbc_scp_lst.insets = new Insets(0, 0, 10, 5);
 		gbc_scp_lst.fill = GridBagConstraints.HORIZONTAL;
 		gbc_scp_lst.gridx = 1;
-		gbc_scp_lst.gridy = 4;
+		gbc_scp_lst.gridy = 5;
 		pnlCenter.add(scp_lst, gbc_scp_lst);
 		
 		btnNeu = new JButton("neu");
@@ -191,7 +200,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		gbc_btnNeu.anchor = GridBagConstraints.WEST;
 		gbc_btnNeu.insets = new Insets(0, 0, 5, 10);
 		gbc_btnNeu.gridx = 1;
-		gbc_btnNeu.gridy = 5;
+		gbc_btnNeu.gridy = 6;
 		pnlCenter.add(btnNeu, gbc_btnNeu);
 		
 		btnLoeschen = new JButton("l\u00F6schen");
@@ -200,7 +209,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		gbc_btnLoeschen.anchor = GridBagConstraints.WEST;
 		gbc_btnLoeschen.insets = new Insets(0, 0, 5, 10);
 		gbc_btnLoeschen.gridx = 2;
-		gbc_btnLoeschen.gridy = 5;
+		gbc_btnLoeschen.gridy = 6;
 		pnlCenter.add(btnLoeschen, gbc_btnLoeschen);
 				
 		// creating BorderLayout.SOUTH Components
