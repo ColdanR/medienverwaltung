@@ -74,6 +74,7 @@ public class DBSpeicherFormat extends DataBaseManager {
 			switch (speicherformat.getType()) {
 			case DigitalMusik:
 				ret = writeDigitalMusik(conn, (DigitalMusik) speicherformat, titelId);
+				break;
 			default:
 				throw new UnsupportedOperationException("Methode noch nicht implementiert!");
 			}
@@ -155,6 +156,7 @@ public class DBSpeicherFormat extends DataBaseManager {
 				switch (speicherformat.getType()) {
 				case DigitalMusik:
 					ret = ret && writeDigitalMusik(conn, (DigitalMusik) speicherformat, titelId);
+					break;
 				default:
 					throw new UnsupportedOperationException("Methode noch nicht implementiert!");
 				}
@@ -327,6 +329,7 @@ public class DBSpeicherFormat extends DataBaseManager {
 				switch (speicherformat.getType()) {
 				case DigitalMusik:
 					ret = ret && deleteMusikDigital(conn, (DigitalMusik) speicherformat);
+					break;
 				default:
 					throw new UnsupportedOperationException("Methode noch nicht implementiert!");
 				}
