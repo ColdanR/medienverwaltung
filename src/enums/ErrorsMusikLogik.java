@@ -1,7 +1,7 @@
 package enums;
 
 public enum ErrorsMusikLogik implements ErrorMessage {
-	NoKuenstler("Kein K\u00FCnstler uebergeben."),
+	NoKuenstler("Kein K\u00FCnstler \u00FCbergeben."),
 	NoTitel("Kein Titel vorhanden."),
 	NoAlben("Kein Wert f\u00FCr die Alben erkannt."),
 	NoMitwirkende("Kein Wert f\u00FCr die Mitwirkenden erkannt."),

@@ -186,6 +186,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		StaticComponents.setFontBorderLabel(lblInterpretAnzeige);
 		GridBagConstraints gbc_lblInterpretAnzeige = new GridBagConstraints();
 		gbc_lblInterpretAnzeige.anchor = GridBagConstraints.WEST;
+		gbc_lblInterpretAnzeige.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblInterpretAnzeige.insets = new Insets(0, 0, 10, 10);
 		gbc_lblInterpretAnzeige.gridx = 2;
 		gbc_lblInterpretAnzeige.gridy = 3;
@@ -195,11 +196,11 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		}
 		setInterpretLabel();
 		
-		btnInterpret = new JButton("auswählen");
+		btnInterpret = new JButton("ausw\u00E4hlen");
 		btnInterpret.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnInterpret = new GridBagConstraints();
 		gbc_btnInterpret.anchor = GridBagConstraints.WEST;
-		gbc_btnInterpret.insets = new Insets(0, 0, 10, 10);
+		gbc_btnInterpret.insets = new Insets(0, 0, 10, 5);
 		gbc_btnInterpret.gridx = 3;
 		gbc_btnInterpret.gridy = 3;
 		pnlCenter.add(btnInterpret, gbc_btnInterpret);
@@ -367,6 +368,8 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 				}
 				text.append(")");
 			}
+		} else {
+			text.append(" ");
 		}
 		lblInterpretAnzeige.setText(text.toString());
 	}

@@ -12,7 +12,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 
 import data.Person;
 import data.logic.PersonLogik;
@@ -30,7 +32,7 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 
 	public PersonAuswahlDialog(Window parent) 
 	{
-		super(parent, "Person ausw�hlen", 600, 400);
+		super(parent, "Person ausw\u00E4hlen", 600, 400);
 		createDialogContent();
 		
 	}
@@ -83,13 +85,18 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		PersonLogik		logik		=	new PersonLogik();
 		List<Person>	listData	=	logik.getAll();
 		
+				
 		if (logik.getErrors().isEmpty()) 
 		{
 			listPersonen = new JList<Person>(listData.toArray(new Person[]{}));
 			listPersonen.setCellRenderer(new PersonListRenderer());
 			listPersonen.setVisibleRowCount(5);
 			listPersonen.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			main.add(listPersonen);
+			
+			JScrollPane scrollPane = new JScrollPane(listPersonen, 
+					ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+		            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			main.add(scrollPane);
 		} 
 		else 
 		{
@@ -105,7 +112,7 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		buttons.add(btnAddButton);
 		if (listPersonen != null) 
 		{
-			btnSelectButton = new JButton("Ausw�hlen");
+			btnSelectButton = new JButton("ausw\u00E4hlen");
 			buttons.add(btnSelectButton);
 		}
 		btnCancelButton = new JButton("Abbrechen");
