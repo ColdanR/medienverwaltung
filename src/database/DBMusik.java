@@ -202,10 +202,15 @@ public class DBMusik extends DataBaseManager {
 		String sql = "DELETE FROM `TITEL` WHERE `ID` = ?";
 		try {
 			conn = getConnection();
+			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, musik.getId());
 			stmt.execute();
 			// TODO Massenlöschen einfügen
+			if (true) {
+				conn.commit();
+				conn.setAutoCommit(true);
+			}
 			ret = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
