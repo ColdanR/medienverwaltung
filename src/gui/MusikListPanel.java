@@ -1,47 +1,41 @@
 package gui;
 
-import gui.renderer.PersonListRenderer;
-
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.util.List;
-
-import javax.swing.JScrollPane;
-
-import data.Person;
-import data.logic.PersonLogik;
+import data.medien.Musik;
+import data.medien.logic.MusikLogik;
 import enums.ErrorMessage;
+import gui.renderer.MusikListRenderer;
 
-public class PersonenListePanel extends JPanel implements ActionListener {
+public class MusikListPanel extends JPanel implements ActionListener {
 	private JLabel			lblHeader;
-	private JList<Person>	lstPersonList;
+	private JList<Musik>	lstMusikList;
 	private JButton			btnBearbeiten;
 	private JButton			btnLoeschen;
 	private JScrollPane scrollPane;
-	
 
-	public PersonenListePanel() {
+	public MusikListPanel() {
 		setAlignmentY(Component.TOP_ALIGNMENT);
-		creatPersonListPanel();
+		creatMusikListPanel();
 		
 		btnBearbeiten.addActionListener(this);
 		btnLoeschen.addActionListener(this);
 	}
 	
-	public void creatPersonListPanel(){
+	public void creatMusikListPanel(){
 		this.setMinimumSize(new Dimension (300, 300));
 		this.setLayout(new BorderLayout());
 		
@@ -58,22 +52,22 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 		this.add(pnlSouth, BorderLayout.SOUTH);
 		
 		//Header
-		lblHeader = new JLabel("Interpreten anzeige");
+		lblHeader = new JLabel("Musik anzeige");
 		lblHeader.setFont(StaticComponents.FONT_TITLE);
 		pnlNorth.add(lblHeader);
 		
 		//Center
 		// Main
-		PersonLogik		logik		=	new PersonLogik();
-		List<Person>	listData	=	logik.getAll();
+		MusikLogik		logik		=	new MusikLogik();
+		List<Musik>		listData	=	logik.getAll();
 		
 		if (logik.getErrors().isEmpty()) 
 		{
-			lstPersonList = new JList<Person>(listData.toArray(new Person[]{}));
-			lstPersonList.setCellRenderer(new PersonListRenderer());
-			lstPersonList.setVisibleRowCount(5);
-			lstPersonList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			scrollPane = new JScrollPane(lstPersonList,
+			lstMusikList = new JList<Musik>(listData.toArray(new Musik[]{}));
+			lstMusikList.setCellRenderer(new MusikListRenderer());
+			lstMusikList.setVisibleRowCount(5);
+			lstMusikList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			scrollPane = new JScrollPane(lstMusikList,
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 		            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			pnlCenter.add(scrollPane);
@@ -106,11 +100,11 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 		
 		if (source == btnLoeschen)
 		{
-			Person selected = lstPersonList.getSelectedValue();
+			Musik selected = lstMusikList.getSelectedValue();
 		}
 		else if (source == btnBearbeiten)
 		{
-			Person selecte = lstPersonList.getSelectedValue();
+			Musik selecte = lstMusikList.getSelectedValue();
 		}
 	}
 
