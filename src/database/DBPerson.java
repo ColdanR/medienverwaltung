@@ -218,6 +218,7 @@ public class DBPerson extends DataBaseManager {
 				personlist.add(ret);
 			}
 		} catch (SQLException e) {
+			personlist = null;
 			e.printStackTrace();
 		} finally {
 			if (result != null) {
