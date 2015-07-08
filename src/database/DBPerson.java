@@ -1,17 +1,20 @@
 package database;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import data.Person;
 
 /**
- * Database managment Class for Person Object
- * @author Bernd Schmidt
+ * Database management Class for Person Object
+ * @author <b>Bernd Schmidt</b> Funktionsköpfe angelegt
+ * @author <b>Andreas John</b> Implementierung der Funktionen
  *
  */
 public class DBPerson extends DataBaseManager {
@@ -31,7 +34,8 @@ public class DBPerson extends DataBaseManager {
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
-			String sql = "SELECT id, nachname, vorname, kuenstlername FROM Person WHERE id = ?";
+			String sql = "SELECT A.ID, A.NAME, A.NAME_1, A.KNAME FROM PERSON WHERE A.ID = ?";
+			
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
 			// Erster Index ist immer 1 bei SQL Befehlen!
@@ -74,29 +78,31 @@ public class DBPerson extends DataBaseManager {
 		return ret;
 	}
 	
-	public boolean writePerson(Person person) throws IllegalArgumentException {
+	public boolean writePerson(Person person){
 		boolean ret = false;
 		if (person == null) {
-			throw new IllegalArgumentException();
+			return false;
 		}
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
 			if (person.getId() == 0) {
-				String sql = "INSERT INTO Person (`nachname`, `vorname`, `kuenstlername`) VALUES (?, ?, ?)";
+				String sql = "INSERT INTO PERSON (`NAME`, `NAME_1`, `KNAME`) VALUES (?, ?, ?)";
 				conn = getConnection();
 				stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				stmt.setString(1, person.getNachname());
 				stmt.setString(2, person.getVorname());
 				stmt.setString(3, person.getKuenstlername());
-				result = stmt.executeQuery();
-				if (result.next()) {
-					person.setId(result.getInt(1));
-					ret = true;
+				if (stmt.execute()) {
+					result = stmt.getGeneratedKeys();
+					if (result.next()) {
+						person.setId(result.getInt(1));
+						ret = true;
+					}
 				}
 			} else {
-				String sql = "UPDATE Person SET `nachname` = ?, `vorname` = ?, `kuenstlername` = ? WHERE `id` = ?";
+				String sql = "UPDATE PERSON SET `NAME` = ?, `NAME_1` = ?, `KNAME` = ? WHERE `ID` = ?";
 				conn = getConnection();
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, person.getNachname());
@@ -105,7 +111,6 @@ public class DBPerson extends DataBaseManager {
 				stmt.setInt(4, person.getId());
 				ret = stmt.execute();
 			}
-			// Erster Index ist immer 1 bei SQL Befehlen!
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -139,24 +144,77 @@ public class DBPerson extends DataBaseManager {
 	 * @param songId the id of the song
 	 * @return List of Person
 	 */
-	public List<Person> loadPersonsForAlbum(int songId) {
-	/*	PreparedStatement stmt = null;
+
+	public boolean delete(Person object) { 
+		boolean ret = false;
+		int id;
+		if (object == null)  {
+			return false;
+		}
+		id = object.getId();
+		
+		if (id == 0) {
+			return false;
+		}
+		
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		ResultSet result = null;
-		String PersList = "";
 		try {
-			String sql = "SELECT LIST(A.MASKENKEY_PERSON)"
-					   + "FROM TITEL A"
-					   + "LEFT OUTER JOIN PERSON B ON B.TITEL_ID_LINKKEY = A.ID"
-					   + "WHERE A.ID = ?";
+			String sql = "DELETE FROM PERSON WHERE ID = ?";			
 			conn = getConnection();
 			stmt = conn.prepareStatement(sql);
-			// Erster Index ist immer 1 bei SQL Befehlen!
-			stmt.setInt(1, songId);
-			result = stmt.executeQuery();
-			if (result.next()) {
-				;
-			} else {
-				return null;
+			stmt.setInt(1,object.getId());
+			ret = stmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (result != null) {
+				try {
+					result.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return ret;
+	}
+	
+	public List<Person> getAll() {
+		Person ret = null;
+		List<Person> personlist = new ArrayList<Person>();
+				
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet result = null;
+		try {
+			String sql = "SELECT A.ID, A.NAME, A.NAME_1, A.KNAME FROM PERSON A";
+			
+			conn = getConnection();
+			stmt = conn.createStatement();
+			
+			result = stmt.executeQuery(sql);
+			while (result.next()) {
+				ret = new Person();
+				ret.setId(result.getInt(1));
+				ret.setNachname(result.getString(2));
+				ret.setVorname(result.getString(3));
+				ret.setKuenstlername(result.getString(4));
+				personlist.add(ret);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -183,17 +241,6 @@ public class DBPerson extends DataBaseManager {
 				}
 			}
 		}
-		return ret; */
-		return null;
-	}
-
-	public boolean delete(Person object) {
-		// TODO Write this
-		return false;
-	}
-	
-	public List<Person> getAll() {
-		// TODO Write this
-		return null;
+		return personlist;
 	}
 }
