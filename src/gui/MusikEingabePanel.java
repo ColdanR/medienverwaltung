@@ -215,6 +215,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			Speicherort dialog = new Speicherort(null);
 			dialog.display();
 		}
+		// TODO Löschen Button Logik
 		else if (source == btnLoeschen)	{
 				
 			
@@ -222,26 +223,27 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		else if (source == btnSpeichern) {
 			MusikLogik logik  = new MusikLogik();
 			boolean errors = false;
-			if (logik.createNew(txfTitel.getText(), txfErsterscheinung.getText(), ???.getText())) 
-			{
-				if (logik.write()) {
-					setObject(logik.getObject());
-					dialog.dispose();
-				} else {
-					errors = true;
-				}
-			} 
-			else 
-			{
-				errors = true;
-			}
-			if (errors) 
-			{
-				FehlerDialog fehlerDialog = new FehlerDialog(null, logik.getErrors());
-				fehlerDialog.setAlwaysOnTop(true);
-				fehlerDialog.setVisible(true);
-			}
-			
+//			
+//			TODO Musik Logik
+//			if (logik.createNew(txfTitel.getText(), txfErsterscheinung.getText(), ???.getText())) 
+//			{
+//				if (logik.write()) {
+//					setObject(logik.getObject());
+//				} else {
+//					errors = true;
+//				}
+//			} 
+//			else 
+//			{
+//				errors = true;
+//			}
+//			if (errors) 
+//			{
+//				FehlerDialog fehlerDialog = new FehlerDialog(null, logik.getErrors());
+//				fehlerDialog.setAlwaysOnTop(true);
+//				fehlerDialog.setVisible(true);
+//			}
+//			
 			
 		}
 		
