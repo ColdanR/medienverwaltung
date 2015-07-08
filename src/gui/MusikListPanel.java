@@ -75,7 +75,7 @@ public class MusikListPanel extends JPanel implements ActionListener {
 		btnBearbeiten = new JButton("Bearbeiten");
 		btnBearbeiten.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnBearbeiten);
-		btnLoeschen = new JButton("Löschen");
+		btnLoeschen = new JButton("Lï¿½schen");
 		btnLoeschen.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnLoeschen);
 		
@@ -114,8 +114,8 @@ public class MusikListPanel extends JPanel implements ActionListener {
 				errorDialog.setVisible(true);
 				return;
 			}
-			Musik selecte = lstMusikList.getSelectedValue();
-			MusikEingabePanel panel = new MusikEingabePanel(parent);
+			Musik selected = lstMusikList.getSelectedValue();
+			MusikEingabePanel panel = new MusikEingabePanel(parent, selected);
 			parent.setPanel(panel);
 			generateList();
 		}

@@ -38,9 +38,9 @@ import javax.swing.JList;
 
 import data.Person;
 import data.SpeicherFormatInterface;
+import data.medien.Musik;
 import data.medien.logic.MusikLogik;
 import data.speicherformate.logic.SpeicherFormateLogik;
-import database.DBSpeicherFormat;
 import enums.ErrorMessage;
 import enums.ErrorsGUI;
 
@@ -59,12 +59,14 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 	private JButton 						btnLoeschen;
 	private JButton 						btnAbbrechen;
 	private JButton 						btnSpeichern;
-	private JLabel							lblMusikEingabe;
 	private JList<SpeicherFormatInterface>	lstSpeicherort;
 	private Person							interpret;
+	private Musik							musik;
+	private static DateTimeFormatter		formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 	
 	
-	public MusikEingabePanel(Startfenster source) {
+	public MusikEingabePanel(Startfenster source, Musik musik) {
+		this.musik = musik;
 		this.source = source;
 		setAlignmentY(Component.TOP_ALIGNMENT);
 		createMusikEingabePanel();
@@ -92,7 +94,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		this.add(pnlSouth, BorderLayout.SOUTH);
 		
 		// Header
-		lblMusikEingabe = new JLabel("Musik Eingabe");
+		JLabel lblMusikEingabe = new JLabel("Musik Eingabe");
 		lblMusikEingabe.setFont(StaticComponents.FONT_TITLE);
 		pnlNorth.add(lblMusikEingabe);
 			
@@ -114,6 +116,9 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		pnlCenter.add(lblTitel, gbc_lblTitel);
 		
 		txfTitel = new JTextField();
+		if (musik != null) {
+			txfTitel.setText(musik.getTitel());
+		}
 		StaticComponents.setFontBorderTextField(txfTitel);
 		GridBagConstraints gbc_txfTitel = new GridBagConstraints();
 		gbc_txfTitel.gridwidth = 2;
@@ -134,6 +139,9 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		pnlCenter.add(lblErsterscheinung, gbc_lblErsterscheinung);
 		
 		txfErsterscheinung = new JTextField();
+		if (musik != null) {
+			txfErsterscheinung.setText(formatter.format(musik.getErsterscheinung()));
+		}
 		txfErsterscheinung.setColumns(15);
 		StaticComponents.setFontBorderTextField(txfErsterscheinung);
 		GridBagConstraints gbc_txfErsterscheinung = new GridBagConstraints();
@@ -146,6 +154,9 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		
 		
 		chkbxLive = new JCheckBox("Live");
+		if (musik != null) {
+			chkbxLive.setSelected(musik.isLive());
+		}
 		chkbxLive.setMargin(new Insets(2, 0, 2, 2));
 		chkbxLive.setIconTextGap(10);
 		chkbxLive.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -171,6 +182,9 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		lstSpeicherort.setCellRenderer(new SpeicherortListRenderer());
 		lstSpeicherort.setVisibleRowCount(5);
 		lstSpeicherort.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		if (musik != null) {
+			lstSpeicherort.setListData(musik.getSpeicherformate().toArray(new SpeicherFormatInterface[]{}));
+		}
 		JScrollPane scp_lst = new JScrollPane();
 		scp_lst.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scp_lst.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -217,9 +231,6 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		btnAbbrechen = new JButton("abbrechen");
 		btnAbbrechen.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnAbbrechen);
-		
-		
-		
 	}
 
 	@Override
@@ -261,11 +272,19 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			}
 			LocalDate date = null;
 			try {
-				 date = LocalDate.from(DateTimeFormatter.ofPattern("dd.MM.yyyy").parse(txfErsterscheinung.getText()));
+				 date = LocalDate.from(formatter.parse(txfErsterscheinung.getText()));
 			} catch (DateTimeException ex) {
 				errors.add(ErrorsGUI.NoDateFormat);
 			}
-			if (errors.size() == 0 && logik.createNew(txfTitel.getText(), interpret, date, list, chkbxLive.isSelected())) {
+			boolean operationOk = false;
+			String titel = txfTitel.getText();
+			boolean live = chkbxLive.isSelected();
+			if (musik == null) {
+				operationOk = logik.createNew(titel, interpret, date, list, live);
+			} else {
+				operationOk = logik.loadObject(musik.getId()) && logik.editLoaded(titel, interpret, date, list, live);
+			}
+			if (errors.size() == 0 && operationOk) {
 				if (logik.write()) {
 					this.source.setPanel(new StartPanel());
 				}
@@ -275,10 +294,19 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 				FehlerDialog fehlerDialog = new FehlerDialog(this.source, errors);
 				fehlerDialog.setAlwaysOnTop(true);
 				fehlerDialog.setVisible(true);
+			} else {
+				this.source.setPanel(new StartPanel());
 			}
-		}
-		else if (source == btnAbbrechen) {
+		} else if (source == btnAbbrechen) {
 			this.source.setPanel(new StartPanel());
 		}
+	}
+
+	public Musik getMusik() {
+		return musik;
+	}
+
+	public void setMusik(Musik musik) {
+		this.musik = musik;
 	}
 }
