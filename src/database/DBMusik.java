@@ -203,11 +203,11 @@ public class DBMusik extends DataBaseManager {
 		try {
 			conn = getConnection();
 			conn.setAutoCommit(false);
-			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, musik.getId());
-			stmt.execute();
-			// TODO Massenlöschen einfügen
-			if (true) {
+			DBSpeicherFormat dbformat = new DBSpeicherFormat();
+			if (dbformat.deleteList(musik.getSpeicherformate())) {
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, musik.getId());
+				stmt.execute();
 				conn.commit();
 				conn.setAutoCommit(true);
 			}
@@ -263,6 +263,7 @@ public class DBMusik extends DataBaseManager {
 				ret.add(element);
 			}
 		} catch (SQLException e) {
+			ret = null;
 			e.printStackTrace();
 		} finally {
 			if (result != null) {
