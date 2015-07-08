@@ -78,7 +78,7 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 		btnBearbeiten = new JButton("Bearbeiten");
 		btnBearbeiten.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnBearbeiten);
-		btnLoeschen = new JButton("Löschen");
+		btnLoeschen = new JButton("L\u00F6schen");
 		btnLoeschen.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnLoeschen);
 		
@@ -127,6 +127,7 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 		PersonLogik		logik		=	new PersonLogik();
 		List<Person>	listData	=	logik.getAll();
 		
+		pnlCenter.remove(scrollPane);
 		if (logik.getErrors().isEmpty()) 
 		{
 			lstPersonList = new JList<Person>(listData.toArray(new Person[]{}));
