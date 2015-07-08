@@ -15,6 +15,11 @@ public class DBMusik extends DataBaseManager {
 		return false;
 	}
 	
+	public boolean writeAll(Musik musik) {
+		// TODO Write this!
+		return false;
+	}
+	
 	public Musik getForId(int id) {
 		// TODO Write this!
 		return null;

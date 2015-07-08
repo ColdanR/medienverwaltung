@@ -154,9 +154,28 @@ public class MusikLogik implements DatenLogik<Musik> {
 	
 	@Override
 	public boolean write() {
+		if (object == null) {
+			errors.add(ErrorsMusikLogik.NotLoaded);
+			return false;
+		}
 		try {
 			DBMusik dbLogic = getDBLogic();
 			if (!dbLogic.write(object)) {
+				errors.add(DatabaseErrors.UnableToWrite);
+				return false;
+			} else {
+				return true;
+			}
+		} catch (ClassNotFoundException e) {
+			errors.add(DatabaseErrors.NoDBAvailable);
+		}
+		return false;
+	}
+	
+	public boolean writeAll() {
+		try {
+			DBMusik dbLogic = getDBLogic();
+			if (!dbLogic.writeAll(object)) {
 				errors.add(DatabaseErrors.UnableToWrite);
 				return false;
 			} else {

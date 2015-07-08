@@ -26,6 +26,7 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
     private	JTextField	txfKuenstlername;
     private	JButton		btnSpeichern;
     private	JButton		btnAbbrechen;
+    private Person		person;
     
 	public PersonEingabeDialog(Window parent) {
 		super(parent, "Interpret anlegen", 400, 250);
@@ -113,6 +114,10 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
     	gbc_txfNachname.gridy = 1;
     	pnlCenter.add(txfNachname, gbc_txfNachname);
     	
+    	if (person != null) {
+    		txfNachname.setText(person.getNachname());
+    	}
+    	
     	JLabel lblVorname = new JLabel("Vorname");
     	lblVorname.setFont(StaticComponents.FONT_LABEL);
     	GridBagConstraints gbc_lblVorname = new GridBagConstraints();
@@ -131,6 +136,10 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
     	gbc_txfVorname.gridy = 2;
     	pnlCenter.add(txfVorname, gbc_txfVorname);
     	
+    	if (person != null) {
+    		txfVorname.setText(person.getVorname());
+    	}
+    	
     	JLabel lblKuenstlername = new JLabel("K\u00FCnstlername");
     	lblKuenstlername.setFont(StaticComponents.FONT_LABEL);
     	GridBagConstraints gbc_lblKuenstlername = new GridBagConstraints();
@@ -148,6 +157,10 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
     	gbc_txfKuenstlername.gridx = 2;
     	gbc_txfKuenstlername.gridy = 3;
     	pnlCenter.add(txfKuenstlername, gbc_txfKuenstlername);
+    	
+    	if (person != null) {
+    		txfKuenstlername.setText(person.getKuenstlername());
+    	}
     	
     	panel.add(pnlCenter, BorderLayout.CENTER);
 
@@ -168,5 +181,13 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
 		btnSpeichern.addActionListener(this);
 		btnAbbrechen.addActionListener(this);
 		return panel;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 }
