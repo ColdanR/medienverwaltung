@@ -71,6 +71,7 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
 			txfKuenstlername.setText("");
 			txfNachname.setText("");
 			txfVorname.setText("");
+			setObject(null);
 			dialog.dispose();
 		}
 	}
