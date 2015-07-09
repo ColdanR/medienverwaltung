@@ -47,6 +47,7 @@ import enums.ErrorsGUI;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import java.awt.Dimension;
 
 public class MusikEingabePanel extends JPanel implements ActionListener {
 	
@@ -104,9 +105,9 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			
 		// creating BorderLayout.CENTER Components
 		GridBagLayout gbl = new GridBagLayout();
-		gbl.columnWidths = new int[] {30, 0, 0, 0, 30, 0};
+		gbl.columnWidths = new int[] {30, 0, 0, 0, 0, 30, 0};
 		gbl.rowHeights = new int[] {30, 0, 0, 0, 0, 0, 0, 30, 0};
-		gbl.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlCenter.setLayout(gbl);
 		
@@ -125,7 +126,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		}
 		StaticComponents.setFontBorderTextField(txfTitel);
 		GridBagConstraints gbc_txfTitel = new GridBagConstraints();
-		gbc_txfTitel.gridwidth = 2;
+		gbc_txfTitel.gridwidth = 3;
 		gbc_txfTitel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txfTitel.anchor = GridBagConstraints.WEST;
 		gbc_txfTitel.insets = new Insets(0, 0, 10, 5);
@@ -149,8 +150,8 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		txfErsterscheinung.setColumns(15);
 		StaticComponents.setFontBorderTextField(txfErsterscheinung);
 		GridBagConstraints gbc_txfErsterscheinung = new GridBagConstraints();
-		gbc_txfErsterscheinung.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txfErsterscheinung.anchor = GridBagConstraints.WEST;
+		gbc_txfErsterscheinung.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txfErsterscheinung.insets = new Insets(0, 0, 10, 10);
 		gbc_txfErsterscheinung.gridx = 2;
 		gbc_txfErsterscheinung.gridy = 2;
@@ -169,7 +170,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		GridBagConstraints gbc_chkbxLive = new GridBagConstraints();
 		gbc_chkbxLive.anchor = GridBagConstraints.WEST;
 		gbc_chkbxLive.insets = new Insets(0, 0, 10, 5);
-		gbc_chkbxLive.gridx = 3;
+		gbc_chkbxLive.gridx = 4;
 		gbc_chkbxLive.gridy = 2;
 		pnlCenter.add(chkbxLive, gbc_chkbxLive);
 		
@@ -185,6 +186,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		lblInterpretAnzeige = new JLabel();
 		StaticComponents.setFontBorderLabel(lblInterpretAnzeige);
 		GridBagConstraints gbc_lblInterpretAnzeige = new GridBagConstraints();
+		gbc_lblInterpretAnzeige.gridwidth = 2;
 		gbc_lblInterpretAnzeige.anchor = GridBagConstraints.WEST;
 		gbc_lblInterpretAnzeige.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblInterpretAnzeige.insets = new Insets(0, 0, 10, 10);
@@ -201,7 +203,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		GridBagConstraints gbc_btnInterpret = new GridBagConstraints();
 		gbc_btnInterpret.anchor = GridBagConstraints.WEST;
 		gbc_btnInterpret.insets = new Insets(0, 0, 10, 5);
-		gbc_btnInterpret.gridx = 3;
+		gbc_btnInterpret.gridx = 4;
 		gbc_btnInterpret.gridy = 3;
 		pnlCenter.add(btnInterpret, gbc_btnInterpret);
 		
@@ -223,16 +225,17 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		}
 		JScrollPane scp_lst = new JScrollPane();
 		scp_lst.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scp_lst.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scp_lst.setAlignmentX(Component.LEFT_ALIGNMENT);
-		
 		scp_lst.setViewportView(lstSpeicherort);
 		GridBagConstraints gbc_scp_lst = new GridBagConstraints();
 		gbc_scp_lst.anchor = GridBagConstraints.WEST;
 		gbc_scp_lst.gridwidth = 3;
-		gbc_scp_lst.insets = new Insets(0, 0, 10, 5);
+		gbc_scp_lst.insets = new Insets(0, 0, 10, 10);
 		gbc_scp_lst.fill = GridBagConstraints.HORIZONTAL;
 		gbc_scp_lst.gridx = 1;
 		gbc_scp_lst.gridy = 5;
+		gbc_scp_lst.gridwidth = 2;
 		pnlCenter.add(scp_lst, gbc_scp_lst);
 		
 		btnNeu = new JButton("Neu");

@@ -35,13 +35,10 @@ public class SpeicherortListRenderer implements ListCellRenderer<SpeicherFormatI
 		}
 		
 		if (isSelected) {
-			cell.setForeground(StaticComponents.FONT_COLOR_SELECTED);
-			cell.setBackground(StaticComponents.BACKGROUND_COLOR_SELECTED);
+			StaticComponents.setFontBorderCell_Selected(cell);			
 		} else {
-			cell.setForeground(StaticComponents.FONT_COLOR_STD);
-			cell.setBackground(StaticComponents.BACKGROUND_COLOR_STD);
-		}
-		
+			StaticComponents.setFontBorderCell(cell);
+		}		
 		return cell;
 	}
 }

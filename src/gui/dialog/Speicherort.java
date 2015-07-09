@@ -156,8 +156,8 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		gbc_txfDateiformat.gridy = 4;
 		pnlCenter.add(txfDateiformat, gbc_txfDateiformat);
 		
-		// XXX Fehler in Schrift
-		JLabel lblQualitaet = new JLabel("Qualit�t");
+		
+		JLabel lblQualitaet = new JLabel("Qualit\u00E4t");
 		StaticComponents.setFontLabel(lblQualitaet);
 		GridBagConstraints gbc_lblQualitaet = new GridBagConstraints();
 		gbc_lblQualitaet.anchor = GridBagConstraints.WEST;
