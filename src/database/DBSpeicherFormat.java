@@ -108,7 +108,6 @@ public class DBSpeicherFormat extends DataBaseManager {
 		try {
 			String sql = "SELECT B.ID, B.DATENTRAEGER, B.PFAD, B.FORMAT, B.QUALITAET "
 					   + "FROM TITEL_MUSIKDIGITAL A "
-					// XXX Leerzeichen gefehlt am Ende
 					   + "LEFT OUTER JOIN MUSIKDIGITAL B ON A.MUSIKDIGTAL_ID = B.ID "
 					   + "WHERE A.TITEL_ID = ?";
 			

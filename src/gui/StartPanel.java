@@ -41,7 +41,6 @@ public class StartPanel extends JPanel {
 				
 		
 		JLabel lblText = new JLabel();
-		// XXX Nächster der mich oben hin schreibt, wird gegrillt!
 		lblText.setText("<html><center><br><br>von<br><br>"
 				+ "Andreas John<br><br>"
 				+ "Bernd Schmidt<br><br>"

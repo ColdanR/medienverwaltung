@@ -47,7 +47,6 @@ import enums.ErrorsGUI;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
-import java.awt.Dimension;
 
 public class MusikEingabePanel extends JPanel implements ActionListener {
 	
@@ -354,7 +353,6 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			}
 			if (errors.size() == 0 && operationOk) {
 				if (logik.write()) {
-					// XXX Rückführung angepasst
 					if (musik == null) {
 						this.source.setPanel(new StartPanel());
 					} else {
@@ -369,7 +367,6 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 				fehlerDialog.setVisible(true);
 			}
 		} else if (source == btnAbbrechen) {
-			// XXX Rückführung angepasst
 			if (musik == null) {
 				this.source.setPanel(new StartPanel());
 			} else {
