@@ -353,7 +353,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 					if (musik == null) {
 						this.source.setPanel(new StartPanel());
 					} else {
-						this.source.setPanel(new PersonenListePanel());
+						this.source.setPanel(new MusikListPanel(this.source));
 					}
 				}
 			}
@@ -368,7 +368,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			if (musik == null) {
 				this.source.setPanel(new StartPanel());
 			} else {
-				this.source.setPanel(new PersonenListePanel());
+				this.source.setPanel(new MusikListPanel(this.source));
 			}
 		} else if (source == btnInterpret) {
 			PersonAuswahlDialog dialog = new PersonAuswahlDialog(this.source.getOwner());
