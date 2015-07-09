@@ -47,7 +47,6 @@ import enums.ErrorsGUI;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
-import java.awt.Dimension;
 
 public class MusikEingabePanel extends JPanel implements ActionListener {
 	
@@ -288,10 +287,12 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			for (int i = 0; i < modell.getSize(); i++) {
 				list.add(modell.getElementAt(i));
 			}
-			list.add(dialog.getObject());
-			lstSpeicherort.setListData(list.toArray(new SpeicherFormatInterface[]{}));
-			lstSpeicherort.revalidate();
-			lstSpeicherort.repaint();
+			if (dialog.getObject() != null) {
+				list.add(dialog.getObject());
+				lstSpeicherort.setListData(list.toArray(new SpeicherFormatInterface[]{}));
+				lstSpeicherort.revalidate();
+				lstSpeicherort.repaint();
+			}
 		} else if (source == btnLoeschen) {
 			List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
 			if (lstSpeicherort.getSelectedValue() == null) {
@@ -352,7 +353,6 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			}
 			if (errors.size() == 0 && operationOk) {
 				if (logik.write()) {
-					// XXX Rückführung angepasst
 					if (musik == null) {
 						this.source.setPanel(new StartPanel());
 					} else {
@@ -367,7 +367,6 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 				fehlerDialog.setVisible(true);
 			}
 		} else if (source == btnAbbrechen) {
-			// XXX Rückführung angepasst
 			if (musik == null) {
 				this.source.setPanel(new StartPanel());
 			} else {

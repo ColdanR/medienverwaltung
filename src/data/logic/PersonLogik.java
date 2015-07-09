@@ -58,7 +58,6 @@ public class PersonLogik implements DatenLogik<Person> {
 		try {
 			DBPerson dbLogic = getDBLogic();
 			if (!dbLogic.delete(object)) {
-				// XXX Nachricht angepasst
 				errors.add(DatabaseErrors.UnableToDeletePerson);
 				return false;
 			} else {
