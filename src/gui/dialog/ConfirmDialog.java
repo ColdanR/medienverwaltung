@@ -64,7 +64,10 @@ public class ConfirmDialog extends ReturningDialog<Boolean> {
 		fl_pnlButton.setAlignment(FlowLayout.RIGHT);
 				
 		btnOk = new JButton("OK");
+		btnOk.setFont(StaticComponents.FONT_BUTTON);
 		btnNo = new JButton("Abbrechen");
+		btnNo.setFont(StaticComponents.FONT_BUTTON);
+
 		
 		pnlButton.add(btnOk);
 		pnlButton.add(btnNo);

@@ -42,17 +42,17 @@ public class Startfenster extends JFrame implements ActionListener {
 	public Startfenster() 
 	{
 		super("Medien Verwaltung");
-		this.setFont(StaticComponents.FONT_STD);
-		this.setForeground(StaticComponents.FONT_COLOR_STD);
-		this.setBackground(StaticComponents.BACKGROUND_COLOR_STD);
+		getContentPane().setPreferredSize(new Dimension(600, 400));
+//		this.setFont(StaticComponents.FONT_STD);
+//		this.setForeground(StaticComponents.FONT_COLOR_STD);
+//		this.setBackground(StaticComponents.BACKGROUND_COLOR_STD);
 		
 		cp = getContentPane();
 		cp.setLayout(new BorderLayout());
+		
 		cp.add(createButtonPanel(), BorderLayout.WEST);
-		cp.setSize(new Dimension(600, 400));
-		cp.setMinimumSize(new Dimension(600, 400));
-		cp.setPreferredSize(new Dimension(600, 400));
 		setPanel(new StartPanel());
+		
 
 		btnMAnzeigen.addActionListener(this);
 		btnMNeu.addActionListener(this);
@@ -158,8 +158,7 @@ public class Startfenster extends JFrame implements ActionListener {
 		gbc_btnBeenden.gridx = 0;
 		gbc_btnBeenden.gridy = 0;
 		pnlGl3.add(btnBeenden, gbc_btnBeenden);
-		
-		
+			
 		return buttonPanel;
 	}
 	

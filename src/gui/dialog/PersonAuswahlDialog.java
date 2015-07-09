@@ -21,6 +21,7 @@ import data.logic.PersonLogik;
 import enums.ErrorMessage;
 import enums.ErrorsGUI;
 import gui.ReturningDialog;
+import gui.StaticComponents;
 import gui.renderer.PersonListRenderer;
 
 public class PersonAuswahlDialog extends ReturningDialog<Person> {
@@ -100,7 +101,7 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		} 
 		else 
 		{
-			main.add(new JLabel("Leider sind Fehler aufgetreten"));
+			main.add(new JLabel("Es sind Fehler aufgetreten"));
 			for (ErrorMessage error : logik.getErrors()) 
 			{
 				main.add(new JLabel(error.getErrorMessage()));
@@ -109,13 +110,19 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		
 		// Buttons
 		btnAddButton = new JButton("Neuanlage");
+		btnAddButton.setFont(StaticComponents.FONT_BUTTON);
+
 		buttons.add(btnAddButton);
 		if (listPersonen != null) 
 		{
 			btnSelectButton = new JButton("ausw\u00E4hlen");
+			btnSelectButton.setFont(StaticComponents.FONT_BUTTON);
+
 			buttons.add(btnSelectButton);
 		}
 		btnCancelButton = new JButton("Abbrechen");
+		btnCancelButton.setFont(StaticComponents.FONT_BUTTON);
+
 		buttons.add(btnCancelButton);
 		
 		// Eventhandler

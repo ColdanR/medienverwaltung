@@ -77,13 +77,13 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 	protected JPanel createDialogContent() 
 	{
 		// Creating MainPanel and Subpanels
-		JPanel display		= 	new JPanel(new BorderLayout());
+		JPanel panel		= 	new JPanel(new BorderLayout());
 		JPanel pnlNorth		=	new JPanel();
 		JPanel pnlCenter	=	new JPanel();
 		JPanel pnlSouth		=	new JPanel();
-		display.add(pnlNorth, BorderLayout.NORTH);
-		display.add(pnlCenter, BorderLayout.CENTER);
-		display.add(pnlSouth, BorderLayout.SOUTH);
+		panel.add(pnlNorth, BorderLayout.NORTH);
+		panel.add(pnlCenter, BorderLayout.CENTER);
+		panel.add(pnlSouth, BorderLayout.SOUTH);
 		
 		// Header
 		FlowLayout fl_pnlNorth = new FlowLayout();
@@ -183,15 +183,18 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		pnlSouth.setLayout(fl_pnlSouth);
 		
 		btnSpeichern = new JButton("Speichern");
+		btnSpeichern.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnSpeichern);
+
 		btnAbbrechen = new JButton("Abbrechen");
+		btnAbbrechen.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnAbbrechen);
 		
 		// Event Listener
 		btnSpeichern.addActionListener(this);
 		btnAbbrechen.addActionListener(this);
 		
-		return display;
+		return panel;
 	}
 
 	public void setMusicId(int musicId) {

@@ -34,7 +34,7 @@ import javax.swing.border.EmptyBorder;
 public class FehlerDialog extends JDialog implements ActionListener 
 {
 	private static final long serialVersionUID = 1L;
-	JButton okButton;
+	JButton btnOk;
 	
 	public FehlerDialog (Window parent, List<ErrorMessage> errors)
 	{
@@ -78,11 +78,11 @@ public class FehlerDialog extends JDialog implements ActionListener
 		FlowLayout flowLayout = (FlowLayout) pnlSouth.getLayout();
 		flowLayout.setAlignment(FlowLayout.CENTER);
 				
-		okButton = new JButton("Schliessen");
-		okButton.setFont(StaticComponents.FONT_BUTTON);
-		pnlSouth.add(okButton);
+		btnOk = new JButton("Schliessen");
+		btnOk.setFont(StaticComponents.FONT_BUTTON);
+		pnlSouth.add(btnOk);
 		
-		okButton.addActionListener(this);
+		btnOk.addActionListener(this);
 		
 		pack();
 		setLocationRelativeTo(parent);
@@ -90,7 +90,7 @@ public class FehlerDialog extends JDialog implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == okButton) {
+		if (e.getSource() == btnOk) {
 			this.dispose();
 		}
 	}

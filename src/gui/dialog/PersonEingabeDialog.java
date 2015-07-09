@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -79,11 +80,16 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
 	@Override
 	protected JPanel createDialogContent() 
 	{
-		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
+		JPanel panel = new JPanel(new BorderLayout());
+		JPanel pnlNorth = new JPanel();
+		JPanel pnlCenter = new JPanel();
+		JPanel pnlSouth = new JPanel();
 		
+		panel.add(pnlNorth, BorderLayout.NORTH);
+		panel.add(pnlCenter, BorderLayout.CENTER);
+		panel.add(pnlSouth, BorderLayout.SOUTH);
+
 		// Header Panel
-    	JPanel pnlNorth = new JPanel();
     	FlowLayout fl_pnlNorth = new FlowLayout();
     	fl_pnlNorth.setAlignment(FlowLayout.CENTER);
 		pnlNorth.setLayout(fl_pnlNorth);
@@ -92,16 +98,13 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
     	lblInterpret.setFont(StaticComponents.FONT_TITLE);
     	pnlNorth.add(lblInterpret);
     	
-    	panel.add(pnlNorth, BorderLayout.NORTH);
-		
+    	// Main Panel
     	GridBagLayout gbl = new GridBagLayout();
     	gbl.columnWidths = new int[] {30, 0, 200, 30};
     	gbl.rowHeights = new int[] {30, 0, 0, 0, 30};
     	gbl.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
     	gbl.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-    	
-    	// Main Panel
-    	JPanel pnlCenter = new JPanel();
+    	   	
     	pnlCenter.setLayout(gbl);
     	JLabel lblNachname = new JLabel("Nachname");
     	lblNachname.setFont(StaticComponents.FONT_LABEL);
@@ -169,24 +172,24 @@ public class PersonEingabeDialog extends ReturningDialog<Person> {
     		txfKuenstlername.setText(person.getKuenstlername());
     	}
     	
-    	panel.add(pnlCenter, BorderLayout.CENTER);
-
     	// Button Panel
-    	JPanel pnlSouth = new JPanel();
     	FlowLayout fl_pnlSouth = new FlowLayout();
     	fl_pnlSouth.setVgap(10);
     	fl_pnlSouth.setHgap(10);
     	fl_pnlSouth.setAlignment(FlowLayout.RIGHT);
     	pnlSouth.setLayout(fl_pnlSouth);		
 		btnSpeichern = new JButton("Speichern");
+		btnSpeichern.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnSpeichern);
 		btnAbbrechen = new JButton("Abbrechen");
+		btnAbbrechen.setFont(StaticComponents.FONT_BUTTON);
+
 		pnlSouth.add(btnAbbrechen);
 		
-		panel.add(pnlSouth, BorderLayout.SOUTH);
-		
+		// Event Listener
 		btnSpeichern.addActionListener(this);
 		btnAbbrechen.addActionListener(this);
+		
 		return panel;
 	}
 

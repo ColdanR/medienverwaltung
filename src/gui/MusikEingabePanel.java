@@ -241,7 +241,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		btnNeu = new JButton("Neu");
 		btnNeu.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnNeu = new GridBagConstraints();
-		gbc_btnNeu.anchor = GridBagConstraints.WEST;
+		gbc_btnNeu.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNeu.insets = new Insets(0, 0, 5, 10);
 		gbc_btnNeu.gridx = 1;
 		gbc_btnNeu.gridy = 6;
