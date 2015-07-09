@@ -86,9 +86,7 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		panel.add(pnlSouth, BorderLayout.SOUTH);
 		
 		// Header
-		FlowLayout fl_pnlNorth = new FlowLayout();
-		fl_pnlNorth.setAlignment(FlowLayout.CENTER);
-		pnlNorth.setLayout(fl_pnlNorth);
+		pnlNorth.setLayout(new FlowLayout(FlowLayout.CENTER, 10,10));
 		
 		JLabel lblHeader = new JLabel("Speicherort");
 		lblHeader.setFont(StaticComponents.FONT_TITLE);

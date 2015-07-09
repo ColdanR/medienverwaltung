@@ -1,6 +1,7 @@
 package gui.dialog;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 import data.Person;
 import data.logic.PersonLogik;
@@ -76,11 +80,26 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 	protected JPanel createDialogContent() {
 		
 		// Creating MainPanel and Subpanels
-		JPanel	display	=	new JPanel(new BorderLayout());
-		JPanel	buttons	=	new JPanel();
-		JPanel	main	=	new JPanel(new GridLayout(0, 1));
-		display.add(main, BorderLayout.CENTER);
-		display.add(buttons, BorderLayout.SOUTH);
+		JPanel	pnlDisplay	=	new JPanel(new BorderLayout());
+		JPanel 	pnlNorth	=	new JPanel();
+		JPanel	pnlSouth	=	new JPanel();
+		JPanel	pnlCenter	=	new JPanel(new BorderLayout());
+		
+		
+		pnlNorth.setBorder(StaticComponents.BORDER_PANEL);
+		pnlCenter.setBorder(new CompoundBorder(new MatteBorder(0, 1, 0, 1, StaticComponents.BORDER_COLOR), 
+											   new EmptyBorder(10, 10, 10, 10)));
+		pnlSouth.setBorder(StaticComponents.BORDER_PANEL);
+		pnlSouth.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+		
+		pnlDisplay.add(pnlNorth, BorderLayout.NORTH);
+		pnlDisplay.add(pnlCenter, BorderLayout.CENTER);
+		pnlDisplay.add(pnlSouth, BorderLayout.SOUTH);
+		
+		// Header
+		JLabel 	titel =	new JLabel("Interpret");
+		titel.setFont(StaticComponents.FONT_TITLE);
+		pnlNorth.add(titel);
 		
 		// Main
 		PersonLogik		logik		=	new PersonLogik();
@@ -97,33 +116,34 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 			JScrollPane scrollPane = new JScrollPane(listPersonen, 
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 		            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			main.add(scrollPane);
+			pnlCenter.add(scrollPane);
 		} 
 		else 
 		{
-			main.add(new JLabel("Es sind Fehler aufgetreten"));
+			pnlCenter.add(new JLabel("Es sind Fehler aufgetreten"));
 			for (ErrorMessage error : logik.getErrors()) 
 			{
-				main.add(new JLabel(error.getErrorMessage()));
+				pnlCenter.add(new JLabel(error.getErrorMessage()));
 			}
 		}
 		
 		// Buttons
+		
 		btnAddButton = new JButton("Neuanlage");
 		btnAddButton.setFont(StaticComponents.FONT_BUTTON);
 
-		buttons.add(btnAddButton);
+		pnlSouth.add(btnAddButton);
 		if (listPersonen != null) 
 		{
-			btnSelectButton = new JButton("ausw\u00E4hlen");
+			btnSelectButton = new JButton("Ausw\u00E4hlen");
 			btnSelectButton.setFont(StaticComponents.FONT_BUTTON);
 
-			buttons.add(btnSelectButton);
+			pnlSouth.add(btnSelectButton);
 		}
 		btnCancelButton = new JButton("Abbrechen");
 		btnCancelButton.setFont(StaticComponents.FONT_BUTTON);
 
-		buttons.add(btnCancelButton);
+		pnlSouth.add(btnCancelButton);
 		
 		// Eventhandler
 		btnAddButton.addActionListener(this);
@@ -133,6 +153,6 @@ public class PersonAuswahlDialog extends ReturningDialog<Person> {
 		}
 		btnCancelButton.addActionListener(this);
 		
-		return display;
+		return pnlDisplay;
 	}
 }

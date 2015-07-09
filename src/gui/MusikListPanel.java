@@ -76,14 +76,12 @@ public class MusikListPanel extends JPanel implements ActionListener {
 		
 		
 		//Footer
-		FlowLayout fl = new FlowLayout();
-		fl.setAlignment(FlowLayout.RIGHT);
-		fl.setHgap(10);
-		fl.setVgap(10);
-		pnlSouth.setLayout(fl);
+		pnlSouth.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 10));
+		
 		btnBearbeiten = new JButton("Bearbeiten");
 		btnBearbeiten.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnBearbeiten);
+		
 		btnLoeschen = new JButton("L\u00F6schen");
 		btnLoeschen.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnLoeschen);
@@ -124,6 +122,7 @@ public class MusikListPanel extends JPanel implements ActionListener {
 			Musik selected = lstMusikList.getSelectedValue();
 			MusikEingabePanel panel = new MusikEingabePanel(parent, selected);
 			parent.setPanel(panel);
+			parent.setPreferredSize(getMaximumSize());
 			generateList();
 		}
 	}

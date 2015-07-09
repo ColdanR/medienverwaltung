@@ -42,24 +42,21 @@ public class Startfenster extends JFrame implements ActionListener {
 	public Startfenster() 
 	{
 		super("Medien Verwaltung");
-		getContentPane().setPreferredSize(new Dimension(600, 400));
-//		this.setFont(StaticComponents.FONT_STD);
-//		this.setForeground(StaticComponents.FONT_COLOR_STD);
-//		this.setBackground(StaticComponents.BACKGROUND_COLOR_STD);
-		
 		cp = getContentPane();
+		cp.setPreferredSize(new Dimension(600, 400));
+		this.setFont(StaticComponents.FONT_STD);
+		this.setForeground(StaticComponents.FONT_COLOR_STD);
+		this.setBackground(StaticComponents.BACKGROUND_COLOR_STD);
 		cp.setLayout(new BorderLayout());
 		
 		cp.add(createButtonPanel(), BorderLayout.WEST);
 		setPanel(new StartPanel());
 		
-
 		btnMAnzeigen.addActionListener(this);
 		btnMNeu.addActionListener(this);
 		btnBeenden.addActionListener(this);
 		btnPNeu.addActionListener(this);
 		btnPAnzeigen.addActionListener(this);
-		
 	}
 	
 	private JPanel createButtonPanel() 

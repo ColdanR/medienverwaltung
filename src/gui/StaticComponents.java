@@ -51,8 +51,7 @@ public class StaticComponents {
 
 	public	static	void 	setFontLabel(JCheckBox x) {
 		x.setFont(FONT_LABEL);
-		x.setForeground(FONT_COLOR_LABEL);
-				
+		x.setForeground(FONT_COLOR_LABEL);				
 	}
 	
 	public	static	void	setFontBorderTextField (JTextField x)	{
