@@ -39,40 +39,40 @@ public class StaticComponents {
 	public	static	Dimension	MAIN_PANEL					=	new Dimension(600, 400);
 		
 	
-	public	static	void 		setFontLabel(JLabel x)	{
+	public	static	void 	setFontLabel(JLabel x)	{
 		x.setFont(StaticComponents.FONT_LABEL);
 		x.setForeground(StaticComponents.FONT_COLOR_LABEL);
 	}
 	
-	public	static	void 		setFontLabelRed(JLabel x)	{
+	public	static	void 	setFontLabelRed(JLabel x) {
 		x.setFont(StaticComponents.FONT_LABEL);
 		x.setForeground(Color.RED);
 	}
 
-	public	static	void 		setFontLabel(JCheckBox x) {
+	public	static	void 	setFontLabel(JCheckBox x) {
 		x.setFont(FONT_LABEL);
 		x.setForeground(FONT_COLOR_LABEL);
 				
 	}
 	
-	public	static	void		setFontBorderTextField (JTextField x)	{
+	public	static	void	setFontBorderTextField (JTextField x)	{
 		x.setFont(FONT_TEXTFIELD);
 		x.setBorder(new CompoundBorder(BORDER_PANEL, BORDER_EMPTY_BORDER));
 	}
 	
-	public	static	void		setFontBorderLabel (JLabel x)	{
+	public	static	void	setFontBorderLabel (JLabel x)	{
 		x.setFont(FONT_TEXTFIELD);
 		x.setForeground(FONT_COLOR_LABEL);
 		x.setBorder(new CompoundBorder(BORDER_TEXTFIELDS_STD, BORDER_EMPTY_BORDER));
 	}
-	public	static	void		setFontBorderCell (JLabel x)	{
+	public	static	void	setFontBorderCell (JLabel x)	{
 		x.setFont(FONT_TEXTFIELD);
 		x.setForeground(FONT_COLOR_STD);
 		x.setOpaque(true);
 		x.setBackground(BACKGROUND_COLOR_STD);
 		x.setBorder(new CompoundBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),BORDER_EMPTY_BORDER));
 	}
-	public	static	void		setFontBorderCell_Selected (JLabel x)	{
+	public	static	void	setFontBorderCell_Selected (JLabel x)	{
 		x.setFont(FONT_TEXTFIELD);
 		x.setForeground(FONT_COLOR_SELECTED);
 		x.setOpaque(true);
