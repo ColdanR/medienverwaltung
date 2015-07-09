@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 public class StaticComponents {
 	public	static	Font 		FONT_STD					=	new Font("Arial", Font.PLAIN, 12);
@@ -24,7 +25,7 @@ public class StaticComponents {
 	
 	public	static	Color		FONT_COLOR_STD				=	Color.BLACK;
 	public	static	Color		FONT_COLOR_LABEL			=	Color.DARK_GRAY;
-	public	static	Color		FONT_COLOR_SELECTED			=	Color.LIGHT_GRAY;
+	public	static	Color		FONT_COLOR_SELECTED			=	Color.WHITE;
 	
 	public	static	Color		BACKGROUND_COLOR_STD		=	Color.WHITE;
 	public	static	Color		BACKGROUND_COLOR_SELECTED	=	Color.BLUE;
@@ -49,20 +50,35 @@ public class StaticComponents {
 	}
 
 	public	static	void 		setFontLabel(JCheckBox x) {
-		x.setFont(StaticComponents.FONT_LABEL);
-		x.setForeground(StaticComponents.FONT_COLOR_LABEL);
+		x.setFont(FONT_LABEL);
+		x.setForeground(FONT_COLOR_LABEL);
 				
 	}
 	
 	public	static	void		setFontBorderTextField (JTextField x)	{
-		x.setFont(StaticComponents.FONT_TEXTFIELD);
+		x.setFont(FONT_TEXTFIELD);
 		x.setBorder(new CompoundBorder(BORDER_PANEL, BORDER_EMPTY_BORDER));
 	}
 	
 	public	static	void		setFontBorderLabel (JLabel x)	{
-		x.setFont(StaticComponents.FONT_TEXTFIELD);
-		x.setForeground(StaticComponents.FONT_COLOR_LABEL);
+		x.setFont(FONT_TEXTFIELD);
+		x.setForeground(FONT_COLOR_LABEL);
 		x.setBorder(new CompoundBorder(BORDER_TEXTFIELDS_STD, BORDER_EMPTY_BORDER));
 	}
+	public	static	void		setFontBorderCell (JLabel x)	{
+		x.setFont(FONT_TEXTFIELD);
+		x.setForeground(FONT_COLOR_STD);
+		x.setOpaque(true);
+		x.setBackground(BACKGROUND_COLOR_STD);
+		x.setBorder(new CompoundBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),BORDER_EMPTY_BORDER));
+	}
+	public	static	void		setFontBorderCell_Selected (JLabel x)	{
+		x.setFont(FONT_TEXTFIELD);
+		x.setForeground(FONT_COLOR_SELECTED);
+		x.setOpaque(true);
+		x.setBackground(BACKGROUND_COLOR_SELECTED);
+		x.setBorder(new CompoundBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),BORDER_EMPTY_BORDER));
+	}
+	
 
 }

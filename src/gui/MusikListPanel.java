@@ -2,7 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 import data.medien.Musik;
 import data.medien.logic.MusikLogik;
@@ -47,17 +49,19 @@ public class MusikListPanel extends JPanel implements ActionListener {
 	}
 	
 	public void creatMusikListPanel(){
-		this.setMinimumSize(new Dimension (300, 300));
+		this.setMinimumSize(StaticComponents.MAIN_PANEL);
 		this.setLayout(new BorderLayout());
 		
 		JPanel pnlNorth		= new JPanel();
-		pnlCenter			= new JPanel();
+			   pnlCenter	= new JPanel();
 		JPanel pnlSouth		= new JPanel();
-
-		pnlNorth.setBorder(StaticComponents.BORDER_PANEL);
-		pnlSouth.setBorder(StaticComponents.BORDER_PANEL);
-		pnlCenter.setBorder(StaticComponents.BORDER_PANEL);
 		
+		pnlCenter.setLayout(new BorderLayout());
+		
+		pnlNorth.setBorder(StaticComponents.BORDER_PANEL);
+		pnlCenter.setBorder(new CompoundBorder(StaticComponents.BORDER_PANEL, new EmptyBorder(10, 10, 10, 10)));
+		pnlSouth.setBorder(StaticComponents.BORDER_PANEL);
+			
 		this.add(pnlNorth, BorderLayout.NORTH);
 		this.add(pnlCenter, BorderLayout.CENTER);
 		this.add(pnlSouth, BorderLayout.SOUTH);
@@ -72,6 +76,11 @@ public class MusikListPanel extends JPanel implements ActionListener {
 		
 		
 		//Footer
+		FlowLayout fl = new FlowLayout();
+		fl.setAlignment(FlowLayout.RIGHT);
+		fl.setHgap(10);
+		fl.setVgap(10);
+		pnlSouth.setLayout(fl);
 		btnBearbeiten = new JButton("Bearbeiten");
 		btnBearbeiten.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnBearbeiten);
@@ -121,17 +130,21 @@ public class MusikListPanel extends JPanel implements ActionListener {
 	private void generateList() {
 		MusikLogik		logik		=	new MusikLogik();
 		List<Musik>		listData	=	logik.getAll();
-		
+		if (scrollPane != null) {
+			pnlCenter.remove(scrollPane);
+		}
 		if (logik.getErrors().isEmpty()) 
 		{
 			lstMusikList = new JList<Musik>(listData.toArray(new Musik[]{}));
 			lstMusikList.setCellRenderer(new MusikListRenderer());
 			lstMusikList.setVisibleRowCount(5);
 			lstMusikList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			
 			scrollPane = new JScrollPane(lstMusikList,
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 		            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			pnlCenter.add(scrollPane);
+			
+			pnlCenter.add(scrollPane, BorderLayout.CENTER);
 		} 
 		else 
 		{

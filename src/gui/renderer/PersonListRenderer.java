@@ -1,13 +1,10 @@
 package gui.renderer;
 
-import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-import javax.swing.border.MatteBorder;
-
 import data.Person;
 import gui.StaticComponents;
 
@@ -34,16 +31,10 @@ public class PersonListRenderer implements ListCellRenderer<Person> {
 		}
 		cell.setText(text.toString());
 		if (isSelected) {
-			cell.setForeground(StaticComponents.FONT_COLOR_SELECTED);
-			cell.setOpaque(true);
-			cell.setBackground(StaticComponents.BACKGROUND_COLOR_SELECTED);
-			cell.setBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+			StaticComponents.setFontBorderCell_Selected(cell);			
 		} else {
-			cell.setForeground(StaticComponents.FONT_COLOR_STD);
-			cell.setBackground(StaticComponents.BACKGROUND_COLOR_STD);
-			cell.setBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
+			StaticComponents.setFontBorderCell(cell);
 		}
-		
 		return cell;
 	}
 	

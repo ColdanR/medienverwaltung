@@ -34,7 +34,7 @@ public class Startfenster extends JFrame implements ActionListener {
 	private JButton		btnMAnzeigen;
 	private JButton		btnPNeu;
 	private JButton		btnPAnzeigen;
-	private JButton btnBeenden;
+	private JButton 	btnBeenden;
 	private JPanel		anzeigeFenster;
 	private	Container	cp;			
 	
@@ -114,7 +114,6 @@ public class Startfenster extends JFrame implements ActionListener {
 		btnMAnzeigen = new JButton("Anzeigen");
 		btnMAnzeigen.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnMAnzeigen = new GridBagConstraints();
-		gbc_btnMAnzeigen.anchor = GridBagConstraints.NORTH;
 		gbc_btnMAnzeigen.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnMAnzeigen.insets = new Insets(0, 10, 0, 10);
 		gbc_btnMAnzeigen.gridx = 0;
@@ -141,7 +140,6 @@ public class Startfenster extends JFrame implements ActionListener {
 		btnPAnzeigen = new JButton("Anzeigen");
 		btnPAnzeigen.setFont(StaticComponents.FONT_BUTTON);
 		GridBagConstraints gbc_btnKAnzeigen = new GridBagConstraints();
-		gbc_btnKAnzeigen.anchor = GridBagConstraints.NORTH;
 		gbc_btnKAnzeigen.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnKAnzeigen.insets = new Insets(0, 10, 0, 10);
 		gbc_btnKAnzeigen.gridx = 0;

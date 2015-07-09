@@ -37,6 +37,7 @@ import javax.swing.border.MatteBorder;
 import java.awt.Color;
 
 import javax.swing.border.EmptyBorder;
+import java.awt.FlowLayout;
 
 public class PersonenListePanel extends JPanel implements ActionListener {
 	/**
@@ -64,17 +65,17 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 		this.setLayout(new BorderLayout());
 		
 		JPanel pnlNorth		= new JPanel();
-		pnlCenter			= new JPanel();
-		pnlCenter.setBorder(new CompoundBorder(StaticComponents.BORDER_PANEL, new EmptyBorder(10, 10, 10, 10)));
+			   pnlCenter	= new JPanel();
 		JPanel pnlSouth		= new JPanel();
-
+		
+		pnlCenter.setLayout(new BorderLayout());
+		
 		pnlNorth.setBorder(StaticComponents.BORDER_PANEL);
+		pnlCenter.setBorder(new CompoundBorder(StaticComponents.BORDER_PANEL, new EmptyBorder(10, 10, 10, 10)));
 		pnlSouth.setBorder(StaticComponents.BORDER_PANEL);
-		
-		
+				
 		this.add(pnlNorth, BorderLayout.NORTH);
 		this.add(pnlCenter, BorderLayout.CENTER);
-		pnlCenter.setLayout(new BorderLayout(50, 50));
 		this.add(pnlSouth, BorderLayout.SOUTH);
 		
 		//Header
@@ -87,6 +88,11 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 		
 		
 		//Footer
+		FlowLayout fl = new FlowLayout();
+		fl.setAlignment(FlowLayout.RIGHT);
+		fl.setHgap(10);
+		fl.setVgap(10);
+		pnlSouth.setLayout(fl);
 		btnBearbeiten = new JButton("Bearbeiten");
 		btnBearbeiten.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnBearbeiten);
@@ -147,15 +153,12 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 			lstPersonList.setCellRenderer(new PersonListRenderer());
 			lstPersonList.setVisibleRowCount(5);
 			lstPersonList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			
 			scrollPane = new JScrollPane(lstPersonList,
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 		            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 				
 			pnlCenter.add(scrollPane, BorderLayout.CENTER);
-			
-			
-			
-			
 		} 
 		else 
 		{
