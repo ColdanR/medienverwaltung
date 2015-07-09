@@ -330,14 +330,6 @@ public class DBSpeicherFormat extends DataBaseManager {
 		} catch (ClassCastException e) {
 			e.printStackTrace();
 			ret = false;
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 		return ret;
 	}

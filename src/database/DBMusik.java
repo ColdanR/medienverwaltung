@@ -107,10 +107,10 @@ public class DBMusik extends DataBaseManager {
 			}
 			if (ret) {
 				conn.commit();
-				conn.setAutoCommit(true);
 			} else {
 				conn.rollback();
 			}
+			conn.setAutoCommit(true);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			ret = false;

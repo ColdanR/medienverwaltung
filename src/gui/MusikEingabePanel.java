@@ -285,10 +285,12 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			for (int i = 0; i < modell.getSize(); i++) {
 				list.add(modell.getElementAt(i));
 			}
-			list.add(dialog.getObject());
-			lstSpeicherort.setListData(list.toArray(new SpeicherFormatInterface[]{}));
-			lstSpeicherort.revalidate();
-			lstSpeicherort.repaint();
+			if (dialog.getObject() != null) {
+				list.add(dialog.getObject());
+				lstSpeicherort.setListData(list.toArray(new SpeicherFormatInterface[]{}));
+				lstSpeicherort.revalidate();
+				lstSpeicherort.repaint();
+			}
 		} else if (source == btnLoeschen) {
 			List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
 			if (lstSpeicherort.getSelectedValue() == null) {
