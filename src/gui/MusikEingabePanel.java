@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -83,7 +82,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 	
 	private void createMusikEingabePanel()	{
 		
-		this.setMinimumSize(new Dimension (300, 300));
+		this.setMinimumSize(StaticComponents.MAIN_PANEL);
 		this.setLayout(new BorderLayout());
 		
 		JPanel pnlNorth		= new JPanel();

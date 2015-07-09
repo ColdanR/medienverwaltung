@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JCheckBox;
@@ -9,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 
 public class StaticComponents {
 	public	static	Font 		FONT_STD					=	new Font("Arial", Font.PLAIN, 12);
@@ -33,6 +35,8 @@ public class StaticComponents {
 	public	static	LineBorder	BORDER_PANEL				=	new LineBorder(BORDER_COLOR);
 	public	static	LineBorder	BORDER_TEXTFIELDS_STD		=	new LineBorder(BORDER_COLOR);
 	public	static	EmptyBorder	BORDER_EMPTY_BORDER 		= 	new EmptyBorder(2, 4, 2, 4);
+	
+	public	static	Dimension	MAIN_PANEL					=	new Dimension(600, 400);
 		
 	
 	public	static	void 		setFontLabel(JLabel x)	{
@@ -46,20 +50,35 @@ public class StaticComponents {
 	}
 
 	public	static	void 		setFontLabel(JCheckBox x) {
-		x.setFont(StaticComponents.FONT_LABEL);
-		x.setForeground(StaticComponents.FONT_COLOR_LABEL);
+		x.setFont(FONT_LABEL);
+		x.setForeground(FONT_COLOR_LABEL);
 				
 	}
 	
 	public	static	void		setFontBorderTextField (JTextField x)	{
-		x.setFont(StaticComponents.FONT_TEXTFIELD);
+		x.setFont(FONT_TEXTFIELD);
 		x.setBorder(new CompoundBorder(BORDER_PANEL, BORDER_EMPTY_BORDER));
 	}
 	
 	public	static	void		setFontBorderLabel (JLabel x)	{
-		x.setFont(StaticComponents.FONT_TEXTFIELD);
-		x.setForeground(StaticComponents.FONT_COLOR_LABEL);
+		x.setFont(FONT_TEXTFIELD);
+		x.setForeground(FONT_COLOR_LABEL);
 		x.setBorder(new CompoundBorder(BORDER_TEXTFIELDS_STD, BORDER_EMPTY_BORDER));
 	}
+	public	static	void		setFontBorderCell (JLabel x)	{
+		x.setFont(FONT_TEXTFIELD);
+		x.setForeground(FONT_COLOR_STD);
+		x.setOpaque(true);
+		x.setBackground(BACKGROUND_COLOR_STD);
+		x.setBorder(new CompoundBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),BORDER_EMPTY_BORDER));
+	}
+	public	static	void		setFontBorderCell_Selected (JLabel x)	{
+		x.setFont(FONT_TEXTFIELD);
+		x.setForeground(FONT_COLOR_SELECTED);
+		x.setOpaque(true);
+		x.setBackground(BACKGROUND_COLOR_SELECTED);
+		x.setBorder(new CompoundBorder(new MatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),BORDER_EMPTY_BORDER));
+	}
+	
 
 }

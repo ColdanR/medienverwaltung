@@ -17,7 +17,6 @@ import javax.swing.ScrollPaneConstants;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,11 @@ import data.Person;
 import data.logic.PersonLogik;
 import enums.ErrorMessage;
 import enums.ErrorsGUI;
+
+import javax.swing.border.CompoundBorder;
+
+import javax.swing.border.EmptyBorder;
+import java.awt.FlowLayout;
 
 public class PersonenListePanel extends JPanel implements ActionListener {
 	/**
@@ -50,17 +54,19 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 	}
 	
 	public void creatPersonListPanel(){
-		this.setMinimumSize(new Dimension (300, 300));
+		this.setMinimumSize(StaticComponents.MAIN_PANEL);
 		this.setLayout(new BorderLayout());
 		
 		JPanel pnlNorth		= new JPanel();
-		pnlCenter			= new JPanel();
+			   pnlCenter	= new JPanel();
 		JPanel pnlSouth		= new JPanel();
-
-		pnlNorth.setBorder(StaticComponents.BORDER_PANEL);
-		pnlSouth.setBorder(StaticComponents.BORDER_PANEL);
-		pnlCenter.setBorder(StaticComponents.BORDER_PANEL);
 		
+		pnlCenter.setLayout(new BorderLayout());
+		
+		pnlNorth.setBorder(StaticComponents.BORDER_PANEL);
+		pnlCenter.setBorder(new CompoundBorder(StaticComponents.BORDER_PANEL, new EmptyBorder(10, 10, 10, 10)));
+		pnlSouth.setBorder(StaticComponents.BORDER_PANEL);
+				
 		this.add(pnlNorth, BorderLayout.NORTH);
 		this.add(pnlCenter, BorderLayout.CENTER);
 		this.add(pnlSouth, BorderLayout.SOUTH);
@@ -75,6 +81,11 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 		
 		
 		//Footer
+		FlowLayout fl = new FlowLayout();
+		fl.setAlignment(FlowLayout.RIGHT);
+		fl.setHgap(10);
+		fl.setVgap(10);
+		pnlSouth.setLayout(fl);
 		btnBearbeiten = new JButton("Bearbeiten");
 		btnBearbeiten.setFont(StaticComponents.FONT_BUTTON);
 		pnlSouth.add(btnBearbeiten);
@@ -116,9 +127,9 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 				errorDialog.setVisible(true);
 				return;
 			}
-			Person selecte = lstPersonList.getSelectedValue();
+			Person selected = lstPersonList.getSelectedValue();
 			PersonEingabeDialog dialog = new PersonEingabeDialog(null);
-			dialog.setPerson(selecte);
+			dialog.setPerson(selected);
 			dialog.display();
 			generateList();
 		}
@@ -126,7 +137,6 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 	private void generateList() {
 		PersonLogik		logik		=	new PersonLogik();
 		List<Person>	listData	=	logik.getAll();
-		// XXX scrollPane ist eventuell noch nicht vorhanden
 		if (scrollPane != null) {
 			pnlCenter.remove(scrollPane);
 		}
@@ -136,10 +146,12 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 			lstPersonList.setCellRenderer(new PersonListRenderer());
 			lstPersonList.setVisibleRowCount(5);
 			lstPersonList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			
 			scrollPane = new JScrollPane(lstPersonList,
 					ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 		            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			pnlCenter.add(scrollPane);
+				
+			pnlCenter.add(scrollPane, BorderLayout.CENTER);
 		} 
 		else 
 		{
