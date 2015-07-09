@@ -16,6 +16,9 @@ public class SpeicherortListRenderer implements ListCellRenderer<SpeicherFormatI
 	public Component getListCellRendererComponent(JList<? extends SpeicherFormatInterface> list, SpeicherFormatInterface value, int index,
 			boolean isSelected, boolean cellHasFocus) {
 		JLabel cell = new JLabel();
+		if (value == null) {
+			return cell;
+		}
 		switch (value.getType()) {
 		case DigitalMusik:
 			if (value instanceof DigitalMusik) {

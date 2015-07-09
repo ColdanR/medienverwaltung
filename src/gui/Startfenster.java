@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -48,8 +49,11 @@ public class Startfenster extends JFrame implements ActionListener {
 		cp = getContentPane();		
 		cp.setLayout(new BorderLayout());
 		cp.add(createButtonPanel(), BorderLayout.WEST);
-		anzeigeFenster = new StartPanel();
-		cp.add(anzeigeFenster, BorderLayout.CENTER);
+		// XXX CP mit fester Größe erledigt das Zusammenklappen
+		cp.setSize(new Dimension(600, 400));
+		cp.setMinimumSize(new Dimension(600, 400));
+		cp.setPreferredSize(new Dimension(600, 400));
+		setPanel(new StartPanel());
 
 		btnMAnzeigen.addActionListener(this);
 		btnMNeu.addActionListener(this);
@@ -217,11 +221,12 @@ public class Startfenster extends JFrame implements ActionListener {
 	}
 
 	public void setPanel(JPanel mainPanel) {
-		cp.remove(anzeigeFenster);
+		if (anzeigeFenster != null) {
+			cp.remove(anzeigeFenster);
+		}
 		anzeigeFenster = mainPanel;
 		cp.add(anzeigeFenster, BorderLayout.CENTER);
-		anzeigeFenster.revalidate();
-		anzeigeFenster.repaint();
-		this.pack();
+		this.revalidate();
+		this.repaint();
 	}
 }

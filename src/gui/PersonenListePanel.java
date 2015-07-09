@@ -126,8 +126,10 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 	private void generateList() {
 		PersonLogik		logik		=	new PersonLogik();
 		List<Person>	listData	=	logik.getAll();
-		
-		pnlCenter.remove(scrollPane);
+		// XXX scrollPane ist eventuell noch nicht vorhanden
+		if (scrollPane != null) {
+			pnlCenter.remove(scrollPane);
+		}
 		if (logik.getErrors().isEmpty()) 
 		{
 			lstPersonList = new JList<Person>(listData.toArray(new Person[]{}));

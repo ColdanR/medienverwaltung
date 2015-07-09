@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import data.SpeicherFormatInterface;
@@ -36,9 +37,10 @@ public class DBSpeicherFormat extends DataBaseManager {
 				ret.setFormat(result.getString(4));
 				ret.setQualitaet(result.getString(4));
 			} else {
-				return null;
+				ret = null;
 			}
 		} catch (SQLException e) {
+			ret = null;
 			e.printStackTrace();
 		} finally {
 			if (result != null) {
@@ -67,6 +69,9 @@ public class DBSpeicherFormat extends DataBaseManager {
 	}
 	
 	public boolean write (SpeicherFormatInterface speicherformat, int titelId) throws UnsupportedOperationException {
+		if (speicherformat == null || titelId == 0) {
+			return false;
+		}
 		boolean ret = false;
 		Connection conn = null;
 		try {
@@ -94,20 +99,23 @@ public class DBSpeicherFormat extends DataBaseManager {
 
 	public List<SpeicherFormatInterface> getSpeicherFormateForTitel (int titelId) {
 		List<SpeicherFormatInterface> formatlist = new ArrayList<SpeicherFormatInterface>();
-				
+		if (titelId == 0) {
+			return null;
+		}
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet result = null;
 		try {
 			String sql = "SELECT B.ID, B.DATENTRAEGER, B.PFAD, B.FORMAT, B.QUALITAET "
 					   + "FROM TITEL_MUSIKDIGITAL A "
-					   + "LEFT OUTER JOIN MUSIKDIGITAL B ON A.MUSIKDIGTAL_ID = B.ID"
+					// XXX Leerzeichen gefehlt am Ende
+					   + "LEFT OUTER JOIN MUSIKDIGITAL B ON A.MUSIKDIGTAL_ID = B.ID "
 					   + "WHERE A.TITEL_ID = ?";
 			
 			conn = getConnection();
-			stmt = conn.createStatement();
-			
-			result = stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, titelId);
+			result = stmt.executeQuery();
 			while (result.next()) {
 				DigitalMusik dimu = new DigitalMusik();
 				dimu.setId(result.getInt(1));
@@ -146,13 +154,15 @@ public class DBSpeicherFormat extends DataBaseManager {
 		return formatlist;
 	}
 	
-	public boolean writeList(List<SpeicherFormatInterface> list, int titelId) throws UnsupportedOperationException {
-		boolean ret = false;
-		Connection conn = null;
+	public boolean writeList(Connection conn, List<SpeicherFormatInterface> list, int titelId) throws UnsupportedOperationException {
+		if (list == null) {
+			return false;
+		}
+		boolean ret = true;
 		try {
-			conn = getConnection();
-			conn.setAutoCommit(false);
-			for (SpeicherFormatInterface speicherformat : list) {
+			Iterator<SpeicherFormatInterface> iterator = list.iterator();
+			while (iterator.hasNext() && ret) {
+				SpeicherFormatInterface speicherformat = iterator.next();
 				switch (speicherformat.getType()) {
 				case DigitalMusik:
 					ret = ret && writeDigitalMusik(conn, (DigitalMusik) speicherformat, titelId);
@@ -161,21 +171,9 @@ public class DBSpeicherFormat extends DataBaseManager {
 					throw new UnsupportedOperationException("Methode noch nicht implementiert!");
 				}
 			}
-			if (ret) {
-				conn.commit();
-			}
-			conn.setAutoCommit(true);
-		} catch (ClassCastException | SQLException e) {
+		} catch (ClassCastException e) {
 			e.printStackTrace();
 			ret = false;
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 		return ret;
 	}
@@ -186,12 +184,13 @@ public class DBSpeicherFormat extends DataBaseManager {
 			return false;
 		}
 		PreparedStatement stmt = null;
+		PreparedStatement stmt2 = null;
 		ResultSet result = null;
+		int id = 0;
 		try {
 			if (speicherformat.getId() == 0) {
 				String sql = "INSERT INTO MUSIKDIGITAL (`DATENTRAEGER`, `PFAD`, `FORMAT`, `QUALITAET`) "
 						   + "VALUES (?, ?, ?, ?)";
-				conn = getConnection();
 				stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				stmt.setString(1, speicherformat.getDatentraeger());
 				stmt.setString(2, speicherformat.getPfad());
@@ -200,30 +199,31 @@ public class DBSpeicherFormat extends DataBaseManager {
 				stmt.execute();
 				result = stmt.getGeneratedKeys();
 				if (result.next()) {
-					speicherformat.setId(result.getInt(1));
-					ret = true;
+					id = result.getInt(1);
 				}
-				stmt.close();
 				String sql2 = "INSERT INTO `TITEL_MUSIKDIGITAL` (`TITEL_ID`, `MUSIKDIGTAL_ID`) VALUES (?, ?);";
-				stmt = conn.prepareStatement(sql2);
-				stmt.setInt(1, titelId);
-				stmt.setInt(2, speicherformat.getId());
-				stmt.execute();
+				stmt2 = conn.prepareStatement(sql2);
+				stmt2.setInt(1, titelId);
+				stmt2.setInt(2, id);
+				stmt2.execute();
+				ret = true;
+				speicherformat.setId(id);
 			} else {
-				String sql = "UPDATE PERSON "
+				String sql = "UPDATE MUSIKDIGITAL "
 						   + "SET `DATENTRAEGER` = ?, `PFAD` = ?, `FORMAT` = ?, `QUALITAET` = ? "
 						   + "WHERE `ID` = ?";
-				conn = getConnection();
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, speicherformat.getDatentraeger());
 				stmt.setString(2, speicherformat.getPfad());
 				stmt.setString(3, speicherformat.getFormat());
 				stmt.setString(4, speicherformat.getQualitaet());
+				stmt.setInt(5, speicherformat.getId());
 				stmt.execute();
 				ret = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			ret = false;
 		} finally {
 			if (result != null) {
 				try {
@@ -239,9 +239,9 @@ public class DBSpeicherFormat extends DataBaseManager {
 					e.printStackTrace();
 				}
 			}
-			if (conn != null) {
+			if (stmt2 != null) {
 				try {
-					conn.close();
+					stmt2.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -288,7 +288,7 @@ public class DBSpeicherFormat extends DataBaseManager {
 		}
 		PreparedStatement stmt = null;
 		try {
-			String sql = "DELETE FROM TITEL_MUSIKDIGITAL WHERE MUSIKDIGITAL_ID = ?";
+			String sql = "DELETE FROM TITEL_MUSIKDIGITAL WHERE MUSIKDIGTAL_ID = ?";
 			String sql2 = "DELETE FROM MUSIKDIGITAL WHERE ID = ?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1,object.getId());
@@ -308,23 +308,16 @@ public class DBSpeicherFormat extends DataBaseManager {
 					e.printStackTrace();
 				}
 			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 		return ret;
 	}
 	
-	public boolean deleteList(List<SpeicherFormatInterface> list) {
-		boolean ret = false;
-		Connection conn = null;
+	public boolean deleteList(Connection conn, List<SpeicherFormatInterface> list) {
+		if (list == null) {
+			return false;
+		}
+		boolean ret = true;
 		try {
-			conn = getConnection();
-			conn.setAutoCommit(false);
 			for (SpeicherFormatInterface speicherformat : list) {
 				switch (speicherformat.getType()) {
 				case DigitalMusik:
@@ -334,11 +327,7 @@ public class DBSpeicherFormat extends DataBaseManager {
 					throw new UnsupportedOperationException("Methode noch nicht implementiert!");
 				}
 			}
-			if (ret) {
-				conn.commit();
-			}
-			conn.setAutoCommit(true);
-		} catch (ClassCastException | SQLException e) {
+		} catch (ClassCastException e) {
 			e.printStackTrace();
 			ret = false;
 		} finally {

@@ -40,7 +40,7 @@ public class DBMusik extends DataBaseManager {
 					ret = true;
 				}
 			} else {
-				String sql = "UPDATE `TITEL` SET 'BEZEICHNUNG` = ?, `PERSON_ID` = ?, `ERSCHDATUM` = ?, `LIVE` = ? WHERE `ID` = ?";
+				String sql = "UPDATE `TITEL` SET `BEZEICHNUNG` = ?, `PERSON_ID` = ?, `ERSCHDATUM` = ?, `LIVE` = ? WHERE `ID` = ?";
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, musik.getTitel());
 				stmt.setInt(2, musik.getInterpret().getId());
@@ -85,8 +85,8 @@ public class DBMusik extends DataBaseManager {
 		ResultSet result = null;
 		try {
 			conn = getConnection();
+			conn.setAutoCommit(false);
 			if (musik.getId() == 0) {
-				conn.setAutoCommit(false);
 				String sql = "INSERT INTO `TITEL` (`BEZEICHNUNG`, `PERSON_ID`, `ERSCHDATUM`, `LIVE`) VALUES (?, ?, ?, ?);";
 				stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				stmt.setString(1, musik.getTitel());
@@ -99,14 +99,21 @@ public class DBMusik extends DataBaseManager {
 					musik.setId(result.getInt(1));
 				}
 				DBSpeicherFormat dbSpeicher = new DBSpeicherFormat();
-				if (dbSpeicher.writeList(musik.getSpeicherformate(), musik.getId())) {
-					conn.commit();
-					conn.setAutoCommit(true);
+				if (dbSpeicher.writeList(conn, musik.getSpeicherformate(), musik.getId())) {
+					ret = true;
+				} else {
+					ret = false;
 				}
-				ret = true;
+			}
+			if (ret) {
+				conn.commit();
+				conn.setAutoCommit(true);
+			} else {
+				conn.rollback();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			ret = false;
 		} finally {
 			if (result != null) {
 				try {
@@ -196,7 +203,7 @@ public class DBMusik extends DataBaseManager {
 	}
 	
 	public boolean delete(Musik musik) {
-		boolean ret = false;
+		boolean ret = true;
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = "DELETE FROM `TITEL` WHERE `ID` = ?";
@@ -204,15 +211,17 @@ public class DBMusik extends DataBaseManager {
 			conn = getConnection();
 			conn.setAutoCommit(false);
 			DBSpeicherFormat dbformat = new DBSpeicherFormat();
-			if (dbformat.deleteList(musik.getSpeicherformate())) {
+			if (dbformat.deleteList(conn, musik.getSpeicherformate())) {
 				stmt = conn.prepareStatement(sql);
 				stmt.setInt(1, musik.getId());
 				stmt.execute();
 				conn.commit();
 				conn.setAutoCommit(true);
+			} else {
+				conn.rollback();
 			}
-			ret = true;
 		} catch (SQLException e) {
+			ret = false;
 			e.printStackTrace();
 		} finally {
 			if (stmt != null) {
@@ -243,7 +252,7 @@ public class DBMusik extends DataBaseManager {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			result = stmt.executeQuery(sql);
-			while (result.next()) {
+			while (result.next() && ret != null) {
 				Musik element = new Musik();
 				element.setId(result.getInt(1));
 				element.setTitel(result.getString(2));
@@ -259,8 +268,12 @@ public class DBMusik extends DataBaseManager {
 				List<SpeicherFormatInterface> list = dbSpeicher.getSpeicherFormateForTitel(element.getId());
 				if (list != null) {
 					element.setSpeicherformate(list);
+				} else {
+					ret = null;
 				}
-				ret.add(element);
+				if (ret != null) {
+					ret.add(element);
+				}
 			}
 		} catch (SQLException e) {
 			ret = null;

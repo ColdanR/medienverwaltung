@@ -160,11 +160,20 @@ public class MusikLogik implements DatenLogik<Musik> {
 		}
 		try {
 			DBMusik dbLogic = getDBLogic();
-			if (!dbLogic.write(object)) {
-				errors.add(DatabaseErrors.UnableToWrite);
-				return false;
+			if (object.getId() == 0) {
+				if (!dbLogic.writeAll(object)) {
+					errors.add(DatabaseErrors.UnableToWrite);
+					return false;
+				} else {
+					return true;
+				}
 			} else {
-				return true;
+				if (!dbLogic.write(object)) {
+					errors.add(DatabaseErrors.UnableToWrite);
+					return false;
+				} else {
+					return true;
+				}
 			}
 		} catch (ClassNotFoundException e) {
 			errors.add(DatabaseErrors.NoDBAvailable);

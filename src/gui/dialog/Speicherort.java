@@ -25,6 +25,7 @@ import gui.StaticComponents;
  *
  */
 public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
+	private	int			musicId = 0;
 	private	JTextField	txfDatentraeger;
 	private	JTextField	txfPfad;
 	private	JTextField	txfDateiformat;
@@ -51,14 +52,9 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 			boolean errors = false;
 			if (logik.createDigitalMusik(txfDatentraeger.getText(), txfPfad.getText(), txfDateiformat.getText(), txfQualitaet.getText())) 
 			{
-				if (logik.write()) 
-				{
-					setObject(logik.getObject());
-					dialog.dispose();
-				} 
-				else 
-				{
-					errors = true;
+				if (musicId != 0) {
+					logik.setTitelId(musicId);
+					errors = !logik.write();
 				}
 			} 
 			else 
@@ -70,6 +66,9 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 				FehlerDialog fehlerDialog = new FehlerDialog(null, logik.getErrors());
 				fehlerDialog.setAlwaysOnTop(true);
 				fehlerDialog.setVisible(true);
+			} else {
+				setObject(logik.getObject());
+				dialog.dispose();
 			}
 		}
 	}
@@ -157,7 +156,8 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		gbc_txfDateiformat.gridy = 4;
 		pnlCenter.add(txfDateiformat, gbc_txfDateiformat);
 		
-		JLabel lblQualitaet = new JLabel("Qualität");
+		// XXX Fehler in Schrift
+		JLabel lblQualitaet = new JLabel("Qualitï¿½t");
 		StaticComponents.setFontLabel(lblQualitaet);
 		GridBagConstraints gbc_lblQualitaet = new GridBagConstraints();
 		gbc_lblQualitaet.anchor = GridBagConstraints.WEST;
@@ -192,5 +192,9 @@ public class Speicherort extends ReturningDialog<SpeicherFormatInterface> {
 		btnAbbrechen.addActionListener(this);
 		
 		return display;
+	}
+
+	public void setMusicId(int musicId) {
+		this.musicId = musicId;
 	}
 }

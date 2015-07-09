@@ -23,7 +23,7 @@ public class StaticComponents {
 	
 	public	static	Color		FONT_COLOR_STD				=	Color.BLACK;
 	public	static	Color		FONT_COLOR_LABEL			=	Color.DARK_GRAY;
-	public	static	Color		FONT_COLOR_SELECTED			=	Color.WHITE;
+	public	static	Color		FONT_COLOR_SELECTED			=	Color.LIGHT_GRAY;
 	
 	public	static	Color		BACKGROUND_COLOR_STD		=	Color.WHITE;
 	public	static	Color		BACKGROUND_COLOR_SELECTED	=	Color.BLUE;

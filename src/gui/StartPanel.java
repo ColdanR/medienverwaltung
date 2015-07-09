@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Panel zur Darstellung des Hauptbildschirms mit Begrüßungstext
+ * Panel zur Darstellung des Hauptbildschirms mit Begrï¿½ï¿½ungstext
  * @author Bernd Schmidt
  * @author Jens Wiede (design)
  *
@@ -39,11 +39,13 @@ public class StartPanel extends JPanel {
 				
 		
 		JLabel lblText = new JLabel();
+		// XXX NÃ¤chster der mich oben hin schreibt, wird gegrillt!
 		lblText.setText("<html><center><br><br>von<br><br>"
-									+ "Bernd Schmidt<br><br>"
-									+ "Andreas John<br><br>"
-									+ "Jens Wiede<br><br>"
-									+ "Jasmin Burger<br><br></center></html>");
+				+ "Andreas John<br><br>"
+				+ "Bernd Schmidt<br><br>"
+				+ "Jasmin Burger<br><br>"
+				+ "Jens Wiede<br><br>"
+				+ "</center></html>");
 		
 		lblText.setFont(StaticComponents.FONT_STD);
 		pnlCenter.add(lblText);

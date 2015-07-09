@@ -99,6 +99,7 @@ public abstract class DataBaseManager {
 	 * @throws SQLException Connection refused
 	 */
 	protected final Connection getConnection () throws SQLException {
-		return DriverManager.getConnection(sqlConnect, username, password);
+		Connection conn = DriverManager.getConnection(sqlConnect, username, password);
+		return conn;
 	}
 }

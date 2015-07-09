@@ -124,17 +124,27 @@ public class MusikListPanel extends JPanel implements ActionListener {
 		
 		if (logik.getErrors().isEmpty()) 
 		{
-			lstMusikList = new JList<Musik>(listData.toArray(new Musik[]{}));
-			lstMusikList.setCellRenderer(new MusikListRenderer());
-			lstMusikList.setVisibleRowCount(5);
-			lstMusikList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			scrollPane = new JScrollPane(lstMusikList,
-					ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-		            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-			pnlCenter.add(scrollPane);
-		} 
+			if (listData.size() > 0) {
+				pnlCenter.removeAll();
+				lstMusikList = new JList<Musik>(listData.toArray(new Musik[]{}));
+				lstMusikList.setCellRenderer(new MusikListRenderer());
+				lstMusikList.setVisibleRowCount(5);
+				lstMusikList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				scrollPane = new JScrollPane(lstMusikList,
+						ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+			            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+				pnlCenter.add(scrollPane);
+			} else {
+				parent.setPanel(new StartPanel());
+				List<ErrorMessage> newErrors = new ArrayList<ErrorMessage>();
+				newErrors.add(ErrorsGUI.NoDataAvailable);
+				FehlerDialog dialog = new FehlerDialog(parent, newErrors);
+				dialog.setVisible(true);
+			}
+		}
 		else 
 		{
+			pnlCenter.removeAll();
 			pnlCenter.add(new JLabel("Leider sind Fehler aufgetreten"));
 			for (ErrorMessage error : logik.getErrors()) 
 			{

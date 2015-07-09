@@ -41,6 +41,7 @@ import data.Person;
 import data.SpeicherFormatInterface;
 import data.medien.Musik;
 import data.medien.logic.MusikLogik;
+import data.speicherformate.DigitalMusik;
 import data.speicherformate.logic.SpeicherFormateLogik;
 import enums.ErrorMessage;
 import enums.ErrorsGUI;
@@ -275,6 +276,9 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		
 		if (source == btnNeu) {
 			Speicherort dialog = new Speicherort(this.source);
+			if (musik != null) {
+				dialog.setMusicId(musik.getId());
+			}
 			dialog.display();
 
 			List<SpeicherFormatInterface> list = new ArrayList<SpeicherFormatInterface>();
@@ -290,10 +294,34 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			List<ErrorMessage> errors = new ArrayList<ErrorMessage>();
 			if (lstSpeicherort.getSelectedValue() == null) {
 				errors.add(ErrorsGUI.NoSelection);
+			} else {
+				SpeicherFormateLogik logik = new SpeicherFormateLogik();
+				SpeicherFormatInterface object = lstSpeicherort.getSelectedValue();
+				switch (object.getType()) {
+				case DigitalMusik:
+					if (object instanceof DigitalMusik) {
+						DigitalMusik musik = (DigitalMusik) object;
+						if (logik.loadObject(musik.getId()) && logik.delete()) {
+							List<SpeicherFormatInterface> list = new ArrayList<SpeicherFormatInterface>();
+							ListModel<SpeicherFormatInterface> modell = lstSpeicherort.getModel();
+							for (int i = 0; i < modell.getSize(); i++) {
+								list.add(modell.getElementAt(i));
+							}
+							list.remove(object);
+							lstSpeicherort.setListData(list.toArray(new SpeicherFormatInterface[]{}));
+							lstSpeicherort.revalidate();
+							lstSpeicherort.repaint();
+						}
+					}
+					break;
+				default:
+					throw new UnsupportedOperationException("Nicht implementiert!");
+				}
+				if (logik.getErrors().size() > 0) {
+					errors.addAll(logik.getErrors());
+				}
 			}
-			SpeicherFormateLogik logik = new SpeicherFormateLogik();
-			if (errors.size() > 0 || logik.getErrors().size() > 0) {
-				errors.addAll(logik.getErrors());
+			if (errors.size() > 0) {
 				FehlerDialog fehlerDialog = new FehlerDialog(this.source, errors);
 				fehlerDialog.setAlwaysOnTop(true);
 				fehlerDialog.setVisible(true);
@@ -322,7 +350,12 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			}
 			if (errors.size() == 0 && operationOk) {
 				if (logik.write()) {
-					this.source.setPanel(new StartPanel());
+					// XXX Rückführung angepasst
+					if (musik == null) {
+						this.source.setPanel(new StartPanel());
+					} else {
+						this.source.setPanel(new PersonenListePanel());
+					}
 				}
 			}
 			if (errors.size() > 0 || logik.getErrors().size() > 0) {
@@ -330,11 +363,14 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 				FehlerDialog fehlerDialog = new FehlerDialog(this.source, errors);
 				fehlerDialog.setAlwaysOnTop(true);
 				fehlerDialog.setVisible(true);
-			} else {
-				this.source.setPanel(new StartPanel());
 			}
 		} else if (source == btnAbbrechen) {
-			this.source.setPanel(new StartPanel());
+			// XXX Rückführung angepasst
+			if (musik == null) {
+				this.source.setPanel(new StartPanel());
+			} else {
+				this.source.setPanel(new PersonenListePanel());
+			}
 		} else if (source == btnInterpret) {
 			PersonAuswahlDialog dialog = new PersonAuswahlDialog(this.source.getOwner());
 			dialog.display();
