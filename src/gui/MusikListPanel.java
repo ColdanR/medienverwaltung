@@ -122,8 +122,9 @@ public class MusikListPanel extends JPanel implements ActionListener {
 			Musik selected = lstMusikList.getSelectedValue();
 			MusikEingabePanel panel = new MusikEingabePanel(parent, selected);
 			parent.setPanel(panel);
-			parent.setPreferredSize(getMaximumSize());
-			generateList();
+			//parent.setPreferredSize(getMaximumSize());
+			// TODO rausnehmen?
+			//generateList();
 		}
 	}
 	private void generateList() {

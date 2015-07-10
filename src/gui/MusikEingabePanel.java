@@ -47,6 +47,7 @@ import enums.ErrorsGUI;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import java.awt.Dimension;
 
 public class MusikEingabePanel extends JPanel implements ActionListener {
 	
@@ -216,13 +217,15 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		pnlCenter.add(lblSpeicherort, gbc_lblSpeicherort);
 		
 		lstSpeicherort = new JList<SpeicherFormatInterface>();
-		lstSpeicherort.setCellRenderer(new SpeicherortListRenderer());
-		lstSpeicherort.setVisibleRowCount(5);
-		lstSpeicherort.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		if (musik != null) {
 			lstSpeicherort.setListData(musik.getSpeicherformate().toArray(new SpeicherFormatInterface[]{}));
 		}
+		lstSpeicherort.setCellRenderer(new SpeicherortListRenderer());
+		lstSpeicherort.setVisibleRowCount(5);
+		lstSpeicherort.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
 		JScrollPane scp_lst = new JScrollPane();
+		scp_lst.setPreferredSize(new Dimension(250, 100));
 		scp_lst.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scp_lst.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scp_lst.setAlignmentX(Component.LEFT_ALIGNMENT);
