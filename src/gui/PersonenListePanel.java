@@ -134,7 +134,7 @@ public class PersonenListePanel extends JPanel implements ActionListener {
 			generateList();
 		}
 	}
-	private void generateList() {
+	public void generateList() {
 		PersonLogik		logik		=	new PersonLogik();
 		List<Person>	listData	=	logik.getAll();
 		if (scrollPane != null) {

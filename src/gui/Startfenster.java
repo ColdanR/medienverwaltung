@@ -178,6 +178,9 @@ public class Startfenster extends JFrame implements ActionListener {
 		{
 			PersonEingabeDialog dialog = new PersonEingabeDialog(this);
 			dialog.display();
+			if (dialog.getObject() != null && anzeigeFenster instanceof PersonenListePanel) {
+				((PersonenListePanel) anzeigeFenster).generateList();
+			}
 		}
 		else if (source == btnPAnzeigen) 
 		{

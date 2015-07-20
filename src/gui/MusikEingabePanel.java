@@ -356,6 +356,7 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 			}
 			if (errors.size() == 0 && operationOk) {
 				if (logik.write()) {
+					musik = logik.getObject();
 					if (musik == null) {
 						this.source.setPanel(new StartPanel());
 					} else {
@@ -378,8 +379,10 @@ public class MusikEingabePanel extends JPanel implements ActionListener {
 		} else if (source == btnInterpret) {
 			PersonAuswahlDialog dialog = new PersonAuswahlDialog(this.source.getOwner());
 			dialog.display();
-			interpret = dialog.getObject();
-			setInterpretLabel();
+			if (dialog.getObject() != null) {
+				interpret = dialog.getObject();
+				setInterpretLabel();
+			}
 		}
 	}
 
